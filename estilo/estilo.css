@@ -1,0 +1,104 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+header {
+    background-color: #2c5364;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.5em 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 0.5em 0;
+}
+
+/* Estilos del menú de navegación */
+nav {
+    background-color: #203a43;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #0f2027;
+}
+
+nav a.activo {
+    background-color: #0f2027;
+    font-weight: bold;
+}
+
+/* Estilos para el contenido principal */
+main {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+section {
+    margin-bottom: 2em;
+}
+
+/* Estilos para el pie de página */
+footer {
+    background-color: #2c5364;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    margin-top: 2em;
+    font-size: 0.9em;
+}
+
+/* Estilos para listas */
+ul {
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Estilos para enlaces */
+a {
+    color: #203a43;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

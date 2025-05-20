@@ -1,0 +1,57 @@
+/* Estilos de diseño y estructura con medidas relativas */
+
+/* Diseño responsivo */
+@media screen and (max-width: 48em) { /* 768px / 16px = 48em */
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav li {
+        width: 100%;
+    }
+
+    body {
+        font-size: 0.95rem;
+    }
+}
+
+@media screen and (min-width: 48.0625em) { /* 769px / 16px = 48.0625em */
+    nav li {
+        flex: 1;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2em;
+    }
+    
+    body {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 75em) { 
+    main {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    body {
+        font-size: 1.05rem;
+    }
+}
+
+/* Proporciones flexibles para imágenes */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Unidades relativas para márgenes y rellenos */
+section {
+    padding: 1em;
+}
+
+header, footer {
+    padding: 1.5em 1em;
+}
