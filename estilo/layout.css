@@ -1,57 +1,295 @@
-/* Estilos de diseño y estructura con medidas relativas */
+/* 
+* Hoja de estilo de layout para San Martín del Rey Aurelio - Sitio web de turismo
+* Autor: UO295445
+* Fecha: 2025-05-29 19:19:07
+*/
 
-/* Diseño responsivo */
-@media screen and (max-width: 48em) { /* 768px / 16px = 48em */
-    nav ul {
-        flex-direction: column;
-    }
+/* Diseño base - Aplicable a todos los tamaños */
 
-    nav li {
-        width: 100%;
-    }
-
-    body {
-        font-size: 0.95rem;
-    }
+/* 0,0,0,1 */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-@media screen and (min-width: 48.0625em) { /* 769px / 16px = 48.0625em */
-    nav li {
-        flex: 1;
-    }
-
-    main {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2em;
-    }
-    
-    body {
-        font-size: 1rem;
-    }
+/* 0,0,0,1 */
+main {
+    flex: 1;
+    /* Se utiliza CSS Grid para la disposición principal de contenidos */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em;
+    max-width: 87.5em; /* 1400px convertidos a em (1400/16 = 87.5) */
+    margin: 0 auto;
 }
 
-@media screen and (min-width: 75em) { 
-    main {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-    
-    body {
-        font-size: 1.05rem;
-    }
+/* 0,0,0,1 */
+section {
+    /* Quitamos el align-self: stretch que sería el comportamiento predeterminado */
+    align-self: start;
+    /* Esto hace que cada sección tenga solo la altura que necesita */
 }
 
-/* Proporciones flexibles para imágenes */
+/* Proporciones flexibles para imágenes y elementos multimedia */
+/* 0,0,0,1 */
 img {
     max-width: 100%;
     height: auto;
 }
 
-/* Unidades relativas para márgenes y rellenos */
-section {
-    padding: 1em;
+/* 0,0,0,1 */
+video {
+    width: 100%;
+    height: auto;
 }
 
-header, footer {
-    padding: 1.5em 1em;
+/* 0,0,0,1 */
+audio {
+    width: 100%;
+}
+
+/* Estilos para tablas responsivas */
+/* 0,0,0,1 */
+table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+/* Diseño responsivo - Media queries */
+
+/* Móviles pequeños y medianos (hasta 480px) */
+@media screen and (max-width: 30em) { /* 480px / 16px = 30em */
+    /* 0,0,0,1 - Redefinida en media query */
+    body {
+        font-size: 0.9rem; /* Redefinición de propiedad debido a media query */
+    }
+    
+    /* 0,0,0,2 */
+    nav ul {
+        flex-direction: column;
+    }
+    
+    /* 0,0,0,2 */
+    nav li {
+        width: 100%;
+    }
+    
+    /* 0,0,0,1 */
+    main {
+        padding: 0.5em;
+        max-width: 95%; /* Redefinición de propiedad debido a media query */
+        grid-template-columns: 1fr; /* Diseño de una columna para móviles */
+    }
+    
+    /* 0,0,0,1 */
+    section {
+        padding: 0.5em; /* Redefinición de propiedad debido a media query */
+    }
+    
+    /* 0,0,0,1 */
+    h1 {
+        font-size: 1.8em; /* Redefinición de propiedad debido a media query */
+    }
+    
+    /* 0,0,0,1 */
+    h2 {
+        font-size: 1.3em; /* Redefinición de propiedad debido a media query */
+    }
+}
+
+/* Móviles grandes y tablets pequeñas (481px - 768px) */
+@media screen and (min-width: 30.0625em) and (max-width: 48em) { /* 481px-768px / 16px */
+    /* 0,0,0,1 */
+    body {
+        font-size: 0.95rem; /* Redefinición de propiedad debido a media query */
+    }
+    
+    /* 0,0,0,2 */
+    nav ul {
+        flex-wrap: wrap;
+    }
+    
+    /* 0,0,0,2 */
+    nav li {
+        width: 50%; /* En tablets pequeñas, 2 elementos por fila */
+    }
+    
+    /* 0,0,0,1 */
+    main {
+        grid-template-columns: 1fr; /* Una sola columna para tablets pequeñas */
+    }
+}
+
+/* Tablets y pantallas medianas (769px - 1024px) */
+@media screen and (min-width: 48.0625em) and (max-width: 64em) { /* 769px-1024px / 16px */
+    /* 0,0,0,1 */
+    body {
+        font-size: 1rem; /* Redefinición de propiedad debido a media query */
+    }
+    
+    /* 0,0,0,2 */
+    nav li {
+        flex: 1;
+    }
+    
+    /* 0,0,0,1 */
+    main {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Diseño de dos columnas para tablets */
+        gap: 2em;
+    }
+    
+    /* 0,0,0,2 - Selector para hacer que algunas secciones ocupen todo el ancho */
+    section:nth-child(1), 
+    section:nth-child(4), 
+    section:nth-child(7) {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Pantallas grandes (1025px - 1200px) */
+@media screen and (min-width: 64.0625em) and (max-width: 75em) { /* 1025px-1200px / 16px */
+    /* 0,0,0,1 */
+    body {
+        font-size: 1.05rem; /* Redefinición de propiedad debido a media query */
+    }
+    
+    /* 0,0,0,2 */
+    nav li {
+        flex: 1;
+    }
+    
+    /* 0,0,0,1 */
+    main {
+        grid-template-columns: repeat(2, 1fr); /* Mantenemos dos columnas para pantallas grandes */
+        grid-auto-flow: dense; /* Permite que los elementos se distribuyan de forma óptima */
+        grid-auto-rows: min-content; /* Importante: cada fila solo tiene la altura necesaria */
+    }
+    
+    /* 0,0,0,2 - Secciones destacadas que ocupen todo el ancho */
+    section:nth-child(1),
+    section:nth-child(7) {
+        grid-column: 1 / -1;
+    }
+    
+    /* 0,0,0,2 - Secciones con tablas ocupan todo el ancho */
+    section:has(table) {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Pantallas muy grandes (más de 1200px) */
+@media screen and (min-width: 75.0625em) { /* >1200px / 16px */
+    /* 0,0,0,1 */
+    body {
+        font-size: 1.1rem; /* Redefinición de propiedad debido a media query */
+    }
+    
+    /* 0,0,0,2 */
+    nav li {
+        flex: 1;
+    }
+    
+    /* 0,0,0,1 - Para pantallas muy anchas, utilizamos un layout mixto */
+    main {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Tres columnas para pantallas grandes */
+        grid-auto-flow: dense; /* Mejor distribución de elementos */
+        grid-auto-rows: min-content; /* Cada fila solo tiene la altura necesaria */
+        gap: 2em;
+    }
+    
+    /* 0,0,0,2 - Secciones principales ocupan más espacio */
+    section:nth-child(1) {
+        grid-column: 1 / -1;
+    }
+    
+    /* 0,0,0,2 - Secciones con tablas o contenido más extenso */
+    section:has(table),
+    section:has(dl) {
+        grid-column: span 2;
+    }
+    
+    /* 0,0,0,2 - Secciones con multimedia */
+    section:has(video),
+    section:has(audio) {
+        grid-column: 1 / -1;
+    }
+    
+    /* 0,0,0,1 */
+    header, footer {
+        padding: 1.5em 1em;
+    }
+}
+
+/* Estilos para impresión */
+@media print {
+    /* 0,0,0,1 */
+    body {
+        font-size: 12pt;
+        line-height: 1.3;
+        background: white;
+        color: black;
+    }
+    
+    /* 0,0,0,1 */
+    nav {
+        display: none;
+    }
+    
+    /* 0,0,0,1 */
+    header, footer {
+        background: white;
+        color: black;
+        text-align: center;
+    }
+    
+    /* 0,0,0,1 */
+    main {
+        display: block;
+        width: 100%;
+    }
+    
+    /* 0,0,0,1 */
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+    
+    /* 0,0,0,1 */
+    video, audio {
+        display: none;
+    }
+    
+    /* 0,0,0,1 - Se añade la URL junto al texto del enlace */
+    a::after {
+        content: " (" attr(href) ")";
+        font-size: 0.9em;
+    }
+    
+    /* 0,0,0,2 - Evitar que los enlaces a imágenes muestren la URL */
+    a[href^="multimedia"]::after {
+        content: "";
+    }
+
+    /* 0,0,0,1 */
+    section {
+        background: white;
+        border: 1px solid #ddd;
+        margin-bottom: 1em;
+        page-break-inside: avoid;
+    }
+
+    /* 0,0,0,1 */
+    th, td {
+        border-color: black;
+    }
+
+    /* 0,0,0,1 */
+    th {
+        background: #eee;
+        color: black;
+    }
 }
