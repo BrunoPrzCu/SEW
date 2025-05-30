@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Gastronomía de San Martín del Rey Aurelio, Asturias"/>
-    <meta name="keywords" content="gastronomía asturiana, comida tradicional, San Martín del Rey Aurelio, fabada, sidra, cocina asturiana, restaurantes asturianos"/>
-    <meta name="author" content="Bruno Pérez Cuervo"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gastronomía típica de San Martín del Rey Aurelio, Asturias">
+    <meta name="keywords" content="gastronomía asturiana, comida tradicional, San Martín del Rey Aurelio, fabada, sidra, cocina asturiana, restaurantes asturianos">
+    <meta name="author" content="Bruno Pérez Cuervo">
     <title>Gastronomía - San Martín del Rey Aurelio</title>
-    <link rel="stylesheet" type="text/css" href="estilo/estilo.css"/>
-    <link rel="stylesheet" type="text/css" href="estilo/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
+    <link rel="stylesheet" type="text/css" href="estilo/layout.css">
 </head>
 <body>
     <header>
@@ -30,11 +30,138 @@
 
     <main>
         <section>
-            <h2>Gastronomía tradicional</h2>
-            <p>San Martín del Rey Aurelio ofrece una gastronomía rica y variada, con platos tradicionales asturianos.</p>
-            <p>Descubre los sabores de la tierra en cada bocado.</p>
+            <h2>Sabores de San Martín</h2>
+            <p>La gastronomía de San Martín del Rey Aurelio, como la del resto de Asturias, es robusta y sabrosa, pensada para reponer fuerzas tras las duras jornadas de trabajo en la mina o en el campo. Platos contundentes que aprovechan los productos de la huerta, la ganadería y los montes asturianos.</p>
+            
+            <picture>
+                <!-- Fuente de imagen para ordenadores -->
+                <source media="(min-width: 800px)" srcset="multimedia/fabada-asturiana.jpg">
+                <!-- Fuente de imagen para tablets -->
+                <source media="(max-width: 799px)" srcset="multimedia/fabada-asturiana-tablet.jpg">
+                <!-- Fuente de imagen para móviles -->
+                <source media="(max-width: 465px)" srcset="multimedia/fabada-asturiana-movil.jpg">
+                <!-- Imagen por defecto -->
+                <img src="multimedia/fabada-asturiana.jpg" alt="Plato de fabada asturiana tradicional, con fabes, chorizo, morcilla y tocino">
+            </picture>
+            <p>Fabada asturiana, plato emblemático de la gastronomía local</p>
         </section>
         
+        <section>
+            <h2>Platos principales</h2>
+            <p>Entre los platos más destacados de la cocina de San Martín del Rey Aurelio encontramos:</p>
+            
+            <h3>Los favoritos locales (por popularidad)</h3>
+            <ol>
+                <li>Fabada asturiana - El plato más representativo, elaborado con fabes (alubias blancas), chorizo, morcilla y tocino</li>
+                <li>Pote asturiano - Guiso tradicional de berzas, patatas, fabes y compango (embutidos y carnes de cerdo)</li>
+                <li>Callos a la asturiana - Preparados con tripas de ternera, chorizo y pimentón</li>
+                <li>Cachopo - Filete de ternera relleno de jamón y queso, empanado y frito</li>
+                <li>Arroz con leche - Postre típico con canela y limón</li>
+            </ol>
+            
+            <h3>Productos de temporada</h3>
+            <ul>
+                <li>Primavera:
+                    <ul>
+                        <li>Verdinas con marisco</li>
+                        <li>Sopa de trucha</li>
+                        <li>Cordero a la estaca</li>
+                    </ul>
+                </li>
+                <li>Verano:
+                    <ul>
+                        <li>Tortos con picadillo</li>
+                        <li>Boroña preñada</li>
+                        <li>Arándanos silvestres</li>
+                    </ul>
+                </li>
+                <li>Otoño:
+                    <ul>
+                        <li>Setas de temporada</li>
+                        <li>Guisos de caza</li>
+                        <li>Castañas asadas</li>
+                    </ul>
+                </li>
+                <li>Invierno:
+                    <ul>
+                        <li>Fabada completa</li>
+                        <li>Caldereta de cordero</li>
+                        <li>Compango casero</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Glosario gastronómico</h2>
+            <dl>
+                <dt>Fabes</dt>
+                <dd>Alubias blancas de gran tamaño, muy apreciadas por su textura cremosa y sabor suave. Son la base de la fabada.</dd>
+                
+                <dt>Compango</dt>
+                <dd>Conjunto de embutidos y carnes curadas que acompañan a las fabes en la fabada, típicamente incluye chorizo, morcilla y tocino.</dd>
+                
+                <dt>Sidra</dt>
+                <dd>Bebida alcohólica fermentada a partir del jugo de manzana. En Asturias se sirve "escanciada", vertiendo el líquido desde altura en el vaso para conseguir que se oxigene.</dd>
+                
+                <dt>Tortos</dt>
+                <dd>Tortitas elaboradas con harina de maíz que se fríen y se sirven con diversos acompañamientos, como picadillo de chorizo o queso cabrales.</dd>
+                
+                <dt>Boroña</dt>
+                <dd>Pan tradicional elaborado con harina de maíz. La "boroña preñada" va rellena de chorizo, tocino y otros embutidos.</dd>
+            </dl>
+        </section>
+        
+        <section>
+            <h2>Restaurantes recomendados</h2>
+            <p>Estos son algunos de los mejores lugares para degustar la gastronomía local:</p>
+            
+            <table>
+                <caption>Restaurantes destacados en San Martín del Rey Aurelio</caption>
+                <thead>
+                    <tr>
+                        <th scope="col" id="nombre">Nombre</th>
+                        <th scope="col" id="especialidad">Especialidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td headers="nombre">Casa Manolín</td>
+                        <td headers="especialidad">Fabada tradicional y cachopos</td>
+                    </tr>
+                    <tr>
+                        <td headers="nombre">La Mina</td>
+                        <td headers="especialidad">Pote asturiano y caldereta</td>
+                    </tr>
+                    <tr>
+                        <td headers="nombre">Sidrería El Madreñeru</td>
+                        <td headers="especialidad">Tabla de quesos asturianos y sidra natural</td>
+                    </tr>
+                    <tr>
+                        <td headers="nombre">El Rincón del Nalón</td>
+                        <td headers="especialidad">Guisos de caza y postres caseros</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section>
+            <h2>Proceso de elaboración de la fabada</h2>
+            <p>La fabada es uno de los platos más emblemáticos. A continuación puedes ver el proceso de elaboración:</p>
+            
+            <video controls>
+                <source src="multimedia/fabada-proceso.mp4" type="video/mp4">
+                <source src="multimedia/fabada-proceso.webm" type="video/webm">
+                Tu navegador no soporta la reproducción de vídeos.
+            </video>
+            
+            <h3>Música tradicional para acompañar la comida</h3>
+            <audio controls>
+                <source src="multimedia/tonada-asturiana.mp3" type="audio/mpeg">
+                <source src="multimedia/tonada-asturiana.ogg" type="audio/ogg">
+                Tu navegador no soporta la reproducción de audio.
+            </audio>
+        </section>
     </main>
 
     <footer>

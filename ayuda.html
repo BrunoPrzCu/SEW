@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Página de ayuda para el sitio de turismo de San Martín del Rey Aurelio"/>
-    <meta name="keywords" content="ayuda, mapa web, accesibilidad, contacto, San Martín del Rey Aurelio, turismo, Asturias, soporte, preguntas frecuentes"/>
-    <meta name="author" content="Bruno Pérez Cuervo"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía de ayuda para la navegación del sitio web turístico de San Martín del Rey Aurelio">
+    <meta name="keywords" content="ayuda, mapa web, accesibilidad, guía de navegación, San Martín del Rey Aurelio, turismo, Asturias">
+    <meta name="author" content="Bruno Pérez Cuervo">
     <title>Ayuda - San Martín del Rey Aurelio</title>
-    <link rel="stylesheet" type="text/css" href="estilo/estilo.css"/>
-    <link rel="stylesheet" type="text/css" href="estilo/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
+    <link rel="stylesheet" type="text/css" href="estilo/layout.css">
 </head>
 <body>
     <header>
@@ -30,11 +30,171 @@
 
     <main>
         <section>
-            <h2>Ayuda y soporte</h2>
-            <p>En esta sección encontrarás información útil para navegar por nuestra web de turismo de San Martín del Rey Aurelio.</p>
-            <p>Si tienes alguna duda o consulta, aquí te ofrecemos guías y consejos para sacar el máximo partido a los contenidos.</p>
+            <h2>Guía de navegación</h2>
+            <p>Bienvenido a la sección de ayuda del sitio web turístico de San Martín del Rey Aurelio. A continuación encontrarás información detallada sobre cada una de las secciones del sitio y cómo sacar el máximo partido a sus funcionalidades.</p>
+            
+            <picture>
+                <!-- Fuente de imagen para ordenadores -->
+                <source media="(min-width: 800px)" srcset="multimedia/mapa-web.jpg">
+                <!-- Fuente de imagen para tablets -->
+                <source media="(max-width: 799px)" srcset="multimedia/mapa-web-tablet.jpg">
+                <!-- Fuente de imagen para móviles -->
+                <source media="(max-width: 465px)" srcset="multimedia/mapa-web-movil.jpg">
+                <!-- Imagen por defecto -->
+                <img src="multimedia/mapa-web.jpg" alt="Diagrama visual del mapa del sitio web con todas las secciones y sus conexiones">
+            </picture>
+            <p>Mapa visual del sitio web</p>
         </section>
         
+        <section>
+            <h2>Estructura del sitio web</h2>
+            <p>El sitio web está dividido en las siguientes secciones principales, accesibles desde el menú de navegación presente en todas las páginas:</p>
+            
+            <dl>
+                <dt><strong>Página principal</strong> (index.html)</dt>
+                <dd>Es la portada del sitio web. Ofrece una introducción a San Martín del Rey Aurelio y sus principales atractivos turísticos. Desde aquí puedes acceder a todas las demás secciones a través del menú de navegación.</dd>
+                
+                <dt><strong>Gastronomía</strong> (gastronomia.html)</dt>
+                <dd>Sección dedicada a la cultura gastronómica local. Incluye información sobre platos típicos, productos locales, restaurantes recomendados y multimedia relacionada con la comida tradicional.</dd>
+                
+                <dt><strong>Rutas</strong> (rutas.html)</dt>
+                <dd>Ofrece información sobre senderos y rutas turísticas por el concejo. Contiene descripciones, mapas, niveles de dificultad y recomendaciones para disfrutar de los paisajes naturales de la zona.</dd>
+                
+                <dt><strong>Meteorología</strong> (meteorologia.html)</dt>
+                <dd>Proporciona información meteorológica actualizada para planificar mejor tu visita. Incluye previsiones del tiempo para los próximos días y recomendaciones según la temporada.</dd>
+                
+                <dt><strong>Juego</strong> (juego.html)</dt>
+                <dd>Sección interactiva con un juego sobre la cultura y geografía de San Martín del Rey Aurelio, ideal para aprender sobre la zona de forma entretenida.</dd>
+                
+                <dt><strong>Reservas</strong> (reservas.php)</dt>
+                <dd>Sistema para gestionar reservas en alojamientos y restaurantes locales. Permite consultar disponibilidad y realizar reservas directamente a través del sitio web.</dd>
+                
+                <dt><strong>Ayuda</strong> (ayuda.html)</dt>
+                <dd>La sección actual, que proporciona asistencia para navegar por el sitio y explica todas sus funcionalidades.</dd>
+            </dl>
+        </section>
+        
+        <section>
+            <h2>Funcionalidades específicas</h2>
+            
+            <h3>Navegación</h3>
+            <p>En todas las páginas encontrarás el menú de navegación en la parte superior. La sección activa siempre aparecerá destacada para que sepas dónde te encuentras en cada momento.</p>
+            
+            <h3>Contenido multimedia</h3>
+            <p>El sitio incluye diversos contenidos multimedia:</p>
+            <ul>
+                <li>Imágenes adaptables que se ajustan al tamaño de la pantalla</li>
+                <li>Vídeos con controles de reproducción</li>
+                <li>Audios relacionados con la cultura local</li>
+            </ul>
+            <p>Todos los elementos multimedia incluyen alternativas textuales para garantizar la accesibilidad.</p>
+            
+            <h3>Sistema de meteorología</h3>
+            <p>La página de meteorología obtiene datos actualizados y muestra:</p>
+            <ol>
+                <li>Temperatura actual</li>
+                <li>Previsión para los próximos días</li>
+                <li>Recomendaciones según las condiciones climáticas</li>
+                <li>Información histórica sobre el clima en la zona</li>
+            </ol>
+            
+            <h3>Sistema de reservas</h3>
+            <p>Para realizar una reserva:</p>
+            <ol>
+                <li>Accede a la sección "Reservas" desde el menú principal</li>
+                <li>Selecciona el tipo de establecimiento (hotel, restaurante, etc.)</li>
+                <li>Elige fechas y número de personas</li>
+                <li>Completa el formulario con tus datos personales</li>
+                <li>Confirma la reserva</li>
+            </ol>
+            <p>Recibirás una confirmación por correo electrónico con los detalles de tu reserva.</p>
+            
+            <h3>Juego interactivo</h3>
+            <p>El juego te permite poner a prueba tus conocimientos sobre San Martín del Rey Aurelio. Las instrucciones detalladas se encuentran en la propia página del juego.</p>
+        </section>
+        
+        <section>
+            <h2>Accesibilidad</h2>
+            <p>Este sitio web ha sido diseñado siguiendo las pautas de accesibilidad web:</p>
+            <ul>
+                <li>Marcado semántico HTML5 para una correcta estructuración del contenido</li>
+                <li>Contraste adecuado entre texto y fondo</li>
+                <li>Texto alternativo para todas las imágenes</li>
+                <li>Navegación mediante teclado</li>
+                <li>Contenido adaptable a diferentes tamaños de pantalla</li>
+                <li>Elementos multimedia con controles accesibles</li>
+            </ul>
+            
+            <p>Si encuentras algún problema de accesibilidad o tienes sugerencias para mejorar tu experiencia, por favor contacta con nosotros.</p>
+        </section>
+        
+        <section>
+            <h2>Compatibilidad</h2>
+            <table>
+                <caption>Compatibilidad con navegadores</caption>
+                <thead>
+                    <tr>
+                        <th scope="col" id="navegador">Navegador</th>
+                        <th scope="col" id="compatibilidad">Nivel de compatibilidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td headers="navegador">Google Chrome</td>
+                        <td headers="compatibilidad">Completa</td>
+                    </tr>
+                    <tr>
+                        <td headers="navegador">Mozilla Firefox</td>
+                        <td headers="compatibilidad">Completa</td>
+                    </tr>
+                    <tr>
+                        <td headers="navegador">Microsoft Edge</td>
+                        <td headers="compatibilidad">Completa</td>
+                    </tr>
+                    <tr>
+                        <td headers="navegador">Safari</td>
+                        <td headers="compatibilidad">Completa</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>Este sitio web funciona correctamente en dispositivos móviles, tabletas y ordenadores.</p>
+        </section>
+        
+        <section>
+            <h2>Preguntas frecuentes</h2>
+            
+            <details>
+                <summary>¿Cómo puedo contactar con la oficina de turismo?</summary>
+                <p>Los datos de contacto de la oficina de turismo de San Martín del Rey Aurelio están disponibles en la página principal. También puedes usar el formulario de contacto en la sección de Reservas.</p>
+            </details>
+            
+            <details>
+                <summary>¿Las rutas mostradas están actualizadas?</summary>
+                <p>Sí, todas las rutas se revisan periódicamente para asegurar que la información es precisa y actualizada. La fecha de última actualización aparece al final de cada descripción de ruta.</p>
+            </details>
+            
+            <details>
+                <summary>¿Cómo puedo cancelar una reserva?</summary>
+                <p>Para cancelar una reserva, accede a la sección "Reservas" e introduce el código de confirmación que recibiste por correo electrónico. Sigue las instrucciones para completar la cancelación.</p>
+            </details>
+            
+            <details>
+                <summary>¿Los vídeos y audios consumen muchos datos móviles?</summary>
+                <p>Los elementos multimedia están optimizados para reducir el consumo de datos. Además, puedes ajustar la calidad de reproducción o descargarlos para verlos sin conexión.</p>
+            </details>
+        </section>
+        
+        <section>
+            <h2>Video tutorial</h2>
+            <p>A continuación puedes ver un breve tutorial sobre cómo utilizar este sitio web:</p>
+            
+            <video controls preload="metadata" poster="multimedia/tutorial-poster.jpg">
+                <source src="multimedia/tutorial-web.mp4" type="video/mp4">
+                <source src="multimedia/tutorial-web.webm" type="video/webm">
+                Tu navegador no soporta la reproducción de vídeos. Puedes descargar el tutorial <a href="multimedia/tutorial-web.mp4">aquí</a>.
+            </video>
+        </section>
     </main>
 
     <footer>
