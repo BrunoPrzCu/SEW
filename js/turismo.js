@@ -283,7 +283,7 @@ class SeccionNoticias {
             apiKey: 'afcd9e8511854f7f9f249ee2f2577d18', // Reemplazar con una clave de API válida
             // Parámetros de la API
             parametros: {
-                q: 'San Martin Rey Aurelio OR Asturias turismo',
+                q: 'Turismo Asturias',
                 language: 'es',
                 sortBy: 'publishedAt',
                 pageSize: 10
