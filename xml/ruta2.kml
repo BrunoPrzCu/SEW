@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><Style id="puntoEstilo"><IconStyle><Icon><href>
+http://maps.google.com/mapfiles/kml/paddle/red-circle.png
+</href></Icon></IconStyle></Style><Placemark><name>
+Inicio: Estación de tren abandonada
+</name><description>
+Punto de inicio de la ruta Senda Verde del Nalón
+</description><Point><coordinates>
+-5.612387,43.269845,260
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Puente de hierro
+</name><description>
+Antiguo puente ferroviario que cruza sobre el río Nalón, testimonio de la época industrial de la zona, ahora rehabilitado para el paso de senderistas y ciclistas.
+</description><Point><coordinates>
+-5.608214,43.266912,255
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Meandro del Nalón
+</name><description>
+Curva pronunciada del río Nalón que forma un paisaje de gran belleza, rodeado de bosque de ribera y con diversas especies de aves acuáticas.
+</description><Point><coordinates>
+-5.601268,43.264789,250
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Área recreativa Los Alisos
+</name><description>
+Zona de descanso junto al río, con mesas, bancos y fuente, ideal para hacer una pausa en la ruta y disfrutar del entorno natural.
+</description><Point><coordinates>
+-5.593155,43.262546,248
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Bosque de castaños centenarios
+</name><description>
+Pequeño bosque con ejemplares de castaños de gran antigüedad, algunos con más de 300 años, que muestran la riqueza natural de la región.
+</description><Point><coordinates>
+-5.587042,43.265123,275
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Mirador del Río
+</name><description>
+Punto elevado desde el que se puede observar gran parte del recorrido del río Nalón y los valles que lo rodean, con vistas panorámicas excepcionales.
+</description><Point><coordinates>
+-5.582561,43.268792,310
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><name>
+Trazado de la ruta: Senda Verde del Nalón
+</name><Placemark><LineString><extrude>
+1
+</extrude><tessellate>
+1
+</tessellate><coordinates>
+-5.612387,43.269845,260
+-5.608214,43.266912,255
+-5.601268,43.264789,250
+-5.593155,43.262546,248
+-5.587042,43.265123,275
+-5.582561,43.268792,310
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></LineString><Style><LineStyle><color>
+ff0000ff
+</color><width>
+5
+</width></LineStyle></Style></Placemark></Document></kml>

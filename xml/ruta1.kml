@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><Style id="puntoEstilo"><IconStyle><Icon><href>
+http://maps.google.com/mapfiles/kml/paddle/red-circle.png
+</href></Icon></IconStyle></Style><Placemark><name>
+Inicio: Plaza del Ayuntamiento de San Martín
+</name><description>
+Punto de inicio de la ruta Ruta del Valle y los Pozos Mineros
+</description><Point><coordinates>
+-5.606585,43.275458,275
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Pozo San Vicente
+</name><description>
+Uno de los pozos mineros más emblemáticos de la cuenca del Nalón, con su característica torre de extracción que domina el paisaje. Rehabilitado para visitas turísticas.
+</description><Point><coordinates>
+-5.605033,43.279872,290
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Mirador del Valle
+</name><description>
+Un punto privilegiado desde donde se puede contemplar todo el valle del Nalón, con sus poblaciones y el contraste entre la naturaleza y el paisaje industrial.
+</description><Point><coordinates>
+-5.598124,43.283561,450
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Antiguo Lavadero de Carbón
+</name><description>
+Estructura industrial rehabilitada donde se realizaba el lavado del carbón extraído de las minas. Hoy forma parte del patrimonio histórico industrial de la zona.
+</description><Point><coordinates>
+-5.592759,43.281248,310
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Bocamina Restaurada
+</name><description>
+Entrada a una antigua galería minera que ha sido acondicionada para poder visitar y experimentar cómo era el trabajo en el interior de las minas de carbón.
+</description><Point><coordinates>
+-5.588124,43.279015,295
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Museo de la Minería
+</name><description>
+Centro cultural que recoge la historia y tradiciones mineras de San Martín del Rey Aurelio, con exposiciones de herramientas, fotografías y recreaciones de la vida minera.
+</description><Point><coordinates>
+-5.606125,43.277230,280
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><name>
+Trazado de la ruta: Ruta del Valle y los Pozos Mineros
+</name><Placemark><LineString><extrude>
+1
+</extrude><tessellate>
+1
+</tessellate><coordinates>
+-5.606585,43.275458,275
+-5.605033,43.279872,290
+-5.598124,43.283561,450
+-5.592759,43.281248,310
+-5.588124,43.279015,295
+-5.606125,43.277230,280
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></LineString><Style><LineStyle><color>
+ff0000ff
+</color><width>
+5
+</width></LineStyle></Style></Placemark></Document></kml>

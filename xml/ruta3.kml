@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><Style id="puntoEstilo"><IconStyle><Icon><href>
+http://maps.google.com/mapfiles/kml/paddle/red-circle.png
+</href></Icon></IconStyle></Style><Placemark><name>
+Inicio: Plaza de España
+</name><description>
+Punto de inicio de la ruta Ruta Gastronómica de San Martín
+</description><Point><coordinates>
+-5.605821,43.274569,273
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Sidrería El Madreñeru
+</name><description>
+Tradicional sidrería asturiana donde degustar la auténtica sidra escanciada y tablas de quesos y embutidos asturianos.
+</description><Point><coordinates>
+-5.606215,43.275612,274
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Casa Manolín
+</name><description>
+Restaurante familiar con más de 50 años de historia, especializado en fabada tradicional y cachopos de gran calidad.
+</description><Point><coordinates>
+-5.604123,43.276841,276
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Confitería La Mina
+</name><description>
+Pastelería artesanal donde probar los dulces típicos asturianos como carbayones, casadielles y moscovitas.
+</description><Point><coordinates>
+-5.602578,43.278153,278
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+El Rincón del Nalón
+</name><description>
+Restaurante especializado en guisos de caza y pescados del Cantábrico, con una carta de vinos principalmente asturianos.
+</description><Point><coordinates>
+-5.598962,43.277641,275
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><Placemark><name>
+Mercado de Productos Locales
+</name><description>
+Mercado cubierto donde se pueden adquirir productos artesanos locales como quesos, embutidos, conservas y licores artesanales.
+</description><Point><coordinates>
+-5.603751,43.273924,272
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></Point></Placemark><name>
+Trazado de la ruta: Ruta Gastronómica de San Martín
+</name><Placemark><LineString><extrude>
+1
+</extrude><tessellate>
+1
+</tessellate><coordinates>
+-5.605821,43.274569,273
+-5.606215,43.275612,274
+-5.604123,43.276841,276
+-5.602578,43.278153,278
+-5.598962,43.277641,275
+-5.603751,43.273924,272
+</coordinates><altitudeMode>
+relativeToGround
+</altitudeMode></LineString><Style><LineStyle><color>
+ff0000ff
+</color><width>
+5
+</width></LineStyle></Style></Placemark></Document></kml>

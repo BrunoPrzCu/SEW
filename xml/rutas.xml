@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rutas SYSTEM "rutas.dtd">
+<rutas xmlns="http://www.uniovi.es"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.uniovi.es rutas.xsd">
+    
+    <ruta id="ruta1">
+        <nombre>Ruta del Valle y los Pozos Mineros</nombre>
+        <tipo>Paisajística e histórica</tipo>
+        <medioTransporte>A pie</medioTransporte>
+        <fechaInicio>2025-06-15</fechaInicio>
+        <horaInicio>09:30:00</horaInicio>
+        <duracion>4 horas</duracion>
+        <agencia>Turismo SMRA</agencia>
+        <descripcion>Un recorrido por el Valle de Santa Bárbara que permite descubrir el patrimonio industrial minero de San Martín del Rey Aurelio, adentrándose en la historia de la cuenca minera asturiana mientras se disfruta de hermosos paisajes.</descripcion>
+        <personasAdecuadas>Personas en buena forma física</personasAdecuadas>
+        <lugarInicio>Plaza del Ayuntamiento de San Martín</lugarInicio>
+        <direccionInicio>Calle La Cuesta, 28</direccionInicio>
+        <coordenadasInicio>
+            <longitud>-5.606585</longitud>
+            <latitud>43.275458</latitud>
+            <altitud>275</altitud>
+        </coordenadasInicio>
+        <referencias>
+            <referencia>https://www.turismoasturias.es/descubre/donde-ir/otros-recursos/pozos-mineros</referencia>
+            <referencia>http://www.museominero.es/</referencia>
+            <referencia>https://www.smra.eu/turismo/que-visitar/</referencia>
+        </referencias>
+        <recomendacion>8</recomendacion>
+        
+        <hitos>
+            <hito>
+                <nombre>Pozo San Vicente</nombre>
+                <descripcion>Uno de los pozos mineros más emblemáticos de la cuenca del Nalón, con su característica torre de extracción que domina el paisaje. Rehabilitado para visitas turísticas.</descripcion>
+                <coordenadas>
+                    <longitud>-5.605033</longitud>
+                    <latitud>43.279872</latitud>
+                    <altitud>290</altitud>
+                </coordenadas>
+                <distancia unidades="km">1.2</distancia>
+                <fotografias>
+                    <fotografia>multimedia/pozo_san_vicente1.jpg</fotografia>
+                    <fotografia>multimedia/pozo_san_vicente2.jpg</fotografia>
+                    <fotografia>multimedia/pozo_san_vicente3.jpg</fotografia>
+                </fotografias>
+                <videos>
+                    <video>multimedia/recorrido_pozo.mp4</video>
+                </videos>
+            </hito>
+            
+            <hito>
+                <nombre>Mirador del Valle</nombre>
+                <descripcion>Un punto privilegiado desde donde se puede contemplar todo el valle del Nalón, con sus poblaciones y el contraste entre la naturaleza y el paisaje industrial.</descripcion>
+                <coordenadas>
+                    <longitud>-5.598124</longitud>
+                    <latitud>43.283561</latitud>
+                    <altitud>450</altitud>
+                </coordenadas>
+                <distancia unidades="km">2.5</distancia>
+                <fotografias>
+                    <fotografia>multimedia/mirador_valle1.jpg</fotografia>
+                    <fotografia>multimedia/mirador_valle2.jpg</fotografia>
+                </fotografias>
+                <videos>
+                    <video>multimedia/panoramica_valle.mp4</video>
+                    <video>multimedia/atardecer_valle.mp4</video>
+                </videos>
+            </hito>
+            
+            <hito>
+                <nombre>Antiguo Lavadero de Carbón</nombre>
+                <descripcion>Estructura industrial rehabilitada donde se realizaba el lavado del carbón extraído de las minas. Hoy forma parte del patrimonio histórico industrial de la zona.</descripcion>
+                <coordenadas>
+                    <longitud>-5.592759</longitud>
+                    <latitud>43.281248</latitud>
+                    <altitud>310</altitud>
+                </coordenadas>
+                <distancia unidades="km">1.8</distancia>
+                <fotografias>
+                    <fotografia>multimedia/lavadero1.jpg</fotografia>
+                    <fotografia>multimedia/lavadero2.jpg</fotografia>
+                    <fotografia>multimedia/lavadero3.jpg</fotografia>
+                    <fotografia>multimedia/lavadero4.jpg</fotografia>
+                </fotografias>
+            </hito>
+            
+            <hito>
+                <nombre>Bocamina Restaurada</nombre>
+                <descripcion>Entrada a una antigua galería minera que ha sido acondicionada para poder visitar y experimentar cómo era el trabajo en el interior de las minas de carbón.</descripcion>
+                <coordenadas>
+                    <longitud>-5.588124</longitud>
+                    <latitud>43.279015</latitud>
+                    <altitud>295</altitud>
+                </coordenadas>
+                <distancia unidades="km">1.3</distancia>
+                <fotografias>
+                    <fotografia>multimedia/bocamina1.jpg</fotografia>
+                    <fotografia>multimedia/bocamina2.jpg</fotografia>
+                </fotografias>
+                <videos>
+                    <video>multimedia/interior_mina.mp4</video>
+                </videos>
+            </hito>
+            
+            <hito>
+                <nombre>Museo de la Minería</nombre>
+                <descripcion>Centro cultural que recoge la historia y tradiciones mineras de San Martín del Rey Aurelio, con exposiciones de herramientas, fotografías y recreaciones de la vida minera.</descripcion>
+                <coordenadas>
+                    <longitud>-5.606125</longitud>
+                    <latitud>43.277230</latitud>
+                    <altitud>280</altitud>
+                </coordenadas>
+                <distancia unidades="km">2.2</distancia>
+                <fotografias>
+                    <fotografia>multimedia/museo_mineria1.jpg</fotografia>
+                    <fotografia>multimedia/museo_mineria2.jpg</fotografia>
+                    <fotografia>multimedia/museo_mineria3.jpg</fotografia>
+                </fotografias>
+                <videos>
+                    <video>multimedia/recorrido_museo.mp4</video>
+                </videos>
+            </hito>
+        </hitos>
+        <planimetria>ruta1.kml</planimetria>
+        <altimetria>ruta1.svg</altimetria>
+    </ruta>
+    
+    <ruta id="ruta2">
+        <nombre>Senda Verde del Nalón</nombre>
+        <tipo>Naturaleza</tipo>
+        <medioTransporte>Bicicleta</medioTransporte>
+        <fechaInicio>2025-07-20</fechaInicio>
+        <horaInicio>10:00:00</horaInicio>
+        <duracion>3 horas</duracion>
+        <agencia>Sin agencia</agencia>
+        <descripcion>Recorrido por la antigua vía del tren minero, convertida ahora en una senda verde que permite disfrutar de la naturaleza a lo largo del río Nalón, observando la flora y fauna local.</descripcion>
+        <personasAdecuadas>Se puede ir con niños</personasAdecuadas>
+        <lugarInicio>Estación de tren abandonada</lugarInicio>
+        <direccionInicio>Carretera AS-117, km 5</direccionInicio>
+        <coordenadasInicio>
+            <longitud>-5.612387</longitud>
+            <latitud>43.269845</latitud>
+            <altitud>260</altitud>
+        </coordenadasInicio>
+        <referencias>
+            <referencia>https://www.viasverdes.com/asturias/</referencia>
+            <referencia>https://www.turismoasturias.es/descubre/naturaleza/rutas/senderismo</referencia>
+            <referencia>https://www.wikiloc.com/mountain-biking-trails/senda-verde-del-nalon</referencia>
+        </referencias>
+        <recomendacion>9</recomendacion>
+        
+        <hitos>
+            <hito>
+                <nombre>Puente de hierro</nombre>
+                <descripcion>Antiguo puente ferroviario que cruza sobre el río Nalón, testimonio de la época industrial de la zona, ahora rehabilitado para el paso de senderistas y ciclistas.</descripcion>
+                <coordenadas>
+                    <longitud>-5.608214</longitud>
+                    <latitud>43.266912</latitud>
+                    <altitud>255</altitud>
+                </coordenadas>
+                <distancia unidades="km">1.5</distancia>
+                <fotografias>
+                    <fotografia>multimedia/puente_hierro1.jpg</fotografia>
+                    <fotografia>multimedia/puente_hierro2.jpg</fotografia>
+                </fotografias>
+            </hito>
+            
+            <hito>
+                <nombre>Meandro del Nalón</nombre>
+                <descripcion>Curva pronunciada del río Nalón que forma un paisaje de gran belleza, rodeado de bosque de ribera y con diversas especies de aves acuáticas.</descripcion>
+                <coordenadas>
+                    <longitud>-5.601268</longitud>
+                    <latitud>43.264789</latitud>
+                    <altitud>250</altitud>
+                </coordenadas>
+                <distancia unidades="km">2.3</distancia>
+                <fotografias>
+                    <fotografia>multimedia/meandro1.jpg</fotografia>
+                    <fotografia>multimedia/meandro2.jpg</fotografia>
+                    <fotografia>multimedia/meandro3.jpg</fotografia>
+                </fotografias>
+                <videos>
+                    <video>multimedia/drone_meandro.mp4</video>
+                </videos>
+            </hito>
+            
+            <hito>
+                <nombre>Área recreativa Los Alisos</nombre>
+                <descripcion>Zona de descanso junto al río, con mesas, bancos y fuente, ideal para hacer una pausa en la ruta y disfrutar del entorno natural.</descripcion>
+                <coordenadas>
+                    <longitud>-5.593155</longitud>
+                    <latitud>43.262546</latitud>
+                    <altitud>248</altitud>
+                </coordenadas>
+                <distancia unidades="km">2.7</distancia>
+                <fotografias>
+                    <fotografia>multimedia/area_recreativa1.jpg</fotografia>
+                    <fotografia>multimedia/area_recreativa2.jpg</fotografia>
+                </fotografias>
+            </hito>
+            
+            <hito>
+                <nombre>Bosque de castaños centenarios</nombre>
+                <descripcion>Pequeño bosque con ejemplares de castaños de gran antigüedad, algunos con más de 300 años, que muestran la riqueza natural de la región.</descripcion>
+                <coordenadas>
+                    <longitud>-5.587042</longitud>
+                    <latitud>43.265123</latitud>
+                    <altitud>275</altitud>
+                </coordenadas>
+                <distancia unidades="km">1.9</distancia>
+                <fotografias>
+                    <fotografia>multimedia/castanos1.jpg</fotografia>
+                    <fotografia>multimedia/castanos2.jpg</fotografia>
+                    <fotografia>multimedia/castanos3.jpg</fotografia>
+                </fotografias>
+                <videos>
+                    <video>multimedia/sendero_castanos.mp4</video>
+                </videos>
+            </hito>
+            
+            <hito>
+                <nombre>Mirador del Río</nombre>
+                <descripcion>Punto elevado desde el que se puede observar gran parte del recorrido del río Nalón y los valles que lo rodean, con vistas panorámicas excepcionales.</descripcion>
+                <coordenadas>
+                    <longitud>-5.582561</longitud>
+                    <latitud>43.268792</latitud>
+                    <altitud>310</altitud>
+                </coordenadas>
+                <distancia unidades="km">2.4</distancia>
+                <fotografias>
+                    <fotografia>multimedia/mirador_rio1.jpg</fotografia>
+                    <fotografia>multimedia/mirador_rio2.jpg</fotografia>
+                    <fotografia>multimedia/mirador_rio3.jpg</fotografia>
+                    <fotografia>multimedia/mirador_rio4.jpg</fotografia>
+                </fotografias>
+                <videos>
+                    <video>multimedia/panoramica_rio.mp4</video>
+                </videos>
+            </hito>
+        </hitos>
+        <planimetria>ruta2.kml</planimetria>
+        <altimetria>ruta2.svg</altimetria>
+    </ruta>
+    
+    <ruta id="ruta3">
+        <nombre>Ruta Gastronómica de San Martín</nombre>
+        <tipo>Gastronómica</tipo>
+        <medioTransporte>A pie</medioTransporte>
+        <fechaInicio>2025-08-10</fechaInicio>
+        <horaInicio>12:00:00</horaInicio>
+        <duracion>5 horas</duracion>
+        <agencia>Sabores de Asturias</agencia>
+        <descripcion>Una ruta para degustar los mejores platos de la gastronomía tradicional asturiana en diferentes establecimientos de San Martín del Rey Aurelio, desde sidrerías hasta restaurantes de alta cocina.</descripcion>
+        <personasAdecuadas>Adultos y familias con niños mayores</personasAdecuadas>
+        <lugarInicio>Plaza de España</lugarInicio>
+        <direccionInicio>Plaza de España, s/n</direccionInicio>
+        <coordenadasInicio>
+            <longitud>-5.605821</longitud>
+            <latitud>43.274569</latitud>
+            <altitud>273</altitud>
+        </coordenadasInicio>
+        <referencias>
+            <referencia>https://www.turismoasturias.es/descubre/donde-comer</referencia>
+            <referencia>https://www.smra.eu/turismo/donde-comer/</referencia>
+            <referencia>https://www.laguiacompleta.com/asturias/san-martin-del-rey-aurelio/restaurantes</referencia>
+        </referencias>
+        <recomendacion>9</recomendacion>
+        
+        <hitos>
+            <hito>
+                <nombre>Sidrería El Madreñeru</nombre>
+                <descripcion>Tradicional sidrería asturiana donde degustar la auténtica sidra escanciada y tablas de quesos y embutidos asturianos.</descripcion>
+                <coordenadas>
+                    <longitud>-5.606215</longitud>
+                    <latitud>43.275612</latitud>
+                    <altitud>274</altitud>
+                </coordenadas>
+                <distancia unidades="km">0.3</distancia>
+                <fotografias>
+                    <fotografia>multimedia/sidreria1.jpg</fotografia>
+                    <fotografia>multimedia/sidreria2.jpg</fotografia>
+                    <fotografia>multimedia/sidreria3.jpg</fotografia>
+                </fotografias>
+                <videos>
+                    <video>multimedia/escanciado_sidra.mp4</video>
+                </videos>
+            </hito>
+            
+            <hito>
+                <nombre>Casa Manolín</nombre>
+                <descripcion>Restaurante familiar con más de 50 años de historia, especializado en fabada tradicional y cachopos de gran calidad.</descripcion>
+                <coordenadas>
+                    <longitud>-5.604123</longitud>
+                    <latitud>43.276841</latitud>
+                    <altitud>276</altitud>
+                </coordenadas>
+                <distancia unidades="km">0.5</distancia>
+                <fotografias>
+                    <fotografia>multimedia/casa_manolin1.jpg</fotografia>
+                    <fotografia>multimedia/casa_manolin2.jpg</fotografia>
+                    <fotografia>multimedia/fabada_manolin.jpg</fotografia>
+                </fotografias>
+            </hito>
+            
+            <hito>
+                <nombre>Confitería La Mina</nombre>
+                <descripcion>Pastelería artesanal donde probar los dulces típicos asturianos como carbayones, casadielles y moscovitas.</descripcion>
+                <coordenadas>
+                    <longitud>-5.602578</longitud>
+                    <latitud>43.278153</latitud>
+                    <altitud>278</altitud>
+                </coordenadas>
+                <distancia unidades="km">0.7</distancia>
+                <fotografias>
+                    <fotografia>multimedia/confiteria1.jpg</fotografia>
+                    <fotografia>multimedia/dulces_asturianos.jpg</fotografia>
+                    <fotografia>multimedia/confiteria_interior.jpg</fotografia>
+                </fotografias>
+                <videos>
+                    <video>multimedia/elaboracion_dulces.mp4</video>
+                </videos>
+            </hito>
+            
+            <hito>
+                <nombre>El Rincón del Nalón</nombre>
+                <descripcion>Restaurante especializado en guisos de caza y pescados del Cantábrico, con una carta de vinos principalmente asturianos.</descripcion>
+                <coordenadas>
+                    <longitud>-5.598962</longitud>
+                    <latitud>43.277641</latitud>
+                    <altitud>275</altitud>
+                </coordenadas>
+                <distancia unidades="km">0.8</distancia>
+                <fotografias>
+                    <fotografia>multimedia/rincon_nalon1.jpg</fotografia>
+                    <fotografia>multimedia/rincon_nalon2.jpg</fotografia>
+                    <fotografia>multimedia/platos_rincon.jpg</fotografia>
+                </fotografias>
+                <videos>
+                    <video>multimedia/chef_rincon.mp4</video>
+                </videos>
+            </hito>
+            
+            <hito>
+                <nombre>Mercado de Productos Locales</nombre>
+                <descripcion>Mercado cubierto donde se pueden adquirir productos artesanos locales como quesos, embutidos, conservas y licores artesanales.</descripcion>
+                <coordenadas>
+                    <longitud>-5.603751</longitud>
+                    <latitud>43.273924</latitud>
+                    <altitud>272</altitud>
+                </coordenadas>
+                <distancia unidades="km">1.2</distancia>
+                <fotografias>
+                    <fotografia>multimedia/mercado1.jpg</fotografia>
+                    <fotografia>multimedia/mercado2.jpg</fotografia>
+                    <fotografia>multimedia/productos_locales.jpg</fotografia>
+                </fotografias>
+            </hito>
+        </hitos>
+        <planimetria>ruta3.kml</planimetria>
+        <altimetria>ruta3.svg</altimetria>
+    </ruta>
+    
+</rutas>

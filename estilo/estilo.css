@@ -53,6 +53,7 @@ h3 {
 /* 0,0,0,1 */
 nav {
     background-color: #0f2027;
+    /*Hereda color de primer plano de body*/
 }
 
 /* 0,0,0,2 */
@@ -74,7 +75,7 @@ nav li {
 /* 0,0,0,2 */
 nav a {
     display: block;
-    /* Color blanco para contraste con fondo oscuro del nav */
+    /* Hereda color de fondo de nav */
     color: white;
     text-align: center;
     padding: 1em;
@@ -84,12 +85,12 @@ nav a {
 
 /* 0,0,1,1 */
 nav a:hover {
-    background-color: #2c5364;
+    background-color: #2c5364; /*Hereda color de primer plano de nav*/
 }
 
-/* 0,0,1,1 - Se permite el uso de class para el enlace activo */
+/* 0,1,2 - Se permite el uso de class para el enlace activo */
 nav a.activo {
-    background-color: #2c5364;
+    background-color: #2c5364; /*Hereda color de primer plano de nav*/
     font-weight: bold;
 }
 
@@ -105,8 +106,8 @@ main {
 /* 0,0,0,1 */
 section {
     margin-bottom: 2em;
-    padding: 1em;
-    background-color: #1e1e1e;
+    padding: 1em; 
+    background-color: #1e1e1e; /*hereda color de fondo de body*/
     border-radius: 4px;
 }
 
@@ -144,7 +145,7 @@ dl {
 dt {
     font-weight: bold;
     margin-top: 1em;
-    color: #4db6e5; /* Color destacado para términos de definición */
+    color: #4db6e5; /* Hereda color de fondo de body */
 }
 
 /* 0,0,0,1 */
@@ -166,7 +167,7 @@ caption {
     padding: 0.5em;
     font-weight: bold;
     margin-bottom: 0.5em;
-    color: #4db6e5; /* Color destacado para el título de la tabla */
+    color: #4db6e5; /* Hereda color de fondo de body */
 }
 
 /* 0,0,0,1 */
@@ -196,14 +197,14 @@ tbody tr:nth-child(even) {
 
 /* 0,0,0,1 */
 a {
-    color: #4db6e5; /* Color más brillante para enlaces en fondo oscuro */
+    color: #4db6e5; /* Hereda color de fondo de body */
     text-decoration: none;
 }
 
 /* 0,0,1,1 */
 a:hover {
     text-decoration: underline;
-    color: #7ecef5; /* Color más claro al pasar el cursor */
+    color: #7ecef5; /* Hereda color de fondo de body */
 }
 
 /* Estilos para elementos multimedia */
@@ -234,7 +235,7 @@ video {
 audio {
     width: 100%;
     margin: 1em 0;
-    background-color: #2a2a2a; /* Fondo para el reproductor de audio */
+    background-color: #2a2a2a; /* Hereda color de primer plano de body */
 }
 
 /* Estilos para elementos details y summary */
@@ -245,7 +246,7 @@ details {
     padding: 0.5em;
     border: 1px solid #444;
     border-radius: 4px;
-    background-color: #2a2a2a;
+    background-color: #2a2a2a; /* Hereda color de primer plano de body */
 }
 
 /* 0,0,0,1 */
@@ -253,7 +254,7 @@ summary {
     font-weight: bold;
     cursor: pointer;
     padding: 0.5em 0;
-    color: #4db6e5; /* Color destacado para el summary */
+    color: #4db6e5; /* Hereda color de fondo de body */
 }
 
 /* 0,0,1,1 */
