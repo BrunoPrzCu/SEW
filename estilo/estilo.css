@@ -1,7 +1,7 @@
 /* 
 * Hoja de estilo para San Martín del Rey Aurelio - Sitio web de turismo
 * Autor: UO295445
-* Fecha: 2025-06-03 12:08:18
+* Fecha: 2025-06-03 13:23:00
 */
 
 /* Estilos generales */
@@ -310,15 +310,16 @@ footer p {
     /* Hereda color:white del footer, no del body */
 }
 
-/* Estilos para la sección de meteorología */
-section:nth-of-type(1) > section > section {
+/* Estilos para la sección 1 - Tiempo actual y carrusel */
+/* Tiempo actual */
+section:nth-of-type(1) > section:nth-of-type(1) > section {
     background-color: #22303c;
     border-radius: 8px;
     padding: 1.5em;
     margin-top: 1em;
 }
 
-section:nth-of-type(1) > section > section > section {
+section:nth-of-type(1) > section:nth-of-type(1) > section > section {
     background: none;
     padding: 0;
     display: grid;
@@ -327,12 +328,12 @@ section:nth-of-type(1) > section > section > section {
     align-items: center;
 }
 
-section:nth-of-type(1) > section figure {
+section:nth-of-type(1) > section:nth-of-type(1) figure {
     margin: 0;
     text-align: center;
 }
 
-section:nth-of-type(1) > section figure img {
+section:nth-of-type(1) > section:nth-of-type(1) figure img {
     width: 5em;
     height: 5em;
     object-fit: contain;
@@ -340,16 +341,129 @@ section:nth-of-type(1) > section figure img {
     border: none;
 }
 
-section:nth-of-type(1) > section > section > section > section:first-child {
+section:nth-of-type(1) > section:nth-of-type(1) > section > section > section:first-child {
     justify-self: center;
 }
 
-section:nth-of-type(1) > section > section > section > section:nth-child(2) p:first-of-type {
+section:nth-of-type(1) > section:nth-of-type(1) > section > section > section:nth-child(2) p:first-of-type {
     font-size: 2em;
     margin: 0;
 }
 
-/* Estilos para la previsión de 7 días */
+/* Carrusel en la primera sección */
+section:nth-of-type(1) > section:nth-of-type(2) {
+    position: relative;
+    overflow: hidden;
+    height: 25em;
+    padding: 0;
+    margin: 0;
+}
+
+/* Deshabilitar el hover en el carrusel */
+section:nth-of-type(1) > section:nth-of-type(2):hover {
+    transform: none;
+    box-shadow: none;
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > section {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    position: relative;
+    background: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > section > figure {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > section > figure > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    margin: 0;
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > section > figure > figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 1em;
+    margin: 0;
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > button:nth-of-type(1) {
+    left: 0.625em;
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > button:nth-of-type(2) {
+    right: 0.625em;
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > menu {
+    position: absolute;
+    bottom: 4.375em;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    z-index: 5;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > menu > li > button {
+    width: 0.75em;
+    height: 0.75em;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+section:nth-of-type(1) > section:nth-of-type(2) > menu > li > button:hover,
+section:nth-of-type(1) > section:nth-of-type(2) > menu > li > button.activo {
+    background: white;
+}
+
+/* Estilos para la sección 2 - Meteorología de 7 días */
 section:nth-of-type(2) > section > ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
@@ -409,119 +523,6 @@ section:nth-of-type(2) > section > ul > li > p.viento {
     font-size: 0.9em;
     margin: 0.3em 0;
     color: #cccccc;
-}
-
-/* Estilos para el carrusel - usando sección anidada para mayor especificidad */
-section:nth-of-type(2) > section {
-    position: relative;
-    overflow: hidden;
-    height: 25em;
-    padding: 0;
-    margin: 0;
-}
-
-/* Deshabilitar el hover en el carrusel */
-section:nth-of-type(2) > section:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-section:nth-of-type(2) > section > section {
-    display: flex;
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
-    position: relative;
-    background: none;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-}
-
-section:nth-of-type(2) > section > section > figure {
-    min-width: 100%;
-    height: 100%;
-    position: relative;
-    margin: 0;
-    padding: 0;
-}
-
-section:nth-of-type(2) > section > section > figure > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border: none;
-    margin: 0;
-}
-
-section:nth-of-type(2) > section > section > figure > figcaption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 1em;
-    margin: 0;
-}
-
-section:nth-of-type(2) > section > button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    width: 2.5em;
-    height: 2.5em;
-    border-radius: 50%;
-    font-size: 1.5em;
-    cursor: pointer;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s;
-}
-
-section:nth-of-type(2) > section > button:nth-of-type(1) {
-    left: 0.625em;
-}
-
-section:nth-of-type(2) > section > button:nth-of-type(2) {
-    right: 0.625em;
-}
-
-section:nth-of-type(2) > section > button:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-section:nth-of-type(2) > section > menu {
-    position: absolute;
-    bottom: 4.375em;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 0.5em;
-    z-index: 5;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-section:nth-of-type(2) > section > menu > li > button {
-    width: 0.75em;
-    height: 0.75em;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    border: none;
-    cursor: pointer;
-    padding: 0;
-}
-
-section:nth-of-type(2) > section > menu > li > button:hover,
-section:nth-of-type(2) > section > menu > li > button.activo {
-    background: white;
 }
 
 /* Estilos para la sección de destacados */
@@ -760,8 +761,35 @@ section:nth-of-type(5) > ul > li:nth-child(3) > figure:hover > figcaption {
 
 /* Media queries para componentes específicos */
 @media screen and (max-width: 48em) { /* 768px / 16px = 48em */
-    section:nth-of-type(2) > section {
+    /* Carrusel ajustes para tablets */
+    section:nth-of-type(1) > section:nth-of-type(2) {
         height: 18.75em; /* 300px */
+    }
+    
+    /* Previsión meteorológica ajustes para tablets */
+    section:nth-of-type(2) > section > ul {
+        grid-template-columns: 1fr;
+        gap: 0.8em;
+    }
+    
+    section:nth-of-type(2) > section > ul > li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto auto;
+        text-align: left;
+        gap: 0.5em;
+        align-items: center;
+    }
+    
+    section:nth-of-type(2) > section > ul > li > p:first-of-type {
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+    
+    section:nth-of-type(2) > section > ul > li figure {
+        grid-row: 2 / 5;
+        margin: 0;
+        padding-right: 0.8em;
     }
     
     section:nth-of-type(4) > section {
@@ -774,24 +802,31 @@ section:nth-of-type(5) > ul > li:nth-child(3) > figure:hover > figcaption {
 }
 
 @media screen and (max-width: 30em) { /* 480px / 16px = 30em */
-    section:nth-of-type(2) > section {
+    /* Carrusel ajustes para móviles */
+    section:nth-of-type(1) > section:nth-of-type(2) {
         height: 15.625em; /* 250px */
     }
     
-    section:nth-of-type(2) > section > section > figure > figcaption {
+    section:nth-of-type(1) > section:nth-of-type(2) > section > figure > figcaption {
         padding: 0.5em;
         font-size: 0.9em;
     }
 
-    section:nth-of-type(2) > section > section > button:nth-of-type(1),
-    section:nth-of-type(2) > section > section > button:nth-of-type(2) {
+    section:nth-of-type(1) > section:nth-of-type(2) > button:nth-of-type(1),
+    section:nth-of-type(1) > section:nth-of-type(2) > button:nth-of-type(2) {
         width: 1.875em; /* 30px */
         height: 1.875em; /* 30px */
         font-size: 1.2em;
     }
 
-    section:nth-of-type(2) > section > section > menu {
+    section:nth-of-type(1) > section:nth-of-type(2) > menu {
         bottom: 3.75em; /* 60px */
+    }
+    
+    /* Previsión meteorológica ajustes para móviles */
+    section:nth-of-type(2) > section > ul > li figure img {
+        width: 3em;
+        height: 3em;
     }
     
     section:nth-of-type(4) > section > article > figure {
