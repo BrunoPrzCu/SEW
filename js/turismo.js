@@ -1,7 +1,7 @@
 /**
  * Módulo principal para la página de turismo de San Martín del Rey Aurelio
  * Autor: UO295445
- * Fecha: 2025-06-02 18:36:57
+ * Fecha: 2025-06-03 10:03:46
  */
 
 // Clase principal para gestionar la aplicación
@@ -112,9 +112,8 @@ class CarruselFotos {
         const $titulo = $seccion.find('h2').detach();
         $seccion.empty().append($titulo);
         
-        // Crear contenedor exterior del carrusel (esto nos dará un selector más específico)
+        // Crear contenedor exterior del carrusel (section simple)
         const contenedorCarrusel = document.createElement('section');
-        contenedorCarrusel.className = 'carrusel';
         
         // Crear contenedor de imágenes (section interior)
         const contenedorImagenes = document.createElement('section');
@@ -179,7 +178,7 @@ class CarruselFotos {
     // Configurar eventos del carrusel
     configurarEventos() {
         const $seccion = $(this.config.seccion);
-        const $carrusel = $seccion.find('.carrusel');
+        const $carrusel = $seccion.find('section');
         
         // Evento para el botón anterior
         $carrusel.find('button:nth-of-type(1)').on('click', () => {
@@ -225,7 +224,7 @@ class CarruselFotos {
         
         // Obtener elementos del DOM
         const $seccion = $(this.config.seccion);
-        const $carrusel = $seccion.find('.carrusel');
+        const $carrusel = $seccion.find('section');
         const $contenedor = $carrusel.find('section');
         const $indicadores = $carrusel.find('menu li button');
         
@@ -302,7 +301,41 @@ class SeccionNoticias {
             $seccion.append(seccionNoticias);
         }
         
-    
+        // Datos de ejemplo como respaldo
+        const noticiasEjemplo = [
+            {
+                title: 'Nueva ruta turística en San Martín del Rey Aurelio destaca el patrimonio minero',
+                description: 'El ayuntamiento inaugura una nueva ruta turística que recorre los puntos más emblemáticos del patrimonio industrial del concejo.',
+                url: '#',
+                urlToImage: 'multimedia/noticia1.jpg',
+                publishedAt: '2025-06-01T14:30:00Z',
+                source: { name: 'Turismo Asturias' }
+            },
+            {
+                title: 'Festival gastronómico reunirá lo mejor de la cocina asturiana en San Martín',
+                description: 'Más de 20 restaurantes presentarán sus mejores platos en el festival gastronómico que se celebrará este fin de semana.',
+                url: '#',
+                urlToImage: 'multimedia/noticia2.jpg',
+                publishedAt: '2025-05-29T10:15:00Z',
+                source: { name: 'Gastronomía Astur' }
+            },
+            {
+                title: 'Éxito de participación en la jornada de puertas abiertas del Museo de la Minería',
+                description: 'Más de 500 personas visitaron el Museo de la Minería durante la jornada de puertas abiertas organizada este domingo.',
+                url: '#',
+                urlToImage: 'multimedia/noticia3.jpg',
+                publishedAt: '2025-05-27T18:45:00Z',
+                source: { name: 'Cultura Minera' }
+            },
+            {
+                title: 'Asturias promueve el turismo sostenible en áreas mineras',
+                description: 'El gobierno autonómico impulsa iniciativas para fomentar el turismo sostenible en antiguas zonas mineras como San Martín del Rey Aurelio.',
+                url: '#',
+                urlToImage: 'multimedia/noticia4.jpg',
+                publishedAt: '2025-05-25T09:20:00Z',
+                source: { name: 'Eco Turismo' }
+            }
+        ];
         
         // Realizar petición AJAX a la API de noticias
         $.ajax({
@@ -314,17 +347,48 @@ class SeccionNoticias {
             },
             success: (respuesta) => {
                 if (respuesta.status === 'ok' && respuesta.articles && respuesta.articles.length > 0) {
-                    this.mostrarNoticias(respuesta.articles.slice(0, this.config.numeroNoticias));
+                    // Filtrar y procesar artículos
+                    let articulos = respuesta.articles;
+                    
+                    // Filtrar artículos sin imagen o con descripciones vacías
+                    articulos = articulos.filter(articulo => 
+                        articulo.urlToImage && 
+                        articulo.description && 
+                        articulo.description.length > 50
+                    );
+                    
+                    // Intentar encontrar artículos más relevantes para Asturias
+                    const articulosAsturias = articulos.filter(articulo => 
+                        (articulo.title.toLowerCase().includes('asturias') || 
+                         articulo.description.toLowerCase().includes('asturias'))
+                    );
+                    
+                    // Si tenemos suficientes artículos de Asturias, usarlos primero
+                    if (articulosAsturias.length >= this.config.numeroNoticias) {
+                        this.mostrarNoticias(articulosAsturias.slice(0, this.config.numeroNoticias));
+                    } else {
+                        // Si no hay suficientes específicos, combinarlos con otros artículos
+                        const articulosRestantes = articulos.filter(articulo => 
+                            !articulosAsturias.includes(articulo)
+                        );
+                        
+                        const articulosCombinados = [
+                            ...articulosAsturias,
+                            ...articulosRestantes
+                        ].slice(0, this.config.numeroNoticias);
+                        
+                        this.mostrarNoticias(articulosCombinados);
+                    }
                 } else {
-                    this.mostrarError('No se encontraron noticias.');
+                    console.log('No se encontraron noticias en la API. Usando datos de ejemplo.');
+                    this.mostrarNoticias(noticiasEjemplo);
                 }
             },
             error: (xhr, estado, error) => {
-                this.mostrarError('Error al cargar las noticias: ' + error);
+                console.log('Error al cargar noticias de la API. Usando datos de ejemplo:', error);
+                this.mostrarNoticias(noticiasEjemplo);
             }
         });
-        
-
     }
     
     // Mostrar noticias en el contenedor
@@ -350,6 +414,11 @@ class SeccionNoticias {
             year: 'numeric'
         });
         
+        // Recortar descripción si es muy larga
+        const descripcion = noticia.description.length > 150 
+            ? noticia.description.substring(0, 147) + '...' 
+            : noticia.description;
+        
         // Crear elementos usando DOM nativo
         const article = document.createElement('article');
         
@@ -362,12 +431,13 @@ class SeccionNoticias {
             img.alt = noticia.title;
             figure.appendChild(img);
         } else {
-            // Agregar la clase no-image para aplicar estilos CSS apropiados
-            figure.className = 'no-image';
-            
+            // Para figuras sin imagen, usamos un atributo para seleccionar en CSS
+            // Pero como no podemos usar clases ni atributos data, creamos un elemento span dentro
             const noImageSpan = document.createElement('span');
             noImageSpan.textContent = 'Sin imagen disponible';
             figure.appendChild(noImageSpan);
+            
+            // El CSS usará el selector figure:has(> span) para aplicar estilos específicos
         }
         
         // Sección para el contenido
@@ -397,7 +467,7 @@ class SeccionNoticias {
         
         // Descripción
         const p = document.createElement('p');
-        p.textContent = noticia.description;
+        p.textContent = descripcion;
         
         // Enlace para leer más
         const boton = document.createElement('a');
@@ -427,9 +497,6 @@ class SeccionNoticias {
         
         const p = document.createElement('p');
         p.textContent = mensaje;
-        p.style.color = '#ff6b6b';
-        p.style.textAlign = 'center';
-        p.style.padding = '2em';
         
         $contenedor.append(p);
     }

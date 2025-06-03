@@ -311,7 +311,7 @@ footer p {
 }
 
 /* Estilos para el carrusel - usando sección anidada para mayor especificidad */
-section:nth-of-type(2) .carrusel {
+section:nth-of-type(2) > section {
     position: relative;
     overflow: hidden;
     height: 25em;
@@ -320,12 +320,12 @@ section:nth-of-type(2) .carrusel {
 }
 
 /* Deshabilitar el hover en el carrusel */
-section:nth-of-type(2) .carrusel:hover {
+section:nth-of-type(2) > section:hover {
     transform: none;
     box-shadow: none;
 }
 
-section:nth-of-type(2) .carrusel > section {
+section:nth-of-type(2) > section > section {
     display: flex;
     height: 100%;
     transition: transform 0.5s ease-in-out;
@@ -336,7 +336,7 @@ section:nth-of-type(2) .carrusel > section {
     border-radius: 0;
 }
 
-section:nth-of-type(2) .carrusel > section > figure {
+section:nth-of-type(2) > section > section > figure {
     min-width: 100%;
     height: 100%;
     position: relative;
@@ -344,7 +344,7 @@ section:nth-of-type(2) .carrusel > section > figure {
     padding: 0;
 }
 
-section:nth-of-type(2) .carrusel > section > figure > img {
+section:nth-of-type(2) > section > section > figure > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -352,7 +352,7 @@ section:nth-of-type(2) .carrusel > section > figure > img {
     margin: 0;
 }
 
-section:nth-of-type(2) .carrusel > section > figure > figcaption {
+section:nth-of-type(2) > section > section > figure > figcaption {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -363,7 +363,7 @@ section:nth-of-type(2) .carrusel > section > figure > figcaption {
     margin: 0;
 }
 
-section:nth-of-type(2) .carrusel > button {
+section:nth-of-type(2) > section > button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -382,19 +382,19 @@ section:nth-of-type(2) .carrusel > button {
     transition: background-color 0.3s;
 }
 
-section:nth-of-type(2) .carrusel > button:nth-of-type(1) {
+section:nth-of-type(2) > section > button:nth-of-type(1) {
     left: 0.625em;
 }
 
-section:nth-of-type(2) .carrusel > button:nth-of-type(2) {
+section:nth-of-type(2) > section > button:nth-of-type(2) {
     right: 0.625em;
 }
 
-section:nth-of-type(2) .carrusel > button:hover {
+section:nth-of-type(2) > section > button:hover {
     background: rgba(0, 0, 0, 0.8);
 }
 
-section:nth-of-type(2) .carrusel > menu {
+section:nth-of-type(2) > section > menu {
     position: absolute;
     bottom: 4.375em;
     left: 0;
@@ -408,7 +408,7 @@ section:nth-of-type(2) .carrusel > menu {
     list-style: none;
 }
 
-section:nth-of-type(2) .carrusel > menu > li > button {
+section:nth-of-type(2) > section > menu > li > button {
     width: 0.75em;
     height: 0.75em;
     border-radius: 50%;
@@ -418,8 +418,8 @@ section:nth-of-type(2) .carrusel > menu > li > button {
     padding: 0;
 }
 
-section:nth-of-type(2) .carrusel > menu > li > button:hover,
-section:nth-of-type(2) .carrusel > menu > li > button.activo {
+section:nth-of-type(2) > section > menu > li > button:hover,
+section:nth-of-type(2) > section > menu > li > button.activo {
     background: white;
 }
 
@@ -512,15 +512,6 @@ section:nth-of-type(4) > section > article > figure > img {
     border: none;
 }
 
-/* Para figuras sin imagen, usamos una clase */
-section:nth-of-type(4) > section > article > figure.no-image {
-    height: 12.5em;
-    background-color: #2c5364;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-}
 
 section:nth-of-type(4) > section > article > figure > span {
     font-style: italic;
@@ -668,7 +659,7 @@ section:nth-of-type(5) > ul > li:nth-child(3) > figure:hover > figcaption {
 
 /* Media queries para componentes específicos */
 @media screen and (max-width: 48em) { /* 768px / 16px = 48em */
-    section:nth-of-type(2) .carrusel {
+    section:nth-of-type(2) > section {
         height: 18.75em; /* 300px */
     }
     
@@ -682,23 +673,23 @@ section:nth-of-type(5) > ul > li:nth-child(3) > figure:hover > figcaption {
 }
 
 @media screen and (max-width: 30em) { /* 480px / 16px = 30em */
-    section:nth-of-type(2) .carrusel {
+    section:nth-of-type(2) > section {
         height: 15.625em; /* 250px */
     }
     
-    section:nth-of-type(2) .carrusel > section > figure > figcaption {
+    section:nth-of-type(2) > section > section > figure > figcaption {
         padding: 0.5em;
         font-size: 0.9em;
     }
-    
-    section:nth-of-type(2) .carrusel > button:nth-of-type(1),
-    section:nth-of-type(2) .carrusel > button:nth-of-type(2) {
+
+    section:nth-of-type(2) > section > section > button:nth-of-type(1),
+    section:nth-of-type(2) > section > section > button:nth-of-type(2) {
         width: 1.875em; /* 30px */
         height: 1.875em; /* 30px */
         font-size: 1.2em;
     }
-    
-    section:nth-of-type(2) .carrusel > menu {
+
+    section:nth-of-type(2) > section > section > menu {
         bottom: 3.75em; /* 60px */
     }
     
