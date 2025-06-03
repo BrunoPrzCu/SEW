@@ -349,6 +349,8 @@ section:nth-of-type(1) > section > section > section > section:nth-child(2) p:fi
     margin: 0;
 }
 
+
+
 /* Estilos para la previsión de 7 días */
 section:nth-of-type(3) > section > ul {
     display: grid;
@@ -508,6 +510,11 @@ section:nth-of-type(2) > section > menu > li > button:hover,
 section:nth-of-type(2) > section > menu > li > button.activo {
     background: white;
 }
+
+section:nth-of-type(2) > section > section > h6 {
+    font-size: 0%;
+}
+
 
 /* Estilos para la sección de destacados */
 section:nth-of-type(3) > ul {

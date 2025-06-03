@@ -114,10 +114,16 @@ class CarruselFotos {
         
         // Crear contenedor exterior del carrusel (section simple)
         const contenedorCarrusel = document.createElement('section');
+        const h3 = document.createElement('h3');
+        h3.textContent = 'Carrusel de imágenes';
+        contenedorCarrusel.appendChild(h3);
         
         // Crear contenedor de imágenes (section interior)
         const contenedorImagenes = document.createElement('section');
-        
+        const h6 = document.createElement('h6');
+        h6.textContent = 'Imágenes destacadas';
+        contenedorImagenes.appendChild(h6);
+
         // Añadir imágenes al contenedor
         this.imagenes.forEach((imagen) => {
             const figura = document.createElement('figure');
@@ -282,7 +288,7 @@ class SeccionNoticias {
             apiKey: 'afcd9e8511854f7f9f249ee2f2577d18', // Reemplazar con una clave de API válida
             // Parámetros de la API
             parametros: {
-                q: 'Turismo Asturias',
+                q: 'Turismo en concejos Asturias',
                 language: 'es',
                 sortBy: 'publishedAt',
                 pageSize: 10
@@ -298,6 +304,9 @@ class SeccionNoticias {
         if ($seccion.find('section').length === 0) {
             const seccionNoticias = document.createElement('section');
             seccionNoticias.innerHTML = '<p>Cargando noticias...</p>';
+            const h3 = document.createElement('h3');
+            h3.textContent = 'Últimas noticias';
+            seccionNoticias.appendChild(h3);
             $seccion.append(seccionNoticias);
         }
         
@@ -396,7 +405,12 @@ class SeccionNoticias {
         const $seccion = $(this.config.seccion);
         const $contenedor = $seccion.find('section');
         $contenedor.empty();
-        
+
+        // Crear título para la sección de noticias
+        const h3 = document.createElement('h3');
+        h3.textContent = 'Últimas noticias';
+        $contenedor.append(h3);
+
         // Crear tarjeta para cada noticia
         noticias.forEach(noticia => {
             const $tarjeta = this.crearTarjetaNoticia(noticia);
@@ -421,6 +435,9 @@ class SeccionNoticias {
         
         // Crear elementos usando DOM nativo
         const article = document.createElement('article');
+
+        const h4 = document.createElement('h4');
+        h4.textContent = noticia.title;
         
         // Figura para la imagen
         const figure = document.createElement('figure');
@@ -482,6 +499,7 @@ class SeccionNoticias {
         section.appendChild(p);
         section.appendChild(boton);
         
+        article.appendChild(h4);
         article.appendChild(figure);
         article.appendChild(section);
         

@@ -89,10 +89,12 @@ class TiempoActual {
         
         // Crear elementos para mostrar la información
         const h3 = document.createElement('h3');
-        h3.textContent = `Tiempo actual en San Martín del Rey Aurelio`;
+        h3.textContent = `Tiempo actual`;
         
         // Crear estructura para mostrar la información principal
         const seccionPrincipal = document.createElement('section');
+        const h4 = document.createElement('h4');
+        h4.textContent = `Información actualizada a las ${horaActual}:00`;
         
         // Información principal
         const temperaturaActual = Math.round(datos.current_weather.temperature);
@@ -118,7 +120,8 @@ class TiempoActual {
         
         // Figura para el icono
         const figura = document.createElement('figure');
-        
+        const h5 = document.createElement('h5');
+        h5.textContent = 'Condición actual';
         const img = document.createElement('img');
         img.src = iconoURL;
         img.alt = condicion;
@@ -126,13 +129,15 @@ class TiempoActual {
         const figcaption = document.createElement('figcaption');
         figcaption.textContent = this.capitalizarPrimeraLetra(condicion);
         
+        figura.appendChild(h5);
         figura.appendChild(img);
         figura.appendChild(figcaption);
         seccionIcono.appendChild(figura);
         
         // Sección para temperatura y datos principales
         const seccionTemperatura = document.createElement('section');
-        
+        const h5Temp = document.createElement('h5');
+        h5Temp.textContent = 'Temperatura actual';
         const pTemp = document.createElement('p');
         pTemp.innerHTML = `${temperaturaActual}°C`;
 
@@ -146,6 +151,7 @@ class TiempoActual {
         const pPrecipitacion = document.createElement('p');
         pPrecipitacion.textContent = `Probabilidad de lluvia: ${probabilidadLluvia}%`;
         
+        seccionTemperatura.appendChild(h5Temp);
         seccionTemperatura.appendChild(pTemp);
         seccionTemperatura.appendChild(pSensacion);
         seccionTemperatura.appendChild(pHumedad);
@@ -153,7 +159,8 @@ class TiempoActual {
         
         // Sección para viento y sol
         const seccionVientoSol = document.createElement('section');
-        
+        const h5Viento = document.createElement('h5');
+        h5Viento.textContent = 'Viento y sol';
         const pViento = document.createElement('p');
         pViento.textContent = `Viento: ${velocidadViento} km/h (${direccionViento})`;
         
@@ -167,13 +174,14 @@ class TiempoActual {
         const fechaActualizacion = new Date();
         pActualizacion.textContent = `Actualizado: ${fechaActualizacion.toLocaleTimeString('es-ES')}`;
 
-        
+        seccionVientoSol.appendChild(h5Viento);
         seccionVientoSol.appendChild(pViento);
         seccionVientoSol.appendChild(pSol);
         seccionVientoSol.appendChild(pPuesta);
         seccionVientoSol.appendChild(pActualizacion);
         
         // Añadir secciones al contenedor principal
+        seccionPrincipal.appendChild(h4);
         seccionPrincipal.appendChild(seccionIcono);
         seccionPrincipal.appendChild(seccionTemperatura);
         seccionPrincipal.appendChild(seccionVientoSol);
@@ -412,18 +420,15 @@ class PrevisionSemanal {
         
         // Temperaturas min/max
         const pTemps = document.createElement('p');
-        pTemps.innerHTML = `<strong>${Math.round(tempMax)}°</strong> / ${Math.round(tempMin)}°`;
-        pTemps.setAttribute('aria-label', `Temperatura máxima ${Math.round(tempMax)} grados, mínima ${Math.round(tempMin)} grados`);
+        pTemps.innerHTML = `Temperatura máxima ${Math.round(tempMax)}° / Temperatura mínima ${Math.round(tempMin)}°`;
         
         // Probabilidad de precipitación
         const pLluvia = document.createElement('p');
         pLluvia.textContent = `Lluvia: ${probLluvia}%`;
-        pLluvia.setAttribute('aria-label', `Probabilidad de lluvia ${probLluvia} por ciento`);
         
         // Velocidad del viento
         const pViento = document.createElement('p');
         pViento.textContent = `Viento: ${Math.round(velocidadViento)} km/h`;
-        pViento.setAttribute('aria-label', `Velocidad del viento ${Math.round(velocidadViento)} kilómetros por hora`);
         
         // Añadir elementos a la tarjeta
         li.appendChild(pDia);
