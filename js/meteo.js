@@ -135,8 +135,7 @@ class TiempoActual {
         
         const pTemp = document.createElement('p');
         pTemp.innerHTML = `${temperaturaActual}°C`;
-        pTemp.style.fontSize = '2em';
-        pTemp.style.margin = '0';
+
         
         const pSensacion = document.createElement('p');
         pSensacion.textContent = `Sensación térmica: ${sensacionTermica}°C`;
@@ -167,8 +166,7 @@ class TiempoActual {
         const pActualizacion = document.createElement('p');
         const fechaActualizacion = new Date();
         pActualizacion.textContent = `Actualizado: ${fechaActualizacion.toLocaleTimeString('es-ES')}`;
-        pActualizacion.style.fontSize = '0.8em';
-        pActualizacion.style.marginTop = '1em';
+
         
         seccionVientoSol.appendChild(pViento);
         seccionVientoSol.appendChild(pSol);
@@ -180,11 +178,6 @@ class TiempoActual {
         seccionPrincipal.appendChild(seccionTemperatura);
         seccionPrincipal.appendChild(seccionVientoSol);
         
-        // Establecer el estilo para la sección principal
-        seccionPrincipal.style.display = 'grid';
-        seccionPrincipal.style.gridTemplateColumns = 'auto 1fr 1fr';
-        seccionPrincipal.style.gap = '1em';
-        seccionPrincipal.style.alignItems = 'center';
         
         // Añadir todo al contenedor
         $contenedor.append(h3);
@@ -297,7 +290,6 @@ class TiempoActual {
         
         const p = document.createElement('p');
         p.textContent = mensaje;
-        p.style.color = '#ff6b6b';
         
         $contenedor.append(h3);
         $contenedor.append(p);
@@ -323,7 +315,7 @@ class PrevisionSemanal {
     constructor(coordenadas, config) {
         this.coordenadas = coordenadas;
         this.config = config;
-        this.contenedor = 'section:nth-of-type(2) > section'; // Selector del contenedor para la previsión
+        this.contenedor = 'section:nth-of-type(3) > section'; // Selector del contenedor para la previsión
         
         // Open-Meteo API URL para previsión
         this.urlAPI = 'https://api.open-meteo.com/v1/forecast';
@@ -368,11 +360,6 @@ class PrevisionSemanal {
         
         // Crear lista para los días
         const listaPrevisiones = document.createElement('ul');
-        listaPrevisiones.style.listStyle = 'none';
-        listaPrevisiones.style.padding = '0';
-        listaPrevisiones.style.display = 'grid';
-        listaPrevisiones.style.gridTemplateColumns = 'repeat(auto-fill, minmax(150px, 1fr))';
-        listaPrevisiones.style.gap = '1em';
         
         // Recorrer las fechas y crear tarjetas para cada día
         for (let i = 0; i < datos.daily.time.length; i++) {
@@ -425,19 +412,16 @@ class PrevisionSemanal {
         
         // Temperaturas min/max
         const pTemps = document.createElement('p');
-        pTemps.className = 'temperatura'; // Usar una clase en lugar de estilos inline
         pTemps.innerHTML = `<strong>${Math.round(tempMax)}°</strong> / ${Math.round(tempMin)}°`;
         pTemps.setAttribute('aria-label', `Temperatura máxima ${Math.round(tempMax)} grados, mínima ${Math.round(tempMin)} grados`);
         
         // Probabilidad de precipitación
         const pLluvia = document.createElement('p');
-        pLluvia.className = 'precipitacion'; // Usar una clase en lugar de estilos inline
         pLluvia.textContent = `Lluvia: ${probLluvia}%`;
         pLluvia.setAttribute('aria-label', `Probabilidad de lluvia ${probLluvia} por ciento`);
         
         // Velocidad del viento
         const pViento = document.createElement('p');
-        pViento.className = 'viento'; // Usar una clase en lugar de estilos inline
         pViento.textContent = `Viento: ${Math.round(velocidadViento)} km/h`;
         pViento.setAttribute('aria-label', `Velocidad del viento ${Math.round(velocidadViento)} kilómetros por hora`);
         
@@ -534,7 +518,6 @@ class PrevisionSemanal {
         
         const p = document.createElement('p');
         p.textContent = mensaje;
-        p.style.color = '#ff6b6b';
         
         $contenedor.append(h3);
         $contenedor.append(p);

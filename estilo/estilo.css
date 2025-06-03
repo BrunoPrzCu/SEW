@@ -350,7 +350,7 @@ section:nth-of-type(1) > section > section > section > section:nth-child(2) p:fi
 }
 
 /* Estilos para la previsión de 7 días */
-section:nth-of-type(2) > section > ul {
+section:nth-of-type(3) > section > ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
     gap: 1em;
@@ -359,7 +359,7 @@ section:nth-of-type(2) > section > ul {
     margin-top: 1em;
 }
 
-section:nth-of-type(2) > section > ul > li {
+section:nth-of-type(3) > section > ul > li {
     background-color: #22303c;
     border-radius: 8px;
     padding: 1em;
@@ -367,49 +367,34 @@ section:nth-of-type(2) > section > ul > li {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-section:nth-of-type(2) > section > ul > li:hover {
+section:nth-of-type(3) > section > ul > li:hover {
     transform: translateY(-0.3125em);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-section:nth-of-type(2) > section > ul > li > p:first-of-type {
+section:nth-of-type(3) > section > ul > li > p:first-of-type {
     font-weight: bold;
     margin-bottom: 0.5em;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 0.5em;
 }
 
-section:nth-of-type(2) > section > ul > li figure {
+section:nth-of-type(3) > section > ul > li figure {
     margin: 0.5em 0;
 }
 
-section:nth-of-type(2) > section > ul > li figure img {
+section:nth-of-type(3) > section > ul > li figure img {
     width: 3.5em;
     height: 3.5em;
     margin: 0 auto;
     border: none;
 }
 
-section:nth-of-type(2) > section > ul > li figure figcaption {
+section:nth-of-type(3) > section > ul > li figure figcaption {
     font-size: 0.9em;
     margin-top: 0.3em;
 }
 
-section:nth-of-type(2) > section > ul > li > p.temperatura {
-    font-size: 1.1em;
-    margin: 0.5em 0;
-}
-
-section:nth-of-type(2) > section > ul > li > p.temperatura strong {
-    font-weight: bold;
-}
-
-section:nth-of-type(2) > section > ul > li > p.precipitacion,
-section:nth-of-type(2) > section > ul > li > p.viento {
-    font-size: 0.9em;
-    margin: 0.3em 0;
-    color: #cccccc;
-}
 
 /* Estilos para el carrusel - usando sección anidada para mayor especificidad */
 section:nth-of-type(2) > section {
