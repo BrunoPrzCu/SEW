@@ -1,7 +1,7 @@
 /* 
 * Hoja de estilo para San Martín del Rey Aurelio - Sitio web de turismo
 * Autor: UO295445
-* Fecha: 2025-06-02 18:36:57
+* Fecha: 2025-06-03 12:08:18
 */
 
 /* Estilos generales */
@@ -308,6 +308,107 @@ footer {
 footer p {
     margin: 0.5em 0;
     /* Hereda color:white del footer, no del body */
+}
+
+/* Estilos para la sección de meteorología */
+section:nth-of-type(1) > section > section {
+    background-color: #22303c;
+    border-radius: 8px;
+    padding: 1.5em;
+    margin-top: 1em;
+}
+
+section:nth-of-type(1) > section > section > section {
+    background: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    gap: 1em;
+    align-items: center;
+}
+
+section:nth-of-type(1) > section figure {
+    margin: 0;
+    text-align: center;
+}
+
+section:nth-of-type(1) > section figure img {
+    width: 5em;
+    height: 5em;
+    object-fit: contain;
+    margin: 0 auto;
+    border: none;
+}
+
+section:nth-of-type(1) > section > section > section > section:first-child {
+    justify-self: center;
+}
+
+section:nth-of-type(1) > section > section > section > section:nth-child(2) p:first-of-type {
+    font-size: 2em;
+    margin: 0;
+}
+
+/* Estilos para la previsión de 7 días */
+section:nth-of-type(2) > section > ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+    gap: 1em;
+    padding: 0;
+    list-style: none;
+    margin-top: 1em;
+}
+
+section:nth-of-type(2) > section > ul > li {
+    background-color: #22303c;
+    border-radius: 8px;
+    padding: 1em;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+section:nth-of-type(2) > section > ul > li:hover {
+    transform: translateY(-0.3125em);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+section:nth-of-type(2) > section > ul > li > p:first-of-type {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5em;
+}
+
+section:nth-of-type(2) > section > ul > li figure {
+    margin: 0.5em 0;
+}
+
+section:nth-of-type(2) > section > ul > li figure img {
+    width: 3.5em;
+    height: 3.5em;
+    margin: 0 auto;
+    border: none;
+}
+
+section:nth-of-type(2) > section > ul > li figure figcaption {
+    font-size: 0.9em;
+    margin-top: 0.3em;
+}
+
+section:nth-of-type(2) > section > ul > li > p.temperatura {
+    font-size: 1.1em;
+    margin: 0.5em 0;
+}
+
+section:nth-of-type(2) > section > ul > li > p.temperatura strong {
+    font-weight: bold;
+}
+
+section:nth-of-type(2) > section > ul > li > p.precipitacion,
+section:nth-of-type(2) > section > ul > li > p.viento {
+    font-size: 0.9em;
+    margin: 0.3em 0;
+    color: #cccccc;
 }
 
 /* Estilos para el carrusel - usando sección anidada para mayor especificidad */

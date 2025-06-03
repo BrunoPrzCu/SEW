@@ -1,7 +1,7 @@
 /* 
 * Hoja de estilo de layout para San Martín del Rey Aurelio - Sitio web de turismo
 * Autor: UO295445
-* Fecha: 2025-05-29 19:19:07
+* Fecha: 2025-06-03 12:34:43
 */
 
 /* Diseño base - Aplicable a todos los tamaños */
@@ -57,7 +57,92 @@ table {
     display: block;
 }
 
-/* Diseño responsivo - Media queries */
+/* Estilos responsivos para la sección de meteorología */
+@media screen and (max-width: 64em) { /* 1024px / 16px = 64em */
+    /* Tiempo actual en pantallas medianas */
+    section:nth-of-type(1) > section > section > section {
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+    }
+    
+    section:nth-of-type(1) > section > section > section > section:first-child {
+        grid-column: 1 / -1;
+        justify-self: center;
+    }
+}
+
+@media screen and (max-width: 48em) { /* 768px / 16px = 48em */
+    /* Tiempo actual en tablets pequeñas */
+    section:nth-of-type(1) > section > section > section {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Previsión en formato vertical para tablets y móviles */
+    section:nth-of-type(2) > section > ul {
+        display: grid;
+        grid-template-columns: 1fr; /* Una columna para formato vertical */
+        gap: 0.8em;
+    }
+    
+    /* Tarjetas de previsión en formato horizontal compacto */
+    section:nth-of-type(2) > section > ul > li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 0.5em;
+        align-items: center;
+        text-align: left;
+        padding: 1em;
+    }
+    
+    section:nth-of-type(2) > section > ul > li > p:first-of-type {
+        grid-column: 1 / -1;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 0.5em;
+        margin-bottom: 0.5em;
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    section:nth-of-type(2) > section > ul > li figure {
+        grid-row: 2 / 5;
+        margin: 0;
+        padding-right: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    section:nth-of-type(2) > section > ul > li figure img {
+        width: 3.5em;
+        height: 3.5em;
+    }
+    
+    section:nth-of-type(2) > section > ul > li figure figcaption {
+        font-size: 0.8em;
+        text-align: center;
+        margin-top: 0.3em;
+    }
+}
+
+@media screen and (max-width: 30em) { /* 480px / 16px = 30em */
+    /* Tiempo actual en móviles */
+    section:nth-of-type(1) > section > section > section {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Ajustes adicionales para previsión en móviles pequeños */
+    section:nth-of-type(2) > section > ul > li > p:first-of-type {
+        font-size: 1.1em;
+    }
+    
+    section:nth-of-type(2) > section > ul > li figure img {
+        width: 3em;
+        height: 3em;
+    }
+}
+
+/* Diseño responsivo - Media queries generales */
 
 /* Móviles pequeños y medianos (hasta 480px) */
 @media screen and (max-width: 30em) { /* 480px / 16px = 30em */
