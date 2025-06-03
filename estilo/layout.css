@@ -192,7 +192,9 @@ table {
     }
     
     /* 0,0,0,2 */
-
+    nav ul {
+        flex-wrap: wrap;
+    }
     
     /* 0,0,0,2 */
     nav li {
@@ -202,11 +204,6 @@ table {
     /* 0,0,0,1 */
     main {
         grid-template-columns: 1fr; /* Una sola columna para tablets pequeñas */
-    }
-
-    section:nth-of-type(2) > section {
-        display: grid;
-        grid-template-columns: 1fr;
     }
 }
 
@@ -234,11 +231,6 @@ table {
     section:nth-child(4), 
     section:nth-child(7) {
         grid-column: 1 / -1;
-    }
-
-    section:nth-of-type(2) > section {
-        display: grid;
-        grid-template-columns: 1fr;
     }
 }
 

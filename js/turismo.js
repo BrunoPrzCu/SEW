@@ -39,7 +39,7 @@ class CarruselFotos {
     constructor() {
         // Configuración del carrusel
         this.config = {
-            seccion: 'section:nth-of-type(1)', // Segunda sección = carrusel
+            seccion: 'section:nth-of-type(2)', // Segunda sección = carrusel
             intervalo: 5000, // 5 segundos para cambio automático
             duracionTransicion: 500 // 0.5 segundos de transición
         };
@@ -282,7 +282,7 @@ class SeccionNoticias {
             apiKey: 'afcd9e8511854f7f9f249ee2f2577d18', // Reemplazar con una clave de API válida
             // Parámetros de la API
             parametros: {
-                q: 'Concejos Asturias',
+                q: 'Turismo Asturias',
                 language: 'es',
                 sortBy: 'publishedAt',
                 pageSize: 10
