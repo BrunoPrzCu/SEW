@@ -834,3 +834,107 @@ main > section:first-child > section:nth-of-type(2) > section > section {
 main > section:first-child > section:nth-of-type(2) > section > ol > li > p {
     margin: 0.5em 0;
 }
+
+main > section > section:nth-of-type(1) > ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    list-style: none;
+    padding: 0;
+    margin: 1em 0;
+}
+
+main > section > section:nth-of-type(1) > ul > li {
+    margin: 0;
+}
+
+main > section > section:nth-of-type(1) > ul > li > button {
+    background-color: #22303c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.8em 1.5em;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+main > section > section:nth-of-type(1) > ul > li > button:hover {
+    background-color: #2c5364;
+    transform: translateY(-3px);
+}
+
+/* Sección de información de ruta */
+main > section > section:nth-of-type(2) > section {
+    background-color: #22303c;
+    border-radius: 8px;
+    padding: 1.5em;
+    margin: 1em 0;
+}
+
+main > section > section:nth-of-type(2) > section > ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.8em;
+}
+
+main > section > section:nth-of-type(2) > section > ul > li {
+    padding: 0.5em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+main > section > section:nth-of-type(2) > section:nth-of-type(2) {
+    margin-top: 1.5em;
+}
+
+/* Tabla de hitos */
+main > section > section:nth-of-type(2) > section:nth-of-type(2) table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+main > section > section:nth-of-type(2) > section:nth-of-type(2) table th {
+    background-color: #2c5364;
+    color: white;
+    padding: 0.8em;
+    text-align: left;
+    border: 1px solid #444;
+}
+
+main > section > section:nth-of-type(2) > section:nth-of-type(2) table td {
+    padding: 0.8em;
+    border: 1px solid #444;
+    vertical-align: top;
+}
+
+main > section > section:nth-of-type(2) > section:nth-of-type(2) table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Imágenes en tabla */
+main > section > section:nth-of-type(2) > section:nth-of-type(2) table figure {
+    margin: 0;
+    text-align: center;
+}
+
+main > section > section:nth-of-type(2) > section:nth-of-type(2) table img {
+    max-width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.3s;
+}
+
+main > section > section:nth-of-type(2) > section:nth-of-type(2) table img:hover {
+    transform: scale(1.05);
+}
+
+main > section > section:nth-of-type(2) > section:nth-of-type(2) table figcaption {
+    font-size: 0.8em;
+    margin-top: 0.5em;
+    color: #4db6e5;
+}
+

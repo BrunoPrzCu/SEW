@@ -9,6 +9,12 @@
     <title>Rutas - San Martín del Rey Aurelio</title>
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css"/>
     <link rel="stylesheet" type="text/css" href="estilo/layout.css"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <header>
@@ -30,11 +36,34 @@
 
     <main>
         <section>
-            <h2>Rutas de senderismo</h2>
-            <p>Descubre los mejores senderos y rutas de San Martín del Rey Aurelio, disfrutando de paisajes impresionantes y naturaleza en estado puro.</p>
-            <p>Tanto para principiantes como para senderistas experimentados, nuestras rutas ofrecen diferentes niveles de dificultad.</p>
+            <h2>Rutas por San Martín del Rey Aurelio</h2>
+            <p>Descubre los paisajes, la historia y la gastronomía de nuestro municipio a través de estas rutas cuidadosamente seleccionadas.</p>
+            
+            <section>
+                <h3>Selecciona una ruta</h3>
+                <ul>
+                    <!-- Los botones de rutas se generarán dinámicamente con JavaScript -->
+                </ul>
+            </section>
+            
+            <section>
+                <!-- Aquí se cargará la información de la ruta seleccionada -->
+            </section>
+            
+            <section>
+                <h3>Planimetría de la ruta</h3>
+                <section>
+                    <!-- Contenedor para el mapa -->
+                </section>
+            </section>
+            
+            <section>
+                <h3>Altimetría de la ruta</h3>
+                <section>
+                    <!-- Contenedor para la altimetría SVG -->
+                </section>
+            </section>
         </section>
-        
     </main>
 
     <footer>
@@ -42,5 +71,7 @@
         <p>Universidad de Oviedo - Software y Estándares para la Web</p>
         <p>Bruno Pérez Cuervo</p>
     </footer>
+
+    <script src="js/rutas.js"></script>
 </body>
 </html>

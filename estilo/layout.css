@@ -179,6 +179,19 @@ table {
     section:nth-of-type(5) > ul {
         grid-template-columns: 1fr;
     }
+
+    main > section > section:nth-of-type(1) > ul > li > button {
+        width: 100%;
+    }
+    
+    main > section > section:nth-of-type(2) > section > ul {
+        grid-template-columns: 1fr;
+    }
+    
+    main > section > section:nth-of-type(2) > section:nth-of-type(2) table {
+        display: block;
+        overflow-x: auto;
+    }
 }
 
 @media screen and (max-width: 30em) { /* 480px / 16px = 30em */
