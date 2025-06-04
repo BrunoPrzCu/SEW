@@ -123,6 +123,62 @@ table {
         text-align: center;
         margin-top: 0.3em;
     }
+
+    /* Media query para dispositivos móviles para la sección del juego */
+    main > section:first-child > section:nth-of-type(2) > section {
+        padding: 1.5em;
+    }
+    
+    main > section:first-child > section:nth-of-type(2) > section > img {
+        max-width: 100%;
+    }
+    
+    main > section:first-child > section:nth-of-type(2) > section > section {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    main > section:first-child > section:nth-of-type(2) > section > section > button {
+        min-width: 8em;
+        max-width: 12em;
+        width: auto;
+    }
+
+    section:nth-of-type(2) > section {
+        height: 18.75em; /* 300px */
+    }
+    
+    section:nth-of-type(3) > section > ul {
+        grid-template-columns: 1fr;
+    }
+    
+    section:nth-of-type(3) > section > ul > li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto auto;
+        text-align: left;
+        gap: 0.5em;
+        align-items: center;
+    }
+    
+    section:nth-of-type(3) > section > ul > li > p:first-of-type {
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+    
+    section:nth-of-type(3) > section > ul > li figure {
+        grid-row: 2 / 5;
+        margin: 0;
+        padding-right: 0.8em;
+    }
+    
+    section:nth-of-type(4) > section {
+        grid-template-columns: 1fr;
+    }
+    
+    section:nth-of-type(5) > ul {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media screen and (max-width: 30em) { /* 480px / 16px = 30em */
@@ -139,6 +195,30 @@ table {
     section:nth-of-type(2) > section > ul > li figure img {
         width: 3em;
         height: 3em;
+    }
+
+    section:nth-of-type(2) > section {
+        height: 15.625em; /* 250px */
+    }
+    
+    section:nth-of-type(2) > section > section > figure > figcaption {
+        padding: 0.5em;
+        font-size: 0.9em;
+    }
+
+    section:nth-of-type(2) > section > button:nth-of-type(1),
+    section:nth-of-type(2) > section > button:nth-of-type(2) {
+        width: 1.875em; /* 30px */
+        height: 1.875em; /* 30px */
+        font-size: 1.2em;
+    }
+
+    section:nth-of-type(2) > section > menu {
+        bottom: 3.75em; /* 60px */
+    }
+    
+    section:nth-of-type(4) > section > article > figure {
+        height: 11.25em; /* 180px */
     }
 }
 
