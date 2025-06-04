@@ -135,9 +135,6 @@ def procesar_xml_a_svg(xml_file):
     """
     Procesa el archivo XML completo y genera un archivo SVG por cada ruta
     """
-    # Aseguramos que exista el directorio svg
-    if not os.path.exists('svg'):
-        os.makedirs('svg')
     
     # Parseamos el XML con namespace
     tree = ET.parse(xml_file)
@@ -149,7 +146,7 @@ def procesar_xml_a_svg(xml_file):
     # Procesamos cada ruta
     for ruta in root.findall(f"{{{ns}}}ruta"):
         ruta_id = ruta.get("id")
-        svg_file = f"svg/{ruta_id}.svg"
+        svg_file = f"{ruta_id}.svg"
         generar_svg(ruta, svg_file, ns)
 
 if __name__ == "__main__":

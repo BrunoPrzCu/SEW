@@ -49,7 +49,7 @@ class Kml(object):
         style = ET.SubElement(self.doc, 'Style', id=id)
         icon_style = ET.SubElement(style, 'IconStyle')
         icon = ET.SubElement(icon_style, 'Icon')
-        ET.SubElement(icon, 'href').text = '\n' + icon_href + '\n'
+        ET.SubElement(icon, 'href').text = icon_href
 
     def escribir(self, nombreArchivoKML):
         """
@@ -89,7 +89,7 @@ def procesar_ruta_xml_a_kml(ruta_element, kml_file, ns):
     descripcion = ruta_element.find(f"{{{ns}}}descripcion").text
     
     # Añadimos un estilo para los puntos
-    nuevoKML.addStyle("puntoEstilo", "http://maps.google.com/mapfiles/kml/paddle/red-circle.png")
+    nuevoKML.addStyle("puntoEstilo", "/multimedia/red-circle.png")
     
     # Obtenemos las coordenadas del punto inicial
     coord_inicio = ruta_element.find(f"{{{ns}}}coordenadasInicio")
@@ -144,9 +144,6 @@ def procesar_xml_a_kml(xml_file):
     """
     Procesa el archivo XML completo y genera un archivo KML por cada ruta
     """
-    # Aseguramos que exista el directorio kml
-    if not os.path.exists('kml'):
-        os.makedirs('kml')
     
     # Parseamos el XML con namespace
     tree = ET.parse(xml_file)
@@ -158,7 +155,7 @@ def procesar_xml_a_kml(xml_file):
     # Procesamos cada ruta
     for ruta in root.findall(f"{{{ns}}}ruta"):
         ruta_id = ruta.get("id")
-        kml_file = f"kml/{ruta_id}.kml"
+        kml_file = f"{ruta_id}.kml"
         procesar_ruta_xml_a_kml(ruta, kml_file, ns)
 
 if __name__ == "__main__":

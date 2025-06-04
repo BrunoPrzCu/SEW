@@ -449,7 +449,7 @@ class JuegoPreguntas {
             const respuestaCorrecta = document.createElement('p');
             respuestaCorrecta.textContent = `Respuesta correcta: ${pregunta.opciones[pregunta.respuestaCorrecta]}`;
             
-            // Estilo para la respuesta correcta (sin usar class)
+            // Estilo para la respuesta correcta 
             respuestaCorrecta.style.fontWeight = 'bold';
             respuestaCorrecta.style.color = '#4db6e5';
             

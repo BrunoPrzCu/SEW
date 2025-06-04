@@ -112,7 +112,7 @@
                 </coordenadas>
                 <distancia unidades="km">2.2</distancia>
                 <fotografias>
-                    <fotografia>multimedia/museo_mineria1.jpg</fotografia>
+                    <fotografia>multimedia/museo_mineria.jpg</fotografia>
                     <fotografia>multimedia/museo_mineria2.jpg</fotografia>
                     <fotografia>multimedia/museo_mineria3.jpg</fotografia>
                 </fotografias>
@@ -161,7 +161,6 @@
                 <distancia unidades="km">1.5</distancia>
                 <fotografias>
                     <fotografia>multimedia/puente_hierro1.jpg</fotografia>
-                    <fotografia>multimedia/puente_hierro2.jpg</fotografia>
                 </fotografias>
             </hito>
             
@@ -176,12 +175,7 @@
                 <distancia unidades="km">2.3</distancia>
                 <fotografias>
                     <fotografia>multimedia/meandro1.jpg</fotografia>
-                    <fotografia>multimedia/meandro2.jpg</fotografia>
-                    <fotografia>multimedia/meandro3.jpg</fotografia>
                 </fotografias>
-                <videos>
-                    <video>multimedia/drone_meandro.mp4</video>
-                </videos>
             </hito>
             
             <hito>
@@ -195,7 +189,6 @@
                 <distancia unidades="km">2.7</distancia>
                 <fotografias>
                     <fotografia>multimedia/area_recreativa1.jpg</fotografia>
-                    <fotografia>multimedia/area_recreativa2.jpg</fotografia>
                 </fotografias>
             </hito>
             
@@ -210,12 +203,7 @@
                 <distancia unidades="km">1.9</distancia>
                 <fotografias>
                     <fotografia>multimedia/castanos1.jpg</fotografia>
-                    <fotografia>multimedia/castanos2.jpg</fotografia>
-                    <fotografia>multimedia/castanos3.jpg</fotografia>
                 </fotografias>
-                <videos>
-                    <video>multimedia/sendero_castanos.mp4</video>
-                </videos>
             </hito>
             
             <hito>
@@ -229,13 +217,7 @@
                 <distancia unidades="km">2.4</distancia>
                 <fotografias>
                     <fotografia>multimedia/mirador_rio1.jpg</fotografia>
-                    <fotografia>multimedia/mirador_rio2.jpg</fotografia>
-                    <fotografia>multimedia/mirador_rio3.jpg</fotografia>
-                    <fotografia>multimedia/mirador_rio4.jpg</fotografia>
                 </fotografias>
-                <videos>
-                    <video>multimedia/panoramica_rio.mp4</video>
-                </videos>
             </hito>
         </hitos>
         <planimetria>ruta2.kml</planimetria>
@@ -278,12 +260,7 @@
                 <distancia unidades="km">0.3</distancia>
                 <fotografias>
                     <fotografia>multimedia/sidreria1.jpg</fotografia>
-                    <fotografia>multimedia/sidreria2.jpg</fotografia>
-                    <fotografia>multimedia/sidreria3.jpg</fotografia>
                 </fotografias>
-                <videos>
-                    <video>multimedia/escanciado_sidra.mp4</video>
-                </videos>
             </hito>
             
             <hito>
@@ -297,8 +274,6 @@
                 <distancia unidades="km">0.5</distancia>
                 <fotografias>
                     <fotografia>multimedia/casa_manolin1.jpg</fotografia>
-                    <fotografia>multimedia/casa_manolin2.jpg</fotografia>
-                    <fotografia>multimedia/fabada_manolin.jpg</fotografia>
                 </fotografias>
             </hito>
             
@@ -313,12 +288,7 @@
                 <distancia unidades="km">0.7</distancia>
                 <fotografias>
                     <fotografia>multimedia/confiteria1.jpg</fotografia>
-                    <fotografia>multimedia/dulces_asturianos.jpg</fotografia>
-                    <fotografia>multimedia/confiteria_interior.jpg</fotografia>
                 </fotografias>
-                <videos>
-                    <video>multimedia/elaboracion_dulces.mp4</video>
-                </videos>
             </hito>
             
             <hito>
@@ -332,12 +302,7 @@
                 <distancia unidades="km">0.8</distancia>
                 <fotografias>
                     <fotografia>multimedia/rincon_nalon1.jpg</fotografia>
-                    <fotografia>multimedia/rincon_nalon2.jpg</fotografia>
-                    <fotografia>multimedia/platos_rincon.jpg</fotografia>
                 </fotografias>
-                <videos>
-                    <video>multimedia/chef_rincon.mp4</video>
-                </videos>
             </hito>
             
             <hito>
@@ -351,8 +316,6 @@
                 <distancia unidades="km">1.2</distancia>
                 <fotografias>
                     <fotografia>multimedia/mercado1.jpg</fotografia>
-                    <fotografia>multimedia/mercado2.jpg</fotografia>
-                    <fotografia>multimedia/productos_locales.jpg</fotografia>
                 </fotografias>
             </hito>
         </hitos>
