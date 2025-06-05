@@ -84,61 +84,61 @@ class GestorRutas {
             // Extraer información básica de la ruta
             const nuevaRuta = {
                 id: $ruta.attr('id'),
-                nombre: $ruta.find('nombre').text(),
-                tipo: $ruta.find('tipo').text(),
-                medioTransporte: $ruta.find('medioTransporte').text(),
-                fechaInicio: $ruta.find('fechaInicio').text(),
-                horaInicio: $ruta.find('horaInicio').text(),
-                duracion: $ruta.find('duracion').text(),
-                agencia: $ruta.find('agencia').text(),
-                descripcion: $ruta.find('descripcion').text(),
-                personasAdecuadas: $ruta.find('personasAdecuadas').text(),
-                lugarInicio: $ruta.find('lugarInicio').text(),
-                direccionInicio: $ruta.find('direccionInicio').text(),
+                nombre: $ruta.find('> nombre').text(),  // Usar selector hijo directo
+                tipo: $ruta.find('> tipo').text(),      // Usar selector hijo directo
+                medioTransporte: $ruta.find('> medioTransporte').text(),  // Usar selector hijo directo
+                fechaInicio: $ruta.find('> fechaInicio').text(),  // Usar selector hijo directo
+                horaInicio: $ruta.find('> horaInicio').text(),    // Usar selector hijo directo
+                duracion: $ruta.find('> duracion').text(),        // Usar selector hijo directo
+                agencia: $ruta.find('> agencia').text(),          // Usar selector hijo directo
+                descripcion: $ruta.find('> descripcion').text(),  // Usar selector hijo directo
+                personasAdecuadas: $ruta.find('> personasAdecuadas').text(),  // Usar selector hijo directo
+                lugarInicio: $ruta.find('> lugarInicio').text(),  // Usar selector hijo directo
+                direccionInicio: $ruta.find('> direccionInicio').text(),  // Usar selector hijo directo
                 coordenadasInicio: {
-                    longitud: parseFloat($ruta.find('coordenadasInicio > longitud').text()),
-                    latitud: parseFloat($ruta.find('coordenadasInicio > latitud').text()),
-                    altitud: parseFloat($ruta.find('coordenadasInicio > altitud').text())
+                    longitud: parseFloat($ruta.find('> coordenadasInicio > longitud').text()),
+                    latitud: parseFloat($ruta.find('> coordenadasInicio > latitud').text()),
+                    altitud: parseFloat($ruta.find('> coordenadasInicio > altitud').text())
                 },
                 referencias: [],
-                recomendacion: parseInt($ruta.find('recomendacion').text()),
+                recomendacion: parseInt($ruta.find('> recomendacion').text()),  // Usar selector hijo directo
                 hitos: [],
-                planimetria: $ruta.find('planimetria').text(),
-                altimetria: $ruta.find('altimetria').text()
+                planimetria: $ruta.find('> planimetria').text(),  // Usar selector hijo directo
+                altimetria: $ruta.find('> altimetria').text()     // Usar selector hijo directo
             };
             
             // Extraer referencias
-            $ruta.find('referencias > referencia').each((i, referencia) => {
+            $ruta.find('> referencias > referencia').each((i, referencia) => {  // Usar selector hijo directo
                 nuevaRuta.referencias.push($(referencia).text());
             });
             
             // Extraer hitos
-            $ruta.find('hitos > hito').each((i, hito) => {
+            $ruta.find('> hitos > hito').each((i, hito) => {  // Usar selector hijo directo
                 const $hito = $(hito);
                 
                 const nuevoHito = {
-                    nombre: $hito.find('nombre').text(),
-                    descripcion: $hito.find('descripcion').text(),
+                    nombre: $hito.find('> nombre').text(),  // Usar selector hijo directo
+                    descripcion: $hito.find('> descripcion').text(),  // Usar selector hijo directo
                     coordenadas: {
-                        longitud: parseFloat($hito.find('coordenadas > longitud').text()),
-                        latitud: parseFloat($hito.find('coordenadas > latitud').text()),
-                        altitud: parseFloat($hito.find('coordenadas > altitud').text())
+                        longitud: parseFloat($hito.find('> coordenadas > longitud').text()),
+                        latitud: parseFloat($hito.find('> coordenadas > latitud').text()),
+                        altitud: parseFloat($hito.find('> coordenadas > altitud').text())
                     },
                     distancia: {
-                        valor: parseFloat($hito.find('distancia').text()),
-                        unidades: $hito.find('distancia').attr('unidades')
+                        valor: parseFloat($hito.find('> distancia').text()),
+                        unidades: $hito.find('> distancia').attr('unidades')
                     },
                     fotografias: [],
                     videos: []
                 };
                 
                 // Extraer fotografías
-                $hito.find('fotografias > fotografia').each((j, foto) => {
+                $hito.find('> fotografias > fotografia').each((j, foto) => {  // Usar selector hijo directo
                     nuevoHito.fotografias.push($(foto).text());
                 });
                 
                 // Extraer videos
-                $hito.find('videos > video').each((j, video) => {
+                $hito.find('> videos > video').each((j, video) => {  // Usar selector hijo directo
                     nuevoHito.videos.push($(video).text());
                 });
                 
@@ -409,7 +409,7 @@ class GestorRutas {
         // Cargar KML
         this.capaKML = new ol.layer.Vector({
             source: new ol.source.Vector({
-                url: this.rutaActual.planimetria,
+                url: "xml/" + this.rutaActual.planimetria,
                 format: new ol.format.KML({
                     extractStyles: true,
                     extractAttributes: true
@@ -441,7 +441,7 @@ class GestorRutas {
         
         // Cargar archivo SVG
         $.ajax({
-            url: this.rutaActual.altimetria,
+            url: "xml/" + this.rutaActual.altimetria,
             type: 'GET',
             dataType: 'text',
             success: (svgData) => {
