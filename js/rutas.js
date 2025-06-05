@@ -1,7 +1,7 @@
 /**
  * Módulo para la visualización de rutas de San Martín del Rey Aurelio
  * Autor: UO295445
- * Fecha: 2025-06-04 22:10:42
+ * Fecha: 2025-06-05 10:52:54
  */
 
 /**
@@ -21,7 +21,7 @@ class GestorRutas {
         // Ruta actual seleccionada
         this.rutaActual = null;
         
-        // Referencias DOM
+        // Referencias DOM - Usando estructura anidada sin IDs
         this.listadoRutas = null;
         this.contenidoRuta = null;
         this.contenedorMapa = null;
@@ -39,11 +39,14 @@ class GestorRutas {
      */
     iniciar() {
         $(document).ready(() => {
-            // Obtener referencias DOM
-            this.listadoRutas = $('main > section > section:nth-of-type(1) > ul');
-            this.contenidoRuta = $('main > section > section:nth-of-type(2)');
-            this.contenedorMapa = $('main > section > section:nth-of-type(3) > section');
-            this.contenedorAltimetria = $('main > section > section:nth-of-type(4) > section');
+            // Obtener referencias DOM - Las secciones se seleccionan por posición
+            this.listadoRutas = $('main > section:nth-of-type(3) > ul');
+            this.contenidoRuta = $('main > section:nth-of-type(4)');
+            this.contenedorMapa = $('main > section:nth-of-type(5) > section');
+            this.contenedorAltimetria = $('main > section:nth-of-type(6) > section');
+            
+            // Ocultar las secciones de planimetría y altimetría inicialmente
+            $('main > section:nth-of-type(5), main > section:nth-of-type(6)').hide();
             
             // Cargar datos de las rutas
             this.cargarDatosRutas();
@@ -208,6 +211,9 @@ class GestorRutas {
             
             // Cargar la altimetría SVG
             this.cargarAltimetria();
+            
+            // Hacer visibles las secciones de planimetría y altimetría
+            $('main > section:nth-of-type(5), main > section:nth-of-type(6)').show();
         }
     }
     
@@ -379,7 +385,7 @@ class GestorRutas {
         
         // Crear elemento para el mapa
         const elementoMapa = document.createElement('section');
-        elementoMapa.style.height = '400px';
+        elementoMapa.style.height = '25em';
         elementoMapa.style.width = '100%';
         elementoMapa.style.border = '1px solid #444';
         elementoMapa.style.borderRadius = '4px';
