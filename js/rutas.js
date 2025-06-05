@@ -1,7 +1,7 @@
 /**
  * Módulo para la visualización de rutas de San Martín del Rey Aurelio
  * Autor: UO295445
- * Fecha: 2025-06-05 19:14:13
+ * Fecha: 2025-06-05 20:02:01
  */
 
 /**
@@ -366,23 +366,44 @@ class GestorRutas {
             
             // Contenedor para multimedia
             const contenedorMultimedia = document.createElement('section');
+            contenedorMultimedia.style.width = "100%";
+            contenedorMultimedia.style.display = "flex";
+            contenedorMultimedia.style.flexDirection = "column";
+            contenedorMultimedia.style.alignItems = "center";
             
             // Añadir galería de fotos si existen
             if (hito.fotografias.length > 0) {
                 const tituloFotos = document.createElement('h6');
                 tituloFotos.textContent = 'Fotografías';
+                tituloFotos.style.alignSelf = "flex-start";
+                tituloFotos.style.width = "100%";
+                tituloFotos.style.borderBottom = "1px solid rgba(255, 255, 255, 0.1)";
+                tituloFotos.style.paddingBottom = "0.3em";
+                tituloFotos.style.marginBottom = "0.5em";
                 contenedorMultimedia.appendChild(tituloFotos);
                 
                 const galeriaFotos = document.createElement('section');
+                galeriaFotos.style.display = "grid";
+                galeriaFotos.style.gridTemplateColumns = "repeat(auto-fill, minmax(10em, 1fr))";
+                galeriaFotos.style.gap = "0.5em";
+                galeriaFotos.style.width = "100%";
+                galeriaFotos.style.marginBottom = "1em";
                 
                 // Agregar todas las fotos
                 hito.fotografias.forEach(urlFoto => {
                     const figura = document.createElement('figure');
+                    figura.style.margin = "0";
+                    figura.style.textAlign = "center";
                     
                     const imagen = document.createElement('img');
                     imagen.src = urlFoto;
                     imagen.alt = `Imagen de ${hito.nombre}`;
                     imagen.title = `Imagen de ${hito.nombre}`;
+                    imagen.style.width = "100%";
+                    imagen.style.height = "8em";
+                    imagen.style.objectFit = "cover";
+                    imagen.style.borderRadius = "0.25em";
+                    imagen.style.transition = "transform 0.3s";
                     
                     figura.appendChild(imagen);
                     galeriaFotos.appendChild(figura);
@@ -395,15 +416,28 @@ class GestorRutas {
             if (hito.videos.length > 0) {
                 const tituloVideos = document.createElement('h6');
                 tituloVideos.textContent = 'Videos';
+                tituloVideos.style.alignSelf = "flex-start";
+                tituloVideos.style.width = "100%";
+                tituloVideos.style.borderBottom = "1px solid rgba(255, 255, 255, 0.1)";
+                tituloVideos.style.paddingBottom = "0.3em";
+                tituloVideos.style.marginBottom = "0.5em";
                 contenedorMultimedia.appendChild(tituloVideos);
                 
                 const galeriaVideos = document.createElement('section');
+                galeriaVideos.style.display = "grid";
+                // Usamos un valor más pequeño para minmax para evitar que se corte
+                galeriaVideos.style.gridTemplateColumns = "repeat(auto-fit, minmax(16em, 1fr))";
+                galeriaVideos.style.gap = "1em";
+                galeriaVideos.style.width = "100%";
                 
                 // Agregar todos los videos
                 hito.videos.forEach(urlVideo => {
                     const videoElemento = document.createElement('video');
                     videoElemento.src = urlVideo;
                     videoElemento.controls = true;
+                    videoElemento.style.width = "100%";
+                    videoElemento.style.maxWidth = "100%";
+                    videoElemento.style.borderRadius = "0.25em";
                     
                     galeriaVideos.appendChild(videoElemento);
                 });
@@ -489,13 +523,26 @@ class GestorRutas {
                 // Crear contenedor para el SVG
                 const contenedorSVG = document.createElement('section');
                 
+                // Configurar estilo del contenedor SVG para evitar que se corte
+                contenedorSVG.style.width = "100%";
+                contenedorSVG.style.overflow = "auto";
+                contenedorSVG.style.maxHeight = "50em"; // Altura máxima relativa
+                
                 // Añadir el SVG al contenedor
                 contenedorSVG.innerHTML = svgData;
                 this.contenedorAltimetria.append(contenedorSVG);
                 
                 // Añadir estilos específicos al SVG
                 const svg = $(contenedorSVG).find('svg');
-                // No establecemos viewBox aquí, lo moveremos al CSS
+                svg.attr('width', '100%');
+                svg.attr('height', 'auto');
+                svg.attr('viewBox', '0 0 800 400');
+                
+                // Ajustes específicos para dispositivos móviles
+                if (window.innerWidth < 768) { // 48em = 768px
+                    svg.attr('width', '150%'); // Más ancho para poder hacer scroll horizontal
+                    contenedorSVG.style.overflowX = "auto";
+                }
                 
                 // Añadir línea de cota cero
                 const svgElement = svg[0];
