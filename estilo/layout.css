@@ -180,7 +180,7 @@ table {
         grid-template-columns: 1fr;
     }
 
-        main > section:nth-of-type(3) > ul {
+    main > section:nth-of-type(3) > ul {
         flex-direction: column;
     }
     
@@ -200,6 +200,14 @@ table {
     /* Altura del mapa en móviles */
     main > section:nth-of-type(5) > section > section {
         height: 18.75em;
+    }
+
+     main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(1) {
+        grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+    }
+    
+    main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(2) {
+        grid-template-columns: 1fr;
     }
 
     

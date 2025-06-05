@@ -1,7 +1,7 @@
 /**
  * Módulo para la visualización de rutas de San Martín del Rey Aurelio
  * Autor: UO295445
- * Fecha: 2025-06-05 10:52:54
+ * Fecha: 2025-06-05 19:14:13
  */
 
 /**
@@ -50,6 +50,15 @@ class GestorRutas {
             
             // Cargar datos de las rutas
             this.cargarDatosRutas();
+            
+            // Corregir problema de redimensionamiento del mapa
+            $(window).on('resize', () => {
+                if (this.mapa) {
+                    setTimeout(() => {
+                        this.mapa.updateSize();
+                    }, 200);
+                }
+            });
         });
     }
     
@@ -206,14 +215,21 @@ class GestorRutas {
             // Mostrar la información de la ruta
             this.mostrarInformacionRuta();
             
+            // Hacer visibles las secciones de planimetría y altimetría
+            $('main > section:nth-of-type(5), main > section:nth-of-type(6)').show();
+            
             // Cargar el mapa con el KML
             this.cargarMapa();
             
             // Cargar la altimetría SVG
             this.cargarAltimetria();
             
-            // Hacer visibles las secciones de planimetría y altimetría
-            $('main > section:nth-of-type(5), main > section:nth-of-type(6)').show();
+            // Solución para forzar la actualización del tamaño del mapa
+            setTimeout(() => {
+                if (this.mapa) {
+                    this.mapa.updateSize();
+                }
+            }, 100);
         }
     }
     
@@ -306,72 +322,102 @@ class GestorRutas {
         tituloHitos.textContent = 'Puntos de interés en la ruta';
         seccionHitos.appendChild(tituloHitos);
         
-        // Tabla de hitos
-        const tablaHitos = document.createElement('table');
-        const thead = document.createElement('thead');
-        const tr = document.createElement('tr');
-        
-        // Cabecera de la tabla
-        ['Nombre', 'Descripción', 'Distancia', 'Fotos'].forEach(texto => {
-            const th = document.createElement('th');
-            th.textContent = texto;
-            tr.appendChild(th);
-        });
-        
-        thead.appendChild(tr);
-        tablaHitos.appendChild(thead);
-        
-        // Cuerpo de la tabla con los hitos
-        const tbody = document.createElement('tbody');
+        // Lista de hitos
+        const listaHitos = document.createElement('ul');
         
         this.rutaActual.hitos.forEach((hito, indice) => {
-            const fila = document.createElement('tr');
+            const elementoHito = document.createElement('li');
             
-            // Nombre del hito
-            const celdaNombre = document.createElement('td');
-            celdaNombre.textContent = hito.nombre;
-            fila.appendChild(celdaNombre);
+            // Contenedor principal del hito
+            const contenedorHito = document.createElement('article');
+            
+            // Título del hito
+            const tituloHito = document.createElement('h5');
+            tituloHito.textContent = hito.nombre;
+            contenedorHito.appendChild(tituloHito);
             
             // Descripción del hito
-            const celdaDescripcion = document.createElement('td');
-            celdaDescripcion.textContent = hito.descripcion;
-            fila.appendChild(celdaDescripcion);
+            const descripcionHito = document.createElement('p');
+            descripcionHito.textContent = hito.descripcion;
+            contenedorHito.appendChild(descripcionHito);
+            
+            // Información adicional del hito
+            const infoAdicional = document.createElement('ul');
             
             // Distancia
-            const celdaDistancia = document.createElement('td');
-            celdaDistancia.textContent = `${hito.distancia.valor} ${hito.distancia.unidades}`;
-            fila.appendChild(celdaDistancia);
+            const distanciaItem = document.createElement('li');
+            const distanciaLabel = document.createElement('strong');
+            distanciaLabel.textContent = 'Distancia: ';
+            distanciaItem.appendChild(distanciaLabel);
+            distanciaItem.appendChild(document.createTextNode(`${hito.distancia.valor} ${hito.distancia.unidades}`));
+            infoAdicional.appendChild(distanciaItem);
             
-            // Fotos
-            const celdaFotos = document.createElement('td');
+            // Coordenadas
+            const coordenadasItem = document.createElement('li');
+            const coordenadasLabel = document.createElement('strong');
+            coordenadasLabel.textContent = 'Coordenadas: ';
+            coordenadasItem.appendChild(coordenadasLabel);
+            coordenadasItem.appendChild(document.createTextNode(
+                `Lat: ${hito.coordenadas.latitud}, Long: ${hito.coordenadas.longitud}, Alt: ${hito.coordenadas.altitud}m`
+            ));
+            infoAdicional.appendChild(coordenadasItem);
+            
+            contenedorHito.appendChild(infoAdicional);
+            
+            // Contenedor para multimedia
+            const contenedorMultimedia = document.createElement('section');
+            
+            // Añadir galería de fotos si existen
             if (hito.fotografias.length > 0) {
-                const galeriaFotos = document.createElement('figure');
+                const tituloFotos = document.createElement('h6');
+                tituloFotos.textContent = 'Fotografías';
+                contenedorMultimedia.appendChild(tituloFotos);
                 
-                // Primera foto
-                const primerFoto = document.createElement('img');
-                primerFoto.src = hito.fotografias[0];
-                primerFoto.alt = `Imagen de ${hito.nombre}`;
-                primerFoto.title = `Imagen de ${hito.nombre}`;
+                const galeriaFotos = document.createElement('section');
                 
-                // Si hay más fotos, añadir un contador
-                if (hito.fotografias.length > 1) {
-                    const figcaption = document.createElement('figcaption');
-                    figcaption.textContent = `${hito.fotografias.length} fotos disponibles`;
-                    galeriaFotos.appendChild(figcaption);
-                }
+                // Agregar todas las fotos
+                hito.fotografias.forEach(urlFoto => {
+                    const figura = document.createElement('figure');
+                    
+                    const imagen = document.createElement('img');
+                    imagen.src = urlFoto;
+                    imagen.alt = `Imagen de ${hito.nombre}`;
+                    imagen.title = `Imagen de ${hito.nombre}`;
+                    
+                    figura.appendChild(imagen);
+                    galeriaFotos.appendChild(figura);
+                });
                 
-                galeriaFotos.appendChild(primerFoto);
-                celdaFotos.appendChild(galeriaFotos);
-            } else {
-                celdaFotos.textContent = 'No hay fotos disponibles';
+                contenedorMultimedia.appendChild(galeriaFotos);
             }
-            fila.appendChild(celdaFotos);
             
-            tbody.appendChild(fila);
+            // Añadir videos si existen
+            if (hito.videos.length > 0) {
+                const tituloVideos = document.createElement('h6');
+                tituloVideos.textContent = 'Videos';
+                contenedorMultimedia.appendChild(tituloVideos);
+                
+                const galeriaVideos = document.createElement('section');
+                
+                // Agregar todos los videos
+                hito.videos.forEach(urlVideo => {
+                    const videoElemento = document.createElement('video');
+                    videoElemento.src = urlVideo;
+                    videoElemento.controls = true;
+                    
+                    galeriaVideos.appendChild(videoElemento);
+                });
+                
+                contenedorMultimedia.appendChild(galeriaVideos);
+            }
+            
+            contenedorHito.appendChild(contenedorMultimedia);
+            
+            elementoHito.appendChild(contenedorHito);
+            listaHitos.appendChild(elementoHito);
         });
         
-        tablaHitos.appendChild(tbody);
-        seccionHitos.appendChild(tablaHitos);
+        seccionHitos.appendChild(listaHitos);
         
         this.contenidoRuta.append(seccionHitos);
     }
@@ -385,11 +431,6 @@ class GestorRutas {
         
         // Crear elemento para el mapa
         const elementoMapa = document.createElement('section');
-        elementoMapa.style.height = '25em';
-        elementoMapa.style.width = '100%';
-        elementoMapa.style.border = '1px solid #444';
-        elementoMapa.style.borderRadius = '4px';
-        elementoMapa.style.margin = '1em 0';
         this.contenedorMapa.append(elementoMapa);
         
         // Crear mapa
@@ -447,13 +488,6 @@ class GestorRutas {
             success: (svgData) => {
                 // Crear contenedor para el SVG
                 const contenedorSVG = document.createElement('section');
-                contenedorSVG.style.width = '100%';
-                contenedorSVG.style.overflow = 'auto';
-                contenedorSVG.style.margin = '1em 0';
-                contenedorSVG.style.border = '1px solid #444';
-                contenedorSVG.style.borderRadius = '4px';
-                contenedorSVG.style.padding = '1em';
-                contenedorSVG.style.backgroundColor = '#22303c';
                 
                 // Añadir el SVG al contenedor
                 contenedorSVG.innerHTML = svgData;
@@ -461,10 +495,7 @@ class GestorRutas {
                 
                 // Añadir estilos específicos al SVG
                 const svg = $(contenedorSVG).find('svg');
-                svg.attr('width', '100%');
-                svg.attr('height', 'auto');
-                svg.attr('preserveAspectRatio', 'xMidYMid meet');
-                svg.attr('viewBox', '0 0 800 400');
+                // No establecemos viewBox aquí, lo moveremos al CSS
                 
                 // Añadir línea de cota cero
                 const svgElement = svg[0];

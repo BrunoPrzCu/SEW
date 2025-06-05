@@ -947,6 +947,12 @@ main > section:nth-of-type(4) > section:nth-of-type(2) table figcaption {
     color: #4db6e5;
 }
 
+/* Hacer que la sección 5 (planimetría) y la sección 6 (altimetría) ocupen todo el ancho */
+main > section:nth-of-type(5),
+main > section:nth-of-type(6) {
+    grid-column: 1 / -1;
+}
+
 /* Contenedor del mapa */
 main > section:nth-of-type(5) > section > section {
     height: 25em;
@@ -958,9 +964,13 @@ main > section:nth-of-type(5) > section > section {
 
 /* Contenedor de la altimetría */
 main > section:nth-of-type(6) > section > section {
-    background-color: #22303c;
-    border-radius: 8px;
+    width: 100%;
+    overflow: auto;
     margin: 1em 0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 1em;
+    background-color: #22303c;
 }
 
 /* Estilos para SVG en altimetría */
@@ -968,5 +978,35 @@ main > section:nth-of-type(6) > section > section svg {
     display: block;
     margin: 0 auto;
     max-width: 100%;
+    transform-origin: 0 0;
+    width: 800px;
+    height: 400px;
+    overflow: visible;
+    
 }
 
+main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section {
+    margin-top: 1.5em;
+}
+
+main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(1) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+    gap: 0.5em;
+    margin-bottom: 1em;
+}
+
+main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(1) > figure {
+    margin: 0;
+}
+
+main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    gap: 1em;
+}
+
+main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(2) > video {
+    width: 100%;
+    border-radius: 4px;
+}
