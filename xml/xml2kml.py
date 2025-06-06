@@ -89,7 +89,7 @@ def procesar_ruta_xml_a_kml(ruta_element, kml_file, ns):
     descripcion = ruta_element.find(f"{{{ns}}}descripcion").text
     
     # Añadimos un estilo para los puntos
-    nuevoKML.addStyle("puntoEstilo", "/multimedia/red-circle.png")
+    nuevoKML.addStyle("puntoEstilo", "multimedia/red-circle.png")
     
     # Obtenemos las coordenadas del punto inicial
     coord_inicio = ruta_element.find(f"{{{ns}}}coordenadasInicio")

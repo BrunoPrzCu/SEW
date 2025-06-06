@@ -69,7 +69,7 @@ def generar_svg(ruta_element, svg_file, ns):
     
     # Generar el contenido del archivo SVG
     svg_content = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n'
-    svg_content += f'<svg width="{ancho}" height="{alto}" xmlns="http://www.w3.org/2000/svg">\n'
+    svg_content += f'<svg xmlns="http://www.w3.org/2000/svg">\n'
     svg_content += f'  <title>Altimetría - {ruta_element.find(f"{{{ns}}}nombre").text}</title>\n'
     
     # Dibujar rejilla de fondo

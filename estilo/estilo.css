@@ -964,8 +964,8 @@ main > section:nth-of-type(5) > section > section {
 
 /* Contenedor de la altimetría */
 main > section:nth-of-type(6) > section > section {
-    width: 100%;
-    overflow: auto;
+    width: auto;
+    height: auto;
     margin: 1em 0;
     border: 1px solid #444;
     border-radius: 4px;
@@ -975,14 +975,8 @@ main > section:nth-of-type(6) > section > section {
 
 /* Estilos para SVG en altimetría */
 main > section:nth-of-type(6) > section > section svg {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    transform-origin: 0 0;
-    width: 800px;
-    height: 400px;
-    overflow: visible;
-    
+    width: 50em;
+    height: 30em;
 }
 
 main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section {

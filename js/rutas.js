@@ -523,10 +523,6 @@ class GestorRutas {
                 // Crear contenedor para el SVG
                 const contenedorSVG = document.createElement('section');
                 
-                // Configurar estilo del contenedor SVG para evitar que se corte
-                contenedorSVG.style.width = "100%";
-                contenedorSVG.style.overflow = "auto";
-                contenedorSVG.style.maxHeight = "50em"; // Altura máxima relativa
                 
                 // Añadir el SVG al contenedor
                 contenedorSVG.innerHTML = svgData;
@@ -534,15 +530,7 @@ class GestorRutas {
                 
                 // Añadir estilos específicos al SVG
                 const svg = $(contenedorSVG).find('svg');
-                svg.attr('width', '100%');
-                svg.attr('height', 'auto');
-                svg.attr('viewBox', '0 0 800 400');
                 
-                // Ajustes específicos para dispositivos móviles
-                if (window.innerWidth < 768) { // 48em = 768px
-                    svg.attr('width', '150%'); // Más ancho para poder hacer scroll horizontal
-                    contenedorSVG.style.overflowX = "auto";
-                }
                 
                 // Añadir línea de cota cero
                 const svgElement = svg[0];
