@@ -1,0 +1,11 @@
+tabla,id,nombre,categoria_id,descripcion,plazas_totales,precio,ubicacion,imagen
+categorias,1,Museo,,Visitas guiadas a museos y exposiciones,,,,
+categorias,2,Ruta,,Rutas guiadas por el entorno natural,,,,
+categorias,3,Restaurante,,Degustaciones gastronómicas tradicionales,,,,
+categorias,4,Hotel,,Alojamientos con encanto,,,,
+categorias,5,Actividad,,Actividades recreativas y culturales,,,,
+recursos_turisticos,1,Museo de la Minería,1,Museo etnográfico sobre la historia minera de la región,25,8.50,"Calle Principal 10, SMRA",museo_mineria.jpg
+recursos_turisticos,2,Ruta del Nalón,2,Ruta guiada por el valle del río Nalón,15,12.00,Punto de encuentro: Plaza del Ayuntamiento,ruta_nalon.jpg
+recursos_turisticos,3,Sidrería El Minero,3,Degustación de sidra y platos tradicionales asturianos,30,25.00,"Avenida del Parque 5, SMRA",sidreria.jpg
+recursos_turisticos,4,Hotel La Casona,4,Hotel rural tradicional asturiano,20,65.00,Carretera de la Montaña km 5,hotel_casona.jpg
+recursos_turisticos,5,Visita al Pozo Sotón,5,Visita guiada a una auténtica mina de carbón,10,15.00,Barrio minero s/n,pozo_soton.jpg
