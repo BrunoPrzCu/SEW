@@ -2,7 +2,7 @@
 // Iniciar sesión para manejar la autenticación del usuario
 session_start();
 
-// Incluir archivos necesarios (todos en la carpeta php)
+// Incluir archivos necesarios
 require_once 'php/config.php';
 require_once 'php/db.php';
 require_once 'php/usuario.php';
@@ -11,14 +11,22 @@ require_once 'php/recurso.php';
 require_once 'php/horario.php';
 require_once 'php/reserva.php';
 
+// Solo cargar csv_manager.php si es necesario
+if (isset($_GET['accion']) && ($_GET['accion'] == 'imp_exp' || $_GET['accion'] == 'importar')) {
+    require_once 'php/csv_manager.php';
+}
+
 // Variables para controlar la visualización
 $mostrarLogin = true;
 $mostrarRegistro = false;
 $mostrarRecursos = false;
 $mostrarDetalle = false;
 $mostrarReservas = false;
+$mostrarImpExp = false;
 $mensajeExito = '';
 $mensajeError = '';
+$mostrarResultados = false;
+$resultadoOperacion = [];
 
 // Verificar si hay un usuario logueado
 $usuarioLogueado = isset($_SESSION['usuario_id']);
@@ -27,15 +35,23 @@ $usuarioLogueado = isset($_SESSION['usuario_id']);
 if (isset($_GET['accion'])) {
     switch ($_GET['accion']) {
         case 'login':
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_POST['password'])) {
-                $usuario = new Usuario();
-                if ($usuario->login($_POST['email'], $_POST['password'])) {
-                    $usuarioLogueado = true;
-                    $mostrarLogin = false;
-                    $mostrarRecursos = true;
-                    $mensajeExito = 'Inicio de sesión exitoso.';
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Validación del lado del servidor
+                if (empty($_POST['email']) || empty($_POST['password'])) {
+                    $mensajeError = 'Debe completar todos los campos.';
+                } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                    $mensajeError = 'El formato del email no es válido.';
                 } else {
-                    $mensajeError = 'Credenciales incorrectas.';
+                    // Autenticar usuario
+                    $usuario = new Usuario();
+                    if ($usuario->login($_POST['email'], $_POST['password'])) {
+                        $usuarioLogueado = true;
+                        $mostrarLogin = false;
+                        $mostrarRecursos = true;
+                        $mensajeExito = 'Inicio de sesión exitoso.';
+                    } else {
+                        $mensajeError = 'Credenciales incorrectas.';
+                    }
                 }
             }
             break;
@@ -45,18 +61,42 @@ if (isset($_GET['accion'])) {
             $mostrarRegistro = true;
             
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $usuario = new Usuario();
+                // Validación del lado del servidor
+                $errores = array();
                 
-                if ($usuario->existeEmail($_POST['email'])) {
-                    $mensajeError = 'Este email ya está registrado.';
-                } else {
-                    if ($usuario->registrar($_POST['nombre'], $_POST['email'], $_POST['password'], $_POST['telefono'])) {
-                        $mensajeExito = 'Usuario registrado correctamente. Ahora puede iniciar sesión.';
-                        $mostrarRegistro = false;
-                        $mostrarLogin = true;
+                if (empty($_POST['nombre']) || strlen($_POST['nombre']) < 3) {
+                    $errores[] = 'El nombre debe tener al menos 3 caracteres.';
+                }
+                
+                if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                    $errores[] = 'El formato del email no es válido.';
+                }
+                
+                if (empty($_POST['password']) || strlen($_POST['password']) < 6) {
+                    $errores[] = 'La contraseña debe tener al menos 6 caracteres.';
+                }
+                
+                if (empty($_POST['telefono']) || !preg_match('/^[0-9]{9}$/', $_POST['telefono'])) {
+                    $errores[] = 'El teléfono debe tener 9 dígitos numéricos.';
+                }
+                
+                if (empty($errores)) {
+                    $usuario = new Usuario();
+                    
+                    // Verificar si el email ya existe
+                    if ($usuario->existeEmail($_POST['email'])) {
+                        $mensajeError = 'Este email ya está registrado.';
                     } else {
-                        $mensajeError = 'Error al registrar el usuario.';
+                        if ($usuario->registrar($_POST['nombre'], $_POST['email'], $_POST['password'], $_POST['telefono'])) {
+                            $mensajeExito = 'Usuario registrado correctamente. Ahora puede iniciar sesión.';
+                            $mostrarRegistro = false;
+                            $mostrarLogin = true;
+                        } else {
+                            $mensajeError = 'Error al registrar el usuario.';
+                        }
                     }
+                } else {
+                    $mensajeError = implode('<br>', $errores);
                 }
             }
             break;
@@ -109,32 +149,36 @@ if (isset($_GET['accion'])) {
         case 'reservar':
             if ($usuarioLogueado) {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $reserva = new Reserva();
-                    $resultado = $reserva->crear(
-                        $_SESSION['usuario_id'],
-                        $_POST['horario_id'],
-                        (int)$_POST['num_personas'],
-                        isset($_POST['recurso_id']) ? (int)$_POST['recurso_id'] : 0
-                    );
-                    
-                    if ($resultado['exito']) {
-                        $mensajeExito = 'Reserva realizada correctamente.';
-                        $mostrarRecursos = false;
-                        $mostrarReservas = true;
-                        
-                        // Cargar las reservas del usuario
-                        $reservas = $reserva->obtenerPorUsuario($_SESSION['usuario_id']);
+                    // Validación del lado del servidor
+                    if (empty($_POST['horario_id']) || !is_numeric($_POST['horario_id'])) {
+                        $mensajeError = 'Debe seleccionar un horario válido.';
+                    } else if (empty($_POST['num_personas']) || !is_numeric($_POST['num_personas']) || $_POST['num_personas'] < 1) {
+                        $mensajeError = 'El número de personas debe ser al menos 1.';
                     } else {
-                        $mensajeError = $resultado['error'];
-                        $mostrarDetalle = true;
-                        // Volver a cargar los datos del recurso y horarios
-                        $recursoId = isset($_POST['recurso_id']) ? (int)$_POST['recurso_id'] : 0;
+                        $reserva = new Reserva();
+                        $resultado = $reserva->crear(
+                            $_SESSION['usuario_id'],
+                            $_POST['horario_id'],
+                            (int)$_POST['num_personas'],
+                            isset($_POST['recurso_id']) ? (int)$_POST['recurso_id'] : 0
+                        );
                         
-                        $recurso = new Recurso();
-                        $detalleRecurso = $recurso->obtenerPorId($recursoId);
-                        
-                        $horario = new Horario();
-                        $horarios = $horario->obtenerPorRecurso($recursoId);
+                        if ($resultado['exito']) {
+                            $mensajeExito = 'Reserva realizada correctamente.';
+                            $mostrarRecursos = false;
+                            $mostrarReservas = true;
+                        } else {
+                            $mensajeError = $resultado['error'];
+                            $mostrarDetalle = true;
+                            // Volver a cargar los datos del recurso y horarios
+                            $recursoId = isset($_POST['recurso_id']) ? (int)$_POST['recurso_id'] : 0;
+                            
+                            $recurso = new Recurso();
+                            $detalleRecurso = $recurso->obtenerPorId($recursoId);
+                            
+                            $horario = new Horario();
+                            $horarios = $horario->obtenerPorRecurso($recursoId);
+                        }
                     }
                 }
             } else {
@@ -169,6 +213,47 @@ if (isset($_GET['accion'])) {
                 $reservas = $reserva->obtenerPorUsuario($_SESSION['usuario_id']);
             } else {
                 $mensajeError = 'Debe iniciar sesión para anular una reserva.';
+            }
+            break;
+            
+        // Nueva acción para importar/exportar
+        case 'imp_exp':
+            if ($usuarioLogueado) {
+                $mostrarLogin = false;
+                $mostrarImpExp = true;
+            } else {
+                $mensajeError = 'Debe iniciar sesión para acceder a esta funcionalidad.';
+            }
+            break;
+            
+        // Nueva acción para manejar la importación
+        case 'importar':
+            if ($usuarioLogueado) {
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    // Verificar si se ha subido un archivo
+                    if (isset($_FILES['archivo_csv']) && $_FILES['archivo_csv']['error'] === UPLOAD_ERR_OK) {
+                        $archivoTemporal = $_FILES['archivo_csv']['tmp_name'];
+                        $tabla = $_POST['tabla'];
+                        
+                        // Importar datos directamente desde el archivo temporal
+                        $csvManager = new CSVManager();
+                        $resultadoOperacion = $csvManager->importarDesdeCSV($tabla, $archivoTemporal);
+                        
+                        if ($resultadoOperacion['exito']) {
+                            $mensajeExito = "Importación exitosa: " . $resultadoOperacion['registrosImportados'] . " registros importados.";
+                        } else {
+                            $mensajeError = "Error en la importación.";
+                        }
+                        
+                        $mostrarResultados = true;
+                        $mostrarImpExp = true;
+                    } else {
+                        $mensajeError = "Debe seleccionar un archivo CSV para importar.";
+                        $mostrarImpExp = true;
+                    }
+                }
+            } else {
+                $mensajeError = 'Debe iniciar sesión para realizar esta acción.';
             }
             break;
     }
@@ -237,7 +322,7 @@ if (isset($_GET['accion'])) {
                 <ul>
                     <li><a href="reservas.php?accion=recursos">Ver recursos turísticos</a></li>
                     <li><a href="reservas.php?accion=mis_reservas">Mis reservas</a></li>
-                    <li><a href="php/admin.php">Importar/Exportar datos</a></li>
+                    <li><a href="reservas.php?accion=imp_exp">Importar/Exportar datos</a></li>
                     <li><a href="reservas.php?accion=cerrar_sesion">Cerrar sesión</a></li>
                 </ul>
             </nav>
@@ -307,6 +392,87 @@ if (isset($_GET['accion'])) {
             </form>
             
             <p>¿Ya tienes una cuenta? <a href="reservas.php">Iniciar sesión</a></p>
+        </section>
+        <?php endif; ?>
+        
+        <?php if ($mostrarImpExp): ?>
+        <section>
+            <h2>Importar y Exportar Datos</h2>
+            
+            <?php if ($mostrarResultados && isset($resultadoOperacion['errores']) && !empty($resultadoOperacion['errores'])): ?>
+            <section>
+                <h3>Detalles de errores</h3>
+                <ul>
+                    <?php foreach($resultadoOperacion['errores'] as $error): ?>
+                        <li><?php echo $error; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </section>
+            <?php endif; ?>
+            
+            <section>
+                <h3>Importar datos CSV</h3>
+                <form action="reservas.php?accion=importar" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <legend>Importación de datos</legend>
+                        
+                        <p>
+                            <label for="tabla">Tabla destino:</label>
+                            <select id="tabla" name="tabla" required>
+                                <option value="">-- Seleccione una tabla --</option>
+                                <option value="usuarios">Usuarios</option>
+                                <option value="categorias">Categorías</option>
+                                <option value="recursos_turisticos">Recursos Turísticos</option>
+                                <option value="horarios">Horarios</option>
+                                <option value="reservas">Reservas</option>
+                                <option value="">Múltiples tablas (desde datos_iniciales.csv)</option>
+                            </select>
+                        </p>
+                        
+                        <p>
+                            <label for="archivo_csv">Archivo CSV:</label>
+                            <input type="file" id="archivo_csv" name="archivo_csv" accept=".csv" required />
+                        </p>
+                        
+                        <p>
+                            <button type="submit">Importar datos</button>
+                        </p>
+                    </fieldset>
+                </form>
+            </section>
+
+            <section>
+                <h3>Exportar datos a CSV</h3>
+                <form action="php/exportar.php" method="get">
+                    <fieldset>
+                        <legend>Exportación de datos</legend>
+                        
+                        <p>
+                            <label for="tabla_export">Tabla a exportar:</label>
+                            <select id="tabla_export" name="tabla" required>
+                                <option value="">-- Seleccione una tabla --</option>
+                                <option value="usuarios">Usuarios</option>
+                                <option value="categorias">Categorías</option>
+                                <option value="recursos_turisticos">Recursos Turísticos</option>
+                                <option value="horarios">Horarios</option>
+                                <option value="reservas">Reservas</option>
+                            </select>
+                        </p>
+                        
+                        <p>
+                            <label for="filtro">Filtro (opcional):</label>
+                            <input type="text" id="filtro" name="filtro" placeholder="Ejemplo: id > 5 AND categoria_id = 2" />
+                        </p>
+                        
+                        <p>
+                            <button type="submit">Exportar datos</button>
+                        </p>
+                        <p>
+                            <small>El navegador descargará automáticamente el archivo CSV.</small>
+                        </p>
+                    </fieldset>
+                </form>
+            </section>
         </section>
         <?php endif; ?>
         
@@ -449,6 +615,7 @@ if (isset($_GET['accion'])) {
         <p>San Martín del Rey Aurelio - Turismo</p>
         <p>Universidad de Oviedo - Software y Estándares para la Web</p>
         <p>Bruno Pérez Cuervo</p>
+        <p>Última actualización: 2025-06-09</p>
     </footer>
 </body>
 </html>

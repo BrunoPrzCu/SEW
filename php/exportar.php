@@ -44,9 +44,6 @@ header('Content-Disposition: attachment; filename="' . $nombreArchivo . '"');
 // Abrir output stream
 $output = fopen('php://output', 'w');
 
-// Enviar BOM para UTF-8
-// fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
-
 // Escribir cabeceras si hay datos
 if (!empty($resultado['datos'])) {
     fputcsv($output, array_keys($resultado['datos'][0]));
