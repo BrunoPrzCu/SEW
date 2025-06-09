@@ -96,7 +96,7 @@ if (isset($_GET['accion'])) {
                         }
                     }
                 } else {
-                    $mensajeError = implode('<br>', $errores);
+                    $mensajeError = implode('<p>', $errores);
                 }
             }
             break;
@@ -627,7 +627,6 @@ if (isset($_GET['accion'])) {
         <p>San Martín del Rey Aurelio - Turismo</p>
         <p>Universidad de Oviedo - Software y Estándares para la Web</p>
         <p>Bruno Pérez Cuervo</p>
-        <p>Última actualización: 2025-06-09</p>
     </footer>
 </body>
 </html>
