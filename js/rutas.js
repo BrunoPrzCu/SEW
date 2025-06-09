@@ -199,18 +199,7 @@ class GestorRutas {
         this.rutaActual = this.rutas.find(ruta => ruta.id === rutaId);
         
         if (this.rutaActual) {
-            // Actualizar botones activos
-            this.listadoRutas.find('button').each((index, boton) => {
-                if ($(boton).text() === this.rutaActual.nombre) {
-                    boton.style.fontWeight = 'bold';
-                    boton.style.backgroundColor = '#2c5364';
-                    boton.style.color = 'white';
-                } else {
-                    boton.style.fontWeight = 'normal';
-                    boton.style.backgroundColor = '';
-                    boton.style.color = '';
-                }
-            });
+            
             
             // Mostrar la información de la ruta
             this.mostrarInformacionRuta();
@@ -366,44 +355,23 @@ class GestorRutas {
             
             // Contenedor para multimedia
             const contenedorMultimedia = document.createElement('section');
-            contenedorMultimedia.style.width = "100%";
-            contenedorMultimedia.style.display = "flex";
-            contenedorMultimedia.style.flexDirection = "column";
-            contenedorMultimedia.style.alignItems = "center";
             
             // Añadir galería de fotos si existen
             if (hito.fotografias.length > 0) {
                 const tituloFotos = document.createElement('h6');
-                tituloFotos.textContent = 'Fotografías';
-                tituloFotos.style.alignSelf = "flex-start";
-                tituloFotos.style.width = "100%";
-                tituloFotos.style.borderBottom = "1px solid rgba(255, 255, 255, 0.1)";
-                tituloFotos.style.paddingBottom = "0.3em";
-                tituloFotos.style.marginBottom = "0.5em";
                 contenedorMultimedia.appendChild(tituloFotos);
                 
                 const galeriaFotos = document.createElement('section');
-                galeriaFotos.style.display = "grid";
-                galeriaFotos.style.gridTemplateColumns = "repeat(auto-fill, minmax(10em, 1fr))";
-                galeriaFotos.style.gap = "0.5em";
-                galeriaFotos.style.width = "100%";
-                galeriaFotos.style.marginBottom = "1em";
+
                 
                 // Agregar todas las fotos
                 hito.fotografias.forEach(urlFoto => {
                     const figura = document.createElement('figure');
-                    figura.style.margin = "0";
-                    figura.style.textAlign = "center";
                     
                     const imagen = document.createElement('img');
                     imagen.src = urlFoto;
                     imagen.alt = `Imagen de ${hito.nombre}`;
                     imagen.title = `Imagen de ${hito.nombre}`;
-                    imagen.style.width = "100%";
-                    imagen.style.height = "8em";
-                    imagen.style.objectFit = "cover";
-                    imagen.style.borderRadius = "0.25em";
-                    imagen.style.transition = "transform 0.3s";
                     
                     figura.appendChild(imagen);
                     galeriaFotos.appendChild(figura);
@@ -416,28 +384,15 @@ class GestorRutas {
             if (hito.videos.length > 0) {
                 const tituloVideos = document.createElement('h6');
                 tituloVideos.textContent = 'Videos';
-                tituloVideos.style.alignSelf = "flex-start";
-                tituloVideos.style.width = "100%";
-                tituloVideos.style.borderBottom = "1px solid rgba(255, 255, 255, 0.1)";
-                tituloVideos.style.paddingBottom = "0.3em";
-                tituloVideos.style.marginBottom = "0.5em";
                 contenedorMultimedia.appendChild(tituloVideos);
                 
                 const galeriaVideos = document.createElement('section');
-                galeriaVideos.style.display = "grid";
-                // Usamos un valor más pequeño para minmax para evitar que se corte
-                galeriaVideos.style.gridTemplateColumns = "repeat(auto-fit, minmax(16em, 1fr))";
-                galeriaVideos.style.gap = "1em";
-                galeriaVideos.style.width = "100%";
                 
                 // Agregar todos los videos
                 hito.videos.forEach(urlVideo => {
                     const videoElemento = document.createElement('video');
                     videoElemento.src = urlVideo;
                     videoElemento.controls = true;
-                    videoElemento.style.width = "100%";
-                    videoElemento.style.maxWidth = "100%";
-                    videoElemento.style.borderRadius = "0.25em";
                     
                     galeriaVideos.appendChild(videoElemento);
                 });

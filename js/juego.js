@@ -449,9 +449,6 @@ class JuegoPreguntas {
             const respuestaCorrecta = document.createElement('p');
             respuestaCorrecta.textContent = `Respuesta correcta: ${pregunta.opciones[pregunta.respuestaCorrecta]}`;
             
-            // Estilo para la respuesta correcta 
-            respuestaCorrecta.style.fontWeight = 'bold';
-            respuestaCorrecta.style.color = '#4db6e5';
             
             elementoLista.appendChild(respuestaCorrecta);
             
@@ -459,12 +456,6 @@ class JuegoPreguntas {
             const tuRespuesta = document.createElement('p');
             tuRespuesta.textContent = `Tu respuesta: ${pregunta.opciones[this.respuestasUsuario[indice]]}`;
             
-            // Estilo para tu respuesta (verde si es correcta, roja si es incorrecta)
-            if (this.respuestasUsuario[indice] === pregunta.respuestaCorrecta) {
-                tuRespuesta.style.color = '#4CAF50';
-            } else {
-                tuRespuesta.style.color = '#F44336';
-            }
             
             elementoLista.appendChild(tuRespuesta);
             
