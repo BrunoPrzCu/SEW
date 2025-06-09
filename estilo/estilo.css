@@ -101,9 +101,6 @@ main {
     max-width: 90%;
     margin: 0 auto;
     padding: 1em;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
-    grid-auto-flow: dense;
     gap: 1em;
 }
 
@@ -398,7 +395,7 @@ section:nth-of-type(3) > section > ul > li figure figcaption {
 }
 
 
-/* Estilos para el carrusel - usando sección anidada para mayor especificidad */
+/* Estilos para el carrusel */
 section:nth-of-type(2) > section {
     position: relative;
     overflow: hidden;
@@ -964,8 +961,8 @@ main > section:nth-of-type(5) > section > section {
 
 /* Contenedor de la altimetría */
 main > section:nth-of-type(6) > section > section {
-    width: auto;
-    height: auto;
+    width: 25em;
+    height: 15em;
     margin: 1em 0;
     border: 1px solid #444;
     border-radius: 4px;
@@ -975,8 +972,8 @@ main > section:nth-of-type(6) > section > section {
 
 /* Estilos para SVG en altimetría */
 main > section:nth-of-type(6) > section > section svg {
-    width: 50em;
-    height: 30em;
+    width: 100%;
+    height: 100%;
 }
 
 main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section {

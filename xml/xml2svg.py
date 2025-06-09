@@ -3,154 +3,190 @@
 
 import xml.etree.ElementTree as ET
 import os
-import math
 
-def generar_svg(ruta_element, svg_file, ns):
+def generar_altimetria_ruta(ruta, ns, ruta_id, nombre_ruta, svg_file):
     """
-    Genera un archivo SVG para mostrar la altimetría de una ruta
+    Genera un SVG con la altimetría de una ruta, comenzando desde cota 0 (nivel del mar)
     """
-    # Recopilar los datos de altimetría
-    puntos_altimetria = []
+    # Extraer puntos de altitud (inicio + hitos)
+    puntos = []
+    nombres_puntos = []
     
-    # Punto inicial
-    inicio = ruta_element.find(f"{{{ns}}}coordenadasInicio")
-    altitud_inicio = float(inicio.find(f"{{{ns}}}altitud").text)
-    puntos_altimetria.append((0, altitud_inicio))
+    # Punto de inicio
+    inicio = ruta.find(f"{{{ns}}}coordenadasInicio")
+    if inicio is not None:
+        altitud_inicio = float(inicio.find(f"{{{ns}}}altitud").text)
+        puntos.append((0, altitud_inicio))
+        nombres_puntos.append("Inicio")
     
     # Calcular distancias acumuladas
     distancia_acumulada = 0
     
-    for hito in ruta_element.findall(f"{{{ns}}}hitos/{{{ns}}}hito"):
-        # Obtener la distancia hasta este hito y convertirla a número
-        distancia_str = hito.find(f"{{{ns}}}distancia").text
-        unidades = hito.find(f"{{{ns}}}distancia").get("unidades")
-        distancia = float(distancia_str)
-        
-        # Convertir a km si es necesario
-        if unidades.lower() != 'km':
-            if unidades.lower() == 'm':
-                distancia /= 1000
-        
-        # Actualizar distancia acumulada
-        distancia_acumulada += distancia
-        
-        # Obtener altitud
-        altitud = float(hito.find(f"{{{ns}}}coordenadas/{{{ns}}}altitud").text)
-        
-        # Añadir punto para el gráfico
-        puntos_altimetria.append((distancia_acumulada, altitud))
+    # Hitos
+    hitos = ruta.find(f"{{{ns}}}hitos")
+    if hitos is not None:
+        for hito in hitos.findall(f"{{{ns}}}hito"):
+            # Obtener información del hito
+            nombre_hito = hito.find(f"{{{ns}}}nombre").text
+            altitud = float(hito.find(f"{{{ns}}}coordenadas/{{{ns}}}altitud").text)
+            distancia = float(hito.find(f"{{{ns}}}distancia").text)
+            unidades = hito.find(f"{{{ns}}}distancia").get("unidades")
+            
+            # Convertir a km si es necesario
+            if unidades.lower() != 'km':
+                if unidades.lower() == 'm':
+                    distancia /= 1000
+            
+            # Actualizar distancia acumulada
+            distancia_acumulada += distancia
+            
+            # Añadir punto
+            puntos.append((distancia_acumulada, altitud))
+            nombres_puntos.append(nombre_hito)
     
-    # Configurar dimensiones del SVG
-    ancho = 800
-    alto = 400
-    margen_x = 50
-    margen_y = 50
-    ancho_grafico = ancho - 2 * margen_x
-    alto_grafico = alto - 2 * margen_y
+    # Verificar que hay suficientes puntos
+    if len(puntos) < 2:
+        print(f"Advertencia: La ruta '{nombre_ruta}' tiene menos de 2 puntos")
+        return
+
+    # Configuración del SVG
+    ancho_svg = 400  # Ancho reducido para adaptarse bien a móviles
+    alto_svg = 250   # Alto reducido
+    margen = 40      # Margen para textos y etiquetas
     
-    # Encontrar los valores mínimos y máximos
-    min_altitud = min(punto[1] for punto in puntos_altimetria)
-    max_altitud = max(punto[1] for punto in puntos_altimetria)
-    max_distancia = puntos_altimetria[-1][0]
+    # Calcular escalas
+    max_distancia = puntos[-1][0]  # La última distancia acumulada
+    max_altitud = max(p[1] for p in puntos)
+    
+    # IMPORTANTE: Forzar min_altitud a 0 para mostrar siempre desde el nivel del mar
+    min_altitud = 0
     
     # Asegurar un rango mínimo para la altitud si es muy plana
     if max_altitud - min_altitud < 50:
-        media_altitud = (max_altitud + min_altitud) / 2
-        min_altitud = media_altitud - 25
-        max_altitud = media_altitud + 25
+        max_altitud = min_altitud + 50
     
-    # Funciones para convertir coordenadas a pixels en el SVG
-    def x_to_pixel(x):
-        return margen_x + (x / max_distancia) * ancho_grafico if max_distancia > 0 else margen_x
+    # Cálculo de escalas para dibujar
+    area_dibujo_ancho = ancho_svg - 2 * margen
+    area_dibujo_alto = alto_svg - 2 * margen
     
-    def y_to_pixel(y):
-        # Invertir el eje Y (en SVG, 0 está arriba)
-        return alto - margen_y - ((y - min_altitud) / (max_altitud - min_altitud)) * alto_grafico if (max_altitud - min_altitud) > 0 else alto - margen_y
+    # Función para convertir coordenadas a píxeles
+    def coord_a_pixel(x, y):
+        px = margen + (x / max_distancia) * area_dibujo_ancho
+        py = alto_svg - margen - ((y - min_altitud) / (max_altitud - min_altitud)) * area_dibujo_alto
+        return px, py
     
-    # Generar el contenido del archivo SVG
-    svg_content = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n'
-    svg_content += f'<svg xmlns="http://www.w3.org/2000/svg">\n'
-    svg_content += f'  <title>Altimetría - {ruta_element.find(f"{{{ns}}}nombre").text}</title>\n'
+    # Convertir puntos a coordenadas SVG
+    puntos_svg = [coord_a_pixel(x, y) for x, y in puntos]
     
-    # Dibujar rejilla de fondo
-    svg_content += '  <!-- Rejilla de fondo -->\n'
-    svg_content += '  <g stroke="#dddddd" stroke-width="1">\n'
+    # Crear línea de altimetría
+    polilinea = " ".join(f"{x},{y}" for x, y in puntos_svg)
     
-    # Líneas horizontales
-    num_lineas_h = 5
-    for i in range(num_lineas_h + 1):
-        y = margen_y + i * (alto_grafico / num_lineas_h)
-        svg_content += f'    <line x1="{margen_x}" y1="{y}" x2="{ancho - margen_x}" y2="{y}" />\n'
+    # Nivel del mar - siempre visible ahora porque min_altitud es 0
+    nivel_mar_y = coord_a_pixel(0, 0)[1]
+    
+    # Generar SVG - Cabecera
+    svg_content = f"""<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="{ancho_svg}" height="{alto_svg}" viewBox="0 0 {ancho_svg} {alto_svg}">
+  <title>Altimetría - {nombre_ruta}</title>
+  
+  <!-- Fondo del gráfico -->
+  <rect x="{margen}" y="{margen}" width="{area_dibujo_ancho}" height="{area_dibujo_alto}" fill="#f8f9fa" stroke="#ddd" stroke-width="1"/>
+  
+  <!-- Cuadrícula de fondo -->
+  <g stroke="#dddddd" stroke-width="0.5" opacity="0.7">"""
+    
+    # Líneas horizontales cada 50m de altitud
+    intervalo_alt = 50  # Cada 50 metros
+    alt_actual = 0  # Comenzar desde 0m (nivel del mar)
+    while alt_actual <= max_altitud:
+        y = coord_a_pixel(0, alt_actual)[1]
+        svg_content += f"""
+    <line x1="{margen}" y1="{y}" x2="{ancho_svg - margen}" y2="{y}" />
+    <text x="{margen - 5}" y="{y + 4}" text-anchor="end" font-family="Arial" font-size="8" fill="#666">{int(alt_actual)}m</text>"""
+        alt_actual += intervalo_alt
+    
+    # Líneas verticales cada kilómetro
+    for km in range(int(max_distancia) + 1):
+        x = coord_a_pixel(km, 0)[0]
+        svg_content += f"""
+    <line x1="{x}" y1="{margen}" x2="{x}" y2="{alto_svg - margen}" />
+    <text x="{x}" y="{alto_svg - margen + 15}" text-anchor="middle" font-family="Arial" font-size="8" fill="#666">{km}km</text>"""
+    
+    svg_content += """
+  </g>"""
+    
+    # Línea del nivel del mar (siempre visible ahora)
+    svg_content += f"""
+  
+  <!-- Línea del nivel del mar -->
+  <line x1="{margen}" y1="{nivel_mar_y}" x2="{ancho_svg - margen}" y2="{nivel_mar_y}" stroke="#0066cc" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="{margen + 5}" y="{nivel_mar_y - 5}" font-family="Arial" font-size="8" fill="#0066cc">Nivel del mar (0m)</text>"""
+    
+    # Línea de altimetría
+    svg_content += f"""
+  
+  <!-- Perfil altimétrico -->
+  <polyline points="{polilinea}" fill="none" stroke="#8b3a3a" stroke-width="2" />"""
+    
+    # Puntos de hitos y etiquetas
+    svg_content += """
+  
+  <!-- Puntos de hitos -->"""
+    
+    for i, ((x_svg, y_svg), nombre) in enumerate(zip(puntos_svg, nombres_puntos)):
+        altitud = puntos[i][1]
         
-        # Valor de altitud
-        valor_altitud = max_altitud - i * (max_altitud - min_altitud) / num_lineas_h
-        svg_content += f'    <text x="{margen_x - 5}" y="{y}" text-anchor="end" alignment-baseline="middle" font-size="12">{int(valor_altitud)}m</text>\n'
-    
-    # Líneas verticales
-    num_lineas_v = int(max_distancia) + 1
-    for i in range(num_lineas_v + 1):
-        if i > max_distancia:
-            break
-        x = x_to_pixel(i)
-        svg_content += f'    <line x1="{x}" y1="{margen_y}" x2="{x}" y2="{alto - margen_y}" />\n'
-        svg_content += f'    <text x="{x}" y="{alto - margen_y + 15}" text-anchor="middle" font-size="12">{i}km</text>\n'
-    
-    svg_content += '  </g>\n'
-    
-    # Dibujar la línea de altimetría
-    svg_content += '  <!-- Línea de altimetría -->\n'
-    svg_content += '  <polyline points="'
-    for punto in puntos_altimetria:
-        x = x_to_pixel(punto[0])
-        y = y_to_pixel(punto[1])
-        svg_content += f"{x},{y} "
-    svg_content += '" fill="none" stroke="#0066cc" stroke-width="3" />\n'
-    
-    # Dibujar los puntos y etiquetas
-    svg_content += '  <!-- Puntos de interés -->\n'
-    for i, punto in enumerate(puntos_altimetria):
-        x = x_to_pixel(punto[0])
-        y = y_to_pixel(punto[1])
+        # Línea vertical desde el punto hasta el eje X
+        svg_content += f"""
+  <line x1="{x_svg}" y1="{y_svg}" x2="{x_svg}" y2="{alto_svg - margen}" stroke="#4db6e5" stroke-width="0.5" stroke-dasharray="2,2" />"""
         
         # Círculo para el punto
-        svg_content += f'  <circle cx="{x}" cy="{y}" r="5" fill="#ff3333" />\n'
+        svg_content += f"""
+  <circle cx="{x_svg}" cy="{y_svg}" r="3" fill="#ff3333" stroke="#fff" stroke-width="1"/>"""
         
-        # Etiqueta para el punto
-        nombre = "Inicio" if i == 0 else f"Hito {i}"
-        svg_content += f'  <text x="{x}" y="{y - 10}" text-anchor="middle" font-size="12">{nombre}</text>\n'
+        # Texto con nombre del hito (vertical para ahorrar espacio)
+        svg_content += f"""
+  <text x="{x_svg - 10}" y="{y_svg}" transform="rotate(-90, {x_svg - 10}, {y_svg})" text-anchor="end" font-family="Arial" font-size="7" fill="#4db6e5">{nombre}</text>"""
+        
+        # Valor de altitud
+        svg_content += f"""
+  <text x="{x_svg}" y="{y_svg + 12}" text-anchor="middle" font-family="Arial" font-size="7" fill="#4db6e5">{int(altitud)}m</text>"""
     
-    # Título del gráfico
-    svg_content += f'  <text x="{ancho/2}" y="{margen_y/2}" text-anchor="middle" font-size="18" font-weight="bold">Perfil de Altimetría - {ruta_element.find(f"{{{ns}}}nombre").text}</text>\n'
-    
-    # Cerrar el SVG
-    svg_content += '</svg>'
+    # Título
+    svg_content += f"""
+  
+  <!-- Título -->
+  <text x="{ancho_svg/2}" y="{margen/2}" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#1a1a1a">Altimetría - {nombre_ruta}</text>
+</svg>"""
     
     # Guardar el archivo
     with open(svg_file, 'w', encoding='utf-8') as f:
         f.write(svg_content)
     
-    print(f"Archivo SVG '{svg_file}' creado exitosamente.")
+    print(f"Generado: {svg_file} - {nombre_ruta}")
 
 def procesar_xml_a_svg(xml_file):
     """
-    Procesa el archivo XML completo y genera un archivo SVG por cada ruta
+    Procesa el archivo XML completo y genera un SVG por cada ruta
     """
-    
-    # Parseamos el XML con namespace
+    # Parsear el archivo XML
     tree = ET.parse(xml_file)
     root = tree.getroot()
     
-    # Obtenemos el namespace
-    ns = root.tag.split('}')[0].strip('{')
+    # Obtener namespace
+    ns = ""
+    if "}" in root.tag:
+        ns = root.tag.split('}')[0].strip('{')
     
-    # Procesamos cada ruta
+    # Procesar cada ruta
     for ruta in root.findall(f"{{{ns}}}ruta"):
         ruta_id = ruta.get("id")
+        nombre_ruta = ruta.find(f"{{{ns}}}nombre").text
         svg_file = f"{ruta_id}.svg"
-        generar_svg(ruta, svg_file, ns)
+        
+        generar_altimetria_ruta(ruta, ns, ruta_id, nombre_ruta, svg_file)
 
 if __name__ == "__main__":
-    # Procesamos el archivo XML
     xml_input = 'rutas.xml'  # Nombre del archivo XML
     procesar_xml_a_svg(xml_input)
     print("Proceso completado. Se han generado todos los archivos SVG.")

@@ -1,7 +1,7 @@
 /**
  * Módulo para la visualización de rutas de San Martín del Rey Aurelio
  * Autor: UO295445
- * Fecha: 2025-06-05 20:02:01
+ * Fecha: 2025-06-09 18:39:37
  */
 
 /**
@@ -44,9 +44,6 @@ class GestorRutas {
             this.contenidoRuta = $('main > section:nth-of-type(4)');
             this.contenedorMapa = $('main > section:nth-of-type(5) > section');
             this.contenedorAltimetria = $('main > section:nth-of-type(6) > section');
-            
-            // Ocultar las secciones de planimetría y altimetría inicialmente
-            $('main > section:nth-of-type(5), main > section:nth-of-type(6)').hide();
             
             // Cargar datos de las rutas
             this.cargarDatosRutas();
@@ -199,13 +196,8 @@ class GestorRutas {
         this.rutaActual = this.rutas.find(ruta => ruta.id === rutaId);
         
         if (this.rutaActual) {
-            
-            
             // Mostrar la información de la ruta
             this.mostrarInformacionRuta();
-            
-            // Hacer visibles las secciones de planimetría y altimetría
-            $('main > section:nth-of-type(5), main > section:nth-of-type(6)').show();
             
             // Cargar el mapa con el KML
             this.cargarMapa();
@@ -478,88 +470,9 @@ class GestorRutas {
                 // Crear contenedor para el SVG
                 const contenedorSVG = document.createElement('section');
                 
-                
                 // Añadir el SVG al contenedor
                 contenedorSVG.innerHTML = svgData;
                 this.contenedorAltimetria.append(contenedorSVG);
-                
-                // Añadir estilos específicos al SVG
-                const svg = $(contenedorSVG).find('svg');
-                
-                
-                // Añadir línea de cota cero
-                const svgElement = svg[0];
-                if (svgElement) {
-                    // Crear elementos para la línea de cota cero
-                    const lineaCero = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                    lineaCero.setAttribute('x1', '0');
-                    lineaCero.setAttribute('y1', '300');
-                    lineaCero.setAttribute('x2', '800');
-                    lineaCero.setAttribute('y2', '300');
-                    lineaCero.setAttribute('stroke', '#FF4500');
-                    lineaCero.setAttribute('stroke-width', '1');
-                    lineaCero.setAttribute('stroke-dasharray', '5,5');
-                    
-                    const textoCota = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                    textoCota.setAttribute('x', '10');
-                    textoCota.setAttribute('y', '298');
-                    textoCota.setAttribute('font-family', 'Arial');
-                    textoCota.setAttribute('font-size', '12');
-                    textoCota.setAttribute('fill', '#FF4500');
-                    textoCota.textContent = 'Nivel del mar (0m)';
-                    
-                    svgElement.appendChild(lineaCero);
-                    svgElement.appendChild(textoCota);
-                    
-                    // Añadir etiquetas para los hitos principales
-                    this.rutaActual.hitos.forEach((hito, index) => {
-                        // Posicionar cada hito a lo largo del perfil de altimetría
-                        const posX = 100 + (600 * index / (this.rutaActual.hitos.length - 1));
-                        const posY = 280 - (hito.coordenadas.altitud * 0.5);
-                        
-                        // Crear círculo para marcar el hito
-                        const circulo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                        circulo.setAttribute('cx', posX);
-                        circulo.setAttribute('cy', posY);
-                        circulo.setAttribute('r', '4');
-                        circulo.setAttribute('fill', '#4db6e5');
-                        
-                        // Crear línea vertical desde el hito hasta la base
-                        const linea = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                        linea.setAttribute('x1', posX);
-                        linea.setAttribute('y1', posY);
-                        linea.setAttribute('x2', posX);
-                        linea.setAttribute('y2', '300');
-                        linea.setAttribute('stroke', '#4db6e5');
-                        linea.setAttribute('stroke-width', '1');
-                        linea.setAttribute('stroke-dasharray', '2,2');
-                        
-                        // Crear texto con el nombre del hito
-                        const texto = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                        texto.setAttribute('x', posX);
-                        texto.setAttribute('y', posY - 10);
-                        texto.setAttribute('font-family', 'Arial');
-                        texto.setAttribute('font-size', '10');
-                        texto.setAttribute('fill', 'white');
-                        texto.setAttribute('text-anchor', 'middle');
-                        texto.textContent = hito.nombre;
-                        
-                        // Crear texto con la altitud
-                        const textoAltitud = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                        textoAltitud.setAttribute('x', posX);
-                        textoAltitud.setAttribute('y', posY + 15);
-                        textoAltitud.setAttribute('font-family', 'Arial');
-                        textoAltitud.setAttribute('font-size', '8');
-                        textoAltitud.setAttribute('fill', '#4db6e5');
-                        textoAltitud.setAttribute('text-anchor', 'middle');
-                        textoAltitud.textContent = `${hito.coordenadas.altitud}m`;
-                        
-                        svgElement.appendChild(linea);
-                        svgElement.appendChild(circulo);
-                        svgElement.appendChild(texto);
-                        svgElement.appendChild(textoAltitud);
-                    });
-                }
             },
             error: (error) => {
                 console.error('Error al cargar la altimetría:', error);
