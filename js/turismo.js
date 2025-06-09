@@ -232,21 +232,11 @@ class CarruselFotos {
         const $seccion = $(this.config.seccion);
         const $carrusel = $seccion.find('section');
         const $contenedor = $carrusel.find('section');
-        const $indicadores = $carrusel.find('menu li button');
         
         // Aplicar desplazamiento directamente como estilo en línea
         if ($contenedor.length > 0) {
             $contenedor[0].style.transform = `translateX(${desplazamiento}%)`;
         }
-        
-        // Actualizar indicadores
-        $indicadores.each((idx, btn) => {
-            if (idx === indice) {
-                btn.style.backgroundColor = 'white';
-            } else {
-                btn.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-            }
-        });
     }
 
     // Mostrar imagen anterior
