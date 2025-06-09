@@ -183,5 +183,60 @@ class CSVManager {
         
         return $resultado;
     }
+
+    /**
+     * Exporta datos de todas las tablas para descarga directa en formato unificado
+     * 
+     * @return array Resultado de la operación para ser manejado por el controlador
+     */
+    public function exportarTodoACSV() {
+        $resultado = [
+            'exito' => false,
+            'datos' => [],
+            'errores' => []
+        ];
+        
+        try {
+            // Lista de tablas a exportar
+            $tablas = ['categorias', 'recursos_turisticos', 'horarios', 'reservas', 'usuarios'];
+            $todasFilas = [];
+            $primeraFila = true;
+            
+            foreach ($tablas as $tabla) {
+                // Preparar la consulta SQL
+                $sql = "SELECT * FROM $tabla";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute();
+                $filas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                
+                if (empty($filas)) continue; // Omitir tablas sin datos
+                
+                // Para cada fila, agregar columna 'tabla'
+                foreach ($filas as $fila) {
+                    // Agregar la columna 'tabla' con el nombre de la tabla actual
+                    $fila = array_merge(['tabla' => $tabla], $fila);
+                    $todasFilas[] = $fila;
+                    
+                    // Si es la primera fila, guardar todas las claves para la cabecera
+                    if ($primeraFila) {
+                        $primeraFila = false;
+                        $resultado['cabeceras'] = array_keys($fila);
+                    }
+                }
+            }
+            
+            if (!empty($todasFilas)) {
+                $resultado['datos'] = $todasFilas;
+                $resultado['exito'] = true;
+            } else {
+                $resultado['errores'][] = "No hay datos para exportar.";
+            }
+            
+        } catch (Exception $e) {
+            $resultado['errores'][] = "Error: " . $e->getMessage();
+        }
+        
+        return $resultado;
+    }
 }
 ?>

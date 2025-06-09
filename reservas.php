@@ -442,37 +442,49 @@ if (isset($_GET['accion'])) {
             </section>
 
             <section>
-                <h3>Exportar datos a CSV</h3>
-                <form action="php/exportar.php" method="get">
-                    <fieldset>
-                        <legend>Exportación de datos</legend>
-                        
-                        <p>
-                            <label for="tabla_export">Tabla a exportar:</label>
-                            <select id="tabla_export" name="tabla" required>
-                                <option value="">-- Seleccione una tabla --</option>
-                                <option value="usuarios">Usuarios</option>
-                                <option value="categorias">Categorías</option>
-                                <option value="recursos_turisticos">Recursos Turísticos</option>
-                                <option value="horarios">Horarios</option>
-                                <option value="reservas">Reservas</option>
-                            </select>
-                        </p>
-                        
-                        <p>
-                            <label for="filtro">Filtro (opcional):</label>
-                            <input type="text" id="filtro" name="filtro" placeholder="Ejemplo: id > 5 AND categoria_id = 2" />
-                        </p>
-                        
-                        <p>
-                            <button type="submit">Exportar datos</button>
-                        </p>
-                        <p>
-                            <small>El navegador descargará automáticamente el archivo CSV.</small>
-                        </p>
-                    </fieldset>
-                </form>
-            </section>
+            <h3>Exportar datos a CSV</h3>
+            <form action="php/exportar.php" method="get">
+                <fieldset>
+                    <legend>Exportación de datos</legend>
+                    
+                    <p>
+                        <label for="tabla_export">Tabla a exportar:</label>
+                        <select id="tabla_export" name="tabla" required>
+                            <option value="">-- Seleccione una tabla --</option>
+                            <option value="usuarios">Usuarios</option>
+                            <option value="categorias">Categorías</option>
+                            <option value="recursos_turisticos">Recursos Turísticos</option>
+                            <option value="horarios">Horarios</option>
+                            <option value="reservas">Reservas</option>
+                        </select>
+                    </p>
+                    
+                    <p>
+                        <label for="filtro">Filtro (opcional):</label>
+                        <input type="text" id="filtro" name="filtro" placeholder="Ejemplo: id > 5 AND categoria_id = 2" />
+                    </p>
+                    
+                    <p>
+                        <button type="submit">Exportar datos</button>
+                    </p>
+                </fieldset>
+            </form>
+            
+            <form action="php/exportar.php" method="get">
+                <fieldset>
+                    <legend>Exportación completa</legend>
+                    <p>Exporta todos los datos de la base de datos en un único archivo CSV.</p>
+                    <input type="hidden" name="completa" value="1" />
+                    <p>
+                        <button type="submit">Exportar toda la información</button>
+                    </p>
+                </fieldset>
+            </form>
+            
+            <p>
+                <small>El navegador descargará automáticamente el archivo CSV.</small>
+            </p>
+        </section>
         </section>
         <?php endif; ?>
         
