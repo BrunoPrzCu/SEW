@@ -237,6 +237,7 @@ if (isset($_GET['accion'])) {
                 <ul>
                     <li><a href="reservas.php?accion=recursos">Ver recursos turísticos</a></li>
                     <li><a href="reservas.php?accion=mis_reservas">Mis reservas</a></li>
+                    <li><a href="php/admin.php">Importar/Exportar datos</a></li>
                     <li><a href="reservas.php?accion=cerrar_sesion">Cerrar sesión</a></li>
                 </ul>
             </nav>
