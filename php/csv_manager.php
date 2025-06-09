@@ -60,6 +60,13 @@ class CSVManager {
             $insertados = 0;
             $lineaNum = 1;
             
+            // Mapeo de tablas a sus columnas válidas
+            $tabla_columnas = [
+                'categorias' => ['id', 'nombre', 'descripcion'],
+                'recursos_turisticos' => ['id', 'nombre', 'categoria_id', 'descripcion', 'plazas_totales', 'precio', 'ubicacion', 'imagen'],
+                'horarios' => ['id', 'recurso_id', 'fecha_inicio', 'fecha_fin', 'disponible']
+            ];
+            
             // Leer cada línea del archivo CSV
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 $lineaNum++;
@@ -85,9 +92,15 @@ class CSVManager {
                 $valores = [];
                 $placeholders = [];
                 
-                // Mapear columnas según la configuración
+                // Mapear columnas según la configuración, filtrando por columnas válidas para la tabla
                 foreach ($columnMapping as $csvColumn => $dbColumn) {
-                    if (isset($fila[$csvColumn]) && $fila[$csvColumn] !== '' && $dbColumn !== 'tabla') {
+                    // Solo incluir columnas que existan para la tabla actual y que tengan valor
+                    if (
+                        isset($fila[$csvColumn]) && 
+                        $fila[$csvColumn] !== '' && 
+                        $dbColumn !== 'tabla' &&
+                        in_array($dbColumn, $tabla_columnas[$tablaActual])
+                    ) {
                         $columnas[] = $dbColumn;
                         $valores[] = $fila[$csvColumn];
                         $placeholders[] = '?';
@@ -104,6 +117,8 @@ class CSVManager {
                     } else {
                         $resultado['errores'][] = "Error al insertar la fila $lineaNum: " . implode(' ', $stmt->errorInfo());
                     }
+                } else {
+                    $resultado['errores'][] = "No hay columnas válidas para insertar en la línea $lineaNum para la tabla $tablaActual";
                 }
             }
             
