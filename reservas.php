@@ -588,6 +588,22 @@ if (isset($_GET['accion'])) {
             <h2>Mis reservas</h2>
             
             <?php if (count($reservas) > 0): ?>
+
+            <?php 
+            // Calcular el presupuesto total (suma de todas las reservas confirmadas)
+            $presupuestoTotal = 0;
+            foreach ($reservas as $reserva) {
+                if ($reserva['estado'] == 'confirmada') {
+                    $presupuestoTotal += $reserva['precio_total'];
+                }
+            }
+            ?>
+            
+            <section>
+                <h3>Resumen del presupuesto</h3>
+                <p>Presupuesto total de actividades reservadas: <strong><?php echo number_format($presupuestoTotal, 2); ?>€</strong></p>
+            </section>
+            
             <ul>
                 <?php foreach ($reservas as $reserva): ?>
                 <li>
