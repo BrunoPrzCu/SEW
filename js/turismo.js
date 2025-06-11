@@ -286,6 +286,34 @@ class SeccionNoticias {
         };
     }
 
+    /**
+     * Normaliza un texto a Unicode Normalization Form C (NFC)
+     * @param {string} texto - Texto a normalizar
+     * @returns {string} - Texto normalizado
+     */
+    normalizarTexto(texto) {
+        if (typeof texto === 'string') {
+            return texto.normalize('NFC');
+        }
+        return texto;
+    }
+
+    /**
+     * Normaliza todos los campos de texto de un artículo
+     * @param {Object} articulo - Artículo a normalizar
+     * @returns {Object} - Artículo con textos normalizados
+     */
+    normalizarArticulo(articulo) {
+        return {
+            ...articulo,
+            title: this.normalizarTexto(articulo.title),
+            description: this.normalizarTexto(articulo.description),
+            source_id: this.normalizarTexto(articulo.source_id),
+            // Otros campos de texto que pudieran contener caracteres especiales
+            content: articulo.content ? this.normalizarTexto(articulo.content) : articulo.content
+        };
+    }
+
     // Cargar noticias desde la API
     cargarNoticias() {
         const $seccion = $(this.config.seccion);
@@ -293,46 +321,49 @@ class SeccionNoticias {
         // Crear contenedor para noticias si no existe
         if ($seccion.find('section').length === 0) {
             const seccionNoticias = document.createElement('section');
-            seccionNoticias.innerHTML = '<p>Cargando noticias...</p>';
+            const p = document.createElement('p');
+            p.textContent = 'Cargando noticias...';
+            seccionNoticias.appendChild(p);
+            
             const h3 = document.createElement('h3');
             h3.textContent = 'Últimas noticias';
             seccionNoticias.appendChild(h3);
             $seccion.append(seccionNoticias);
         }
         
-        // Datos de ejemplo como respaldo
+        // Datos de ejemplo como respaldo (ya normalizados)
         const noticiasEjemplo = [
             {
-                title: 'Nueva ruta turística en San Martín del Rey Aurelio destaca el patrimonio minero',
-                description: 'El ayuntamiento inaugura una nueva ruta turística que recorre los puntos más emblemáticos del patrimonio industrial del concejo.',
+                title: this.normalizarTexto('Nueva ruta turística en San Martín del Rey Aurelio destaca el patrimonio minero'),
+                description: this.normalizarTexto('El ayuntamiento inaugura una nueva ruta turística que recorre los puntos más emblemáticos del patrimonio industrial del concejo.'),
                 link: '#',
                 image_url: 'multimedia/noticia1.jpg',
                 pubDate: '2025-06-01T14:30:00Z',
-                source_id: 'Turismo Asturias'
+                source_id: this.normalizarTexto('Turismo Asturias')
             },
             {
-                title: 'Festival gastronómico reunirá lo mejor de la cocina asturiana en San Martín',
-                description: 'Más de 20 restaurantes presentarán sus mejores platos en el festival gastronómico que se celebrará este fin de semana.',
+                title: this.normalizarTexto('Festival gastronómico reunirá lo mejor de la cocina asturiana en San Martín'),
+                description: this.normalizarTexto('Más de 20 restaurantes presentarán sus mejores platos en el festival gastronómico que se celebrará este fin de semana.'),
                 link: '#',
                 image_url: 'multimedia/noticia2.jpg',
                 pubDate: '2025-05-29T10:15:00Z',
-                source_id: 'Gastronomía Astur'
+                source_id: this.normalizarTexto('Gastronomía Astur')
             },
             {
-                title: 'Éxito de participación en la jornada de puertas abiertas del Museo de la Minería',
-                description: 'Más de 500 personas visitaron el Museo de la Minería durante la jornada de puertas abiertas organizada este domingo.',
+                title: this.normalizarTexto('Éxito de participación en la jornada de puertas abiertas del Museo de la Minería'),
+                description: this.normalizarTexto('Más de 500 personas visitaron el Museo de la Minería durante la jornada de puertas abiertas organizada este domingo.'),
                 link: '#',
                 image_url: 'multimedia/noticia3.jpg',
                 pubDate: '2025-05-27T18:45:00Z',
-                source_id: 'Cultura Minera'
+                source_id: this.normalizarTexto('Cultura Minera')
             },
             {
-                title: 'Asturias promueve el turismo sostenible en áreas mineras',
-                description: 'El gobierno autonómico impulsa iniciativas para fomentar el turismo sostenible en antiguas zonas mineras como San Martín del Rey Aurelio.',
+                title: this.normalizarTexto('Asturias promueve el turismo sostenible en áreas mineras'),
+                description: this.normalizarTexto('El gobierno autonómico impulsa iniciativas para fomentar el turismo sostenible en antiguas zonas mineras como San Martín del Rey Aurelio.'),
                 link: '#',
                 image_url: 'multimedia/noticia4.jpg',
                 pubDate: '2025-05-25T09:20:00Z',
-                source_id: 'Eco Turismo'
+                source_id: this.normalizarTexto('Eco Turismo')
             }
         ];
         
@@ -346,8 +377,8 @@ class SeccionNoticias {
             },
             success: (respuesta) => {
                 if (respuesta.status === 'success' && respuesta.results && respuesta.results.length > 0) {
-                    // Filtrar y procesar artículos
-                    let articulos = respuesta.results;
+                    // Normalizar todos los artículos
+                    let articulos = respuesta.results.map(articulo => this.normalizarArticulo(articulo));
                     
                     // Filtrar artículos sin imagen o con descripciones vacías
                     articulos = articulos.filter(articulo => 
@@ -398,7 +429,7 @@ class SeccionNoticias {
 
         // Crear título para la sección de noticias
         const h3 = document.createElement('h3');
-        h3.textContent = 'Últimas noticias';
+        h3.textContent = this.normalizarTexto('Últimas noticias');
         $contenedor.append(h3);
 
         // Crear tarjeta para cada noticia
@@ -412,11 +443,11 @@ class SeccionNoticias {
     crearTarjetaNoticia(noticia) {
         // Formatear fecha
         const fecha = new Date(noticia.pubDate);
-        const fechaFormateada = fecha.toLocaleDateString('es-ES', {
+        const fechaFormateada = this.normalizarTexto(fecha.toLocaleDateString('es-ES', {
             day: 'numeric',
             month: 'long',
             year: 'numeric'
-        });
+        }));
         
         // Recortar descripción si es muy larga
         const descripcion = noticia.description.length > 150 
@@ -427,7 +458,7 @@ class SeccionNoticias {
         const article = document.createElement('article');
 
         const h4 = document.createElement('h4');
-        h4.textContent = noticia.title;
+        h4.textContent = noticia.title; // Ya normalizado
         
         // Figura para la imagen
         const figure = document.createElement('figure');
@@ -435,16 +466,13 @@ class SeccionNoticias {
         if (noticia.image_url) {
             const img = document.createElement('img');
             img.src = noticia.image_url;
-            img.alt = noticia.title;
+            img.alt = noticia.title; // Ya normalizado
             figure.appendChild(img);
         } else {
-            // Para figuras sin imagen, usamos un atributo para seleccionar en CSS
-            // Pero como no podemos usar clases ni atributos data, creamos un elemento span dentro
-            const noImageSpan = document.createElement('span');
-            noImageSpan.textContent = 'Sin imagen disponible';
-            figure.appendChild(noImageSpan);
-            
-            // El CSS usará el selector figure:has(> span) para aplicar estilos específicos
+            // Para figuras sin imagen
+            const figcaption = document.createElement('figcaption');
+            figcaption.textContent = this.normalizarTexto('Sin imagen disponible');
+            figure.appendChild(figcaption);
         }
         
         // Sección para el contenido
@@ -453,15 +481,14 @@ class SeccionNoticias {
         // Header con fuente y fecha
         const header = document.createElement('header');
         
-        const spanFuente = document.createElement('span');
-        spanFuente.textContent = noticia.source_id;
+        const pFuente = document.createElement('p');
+        pFuente.textContent = noticia.source_id; // Ya normalizado
         
-        const time = document.createElement('time');
-        time.textContent = fechaFormateada;
-        time.setAttribute('datetime', noticia.pubDate);
-        
-        header.appendChild(spanFuente);
-        header.appendChild(time);
+        const pTime = document.createElement('p');
+        pTime.textContent = fechaFormateada; // Ya normalizado
+
+        header.appendChild(pFuente);
+        header.appendChild(pTime);
         
         // Título con enlace
         const h3 = document.createElement('h3');
@@ -469,19 +496,19 @@ class SeccionNoticias {
         a.href = noticia.link;
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
-        a.textContent = noticia.title;
+        a.textContent = noticia.title; // Ya normalizado
         h3.appendChild(a);
         
         // Descripción
         const p = document.createElement('p');
-        p.textContent = descripcion;
+        p.textContent = descripcion; // Ya normalizado
         
         // Enlace para leer más
         const boton = document.createElement('a');
         boton.href = noticia.link;
         boton.target = '_blank';
         boton.rel = 'noopener noreferrer';
-        boton.textContent = 'Leer más';
+        boton.textContent = this.normalizarTexto('Leer más');
         
         // Ensamblar la tarjeta
         section.appendChild(header);
@@ -504,7 +531,7 @@ class SeccionNoticias {
         $contenedor.empty();
         
         const p = document.createElement('p');
-        p.textContent = mensaje;
+        p.textContent = this.normalizarTexto(mensaje);
         
         $contenedor.append(p);
     }
