@@ -1,7 +1,7 @@
 /**
  * Módulo para la visualización de rutas de San Martín del Rey Aurelio
  * Autor: UO295445
- * Fecha: 2025-06-09 18:39:37
+ * Fecha: 2025-06-11 10:35:18
  */
 
 /**
@@ -12,9 +12,6 @@ class GestorRutas {
      * Constructor
      */
     constructor() {
-        // Referencia al archivo XML
-        this.archivoXML = 'xml/rutas.xml';
-        
         // Datos de las rutas
         this.rutas = [];
         
@@ -22,7 +19,11 @@ class GestorRutas {
         this.rutaActual = null;
         
         // Referencias DOM - Usando estructura anidada sin IDs
+        this.inputArchivoXML = null;
         this.listadoRutas = null;
+        this.main = null;
+        
+        // Referencias a secciones dinámicas
         this.contenidoRuta = null;
         this.contenedorMapa = null;
         this.contenedorAltimetria = null;
@@ -32,6 +33,12 @@ class GestorRutas {
         
         // Capa para el KML
         this.capaKML = null;
+        
+        // Base URL para recursos relativos
+        this.baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+        
+        // Flag para saber si ya se crearon las secciones dinámicas
+        this.seccionesCreadasFlag = false;
     }
     
     /**
@@ -39,14 +46,18 @@ class GestorRutas {
      */
     iniciar() {
         $(document).ready(() => {
-            // Obtener referencias DOM - Las secciones se seleccionan por posición
+            // Obtener referencias DOM principales
+            this.inputArchivoXML = $('main > section:nth-of-type(1) input[type="file"]');
             this.listadoRutas = $('main > section:nth-of-type(3) > ul');
-            this.contenidoRuta = $('main > section:nth-of-type(4)');
-            this.contenedorMapa = $('main > section:nth-of-type(5) > section');
-            this.contenedorAltimetria = $('main > section:nth-of-type(6) > section');
+            this.main = $('main');
             
-            // Cargar datos de las rutas
-            this.cargarDatosRutas();
+            // Escuchar eventos del input de archivo
+            this.inputArchivoXML.on('change', (event) => {
+                this.cargarArchivoXML(event);
+            });
+            
+            // Mensaje inicial
+            this.listadoRutas.html('<li><p>Carga un archivo XML para ver las rutas disponibles</p></li>');
             
             // Corregir problema de redimensionamiento del mapa
             $(window).on('resize', () => {
@@ -60,21 +71,118 @@ class GestorRutas {
     }
     
     /**
-     * Carga los datos de las rutas desde el archivo XML
+     * Crea la estructura básica de secciones para mostrar el contenido
+     * Solo se llama una vez se ha cargado correctamente un XML
      */
-    cargarDatosRutas() {
-        $.ajax({
-            url: this.archivoXML,
-            type: 'GET',
-            dataType: 'xml',
-            success: (data) => {
-                this.procesarXML(data);
-            },
-            error: (error) => {
-                console.error('Error al cargar el archivo XML:', error);
-                this.mostrarError('No se ha podido cargar la información de las rutas');
+    crearEstructuraContenido() {
+        // No crear las secciones si ya existen
+        if (this.seccionesCreadasFlag) {
+            return;
+        }
+        
+        // Sección 4: Información de la ruta seleccionada
+        const seccionInfo = document.createElement('section');
+        this.main.append(seccionInfo);
+        this.contenidoRuta = $(seccionInfo);
+        
+        // Sección 5: Planimetría
+        const seccionMapa = document.createElement('section');
+        const tituloMapa = document.createElement('h3');
+        tituloMapa.textContent = 'Planimetría de la ruta';
+        seccionMapa.appendChild(tituloMapa);
+        
+        const contenedorMapa = document.createElement('section');
+        seccionMapa.appendChild(contenedorMapa);
+        
+        this.main.append(seccionMapa);
+        this.contenedorMapa = $(contenedorMapa);
+        
+        // Sección 6: Altimetría
+        const seccionAltimetria = document.createElement('section');
+        const tituloAltimetria = document.createElement('h3');
+        tituloAltimetria.textContent = 'Altimetría de la ruta';
+        seccionAltimetria.appendChild(tituloAltimetria);
+        
+        const contenedorAltimetria = document.createElement('section');
+        seccionAltimetria.appendChild(contenedorAltimetria);
+        
+        this.main.append(seccionAltimetria);
+        this.contenedorAltimetria = $(contenedorAltimetria);
+        
+        // Marcar como creadas
+        this.seccionesCreadasFlag = true;
+    }
+    
+    /**
+     * Elimina las secciones dinámicas del DOM
+     */
+    eliminarSeccionesDinamicas() {
+        if (this.seccionesCreadasFlag) {
+            // Eliminar las secciones 4, 5 y 6 si existen
+            $('main > section:nth-of-type(6)').remove();
+            $('main > section:nth-of-type(5)').remove();
+            $('main > section:nth-of-type(4)').remove();
+            
+            // Resetear flags y referencias
+            this.seccionesCreadasFlag = false;
+            this.contenidoRuta = null;
+            this.contenedorMapa = null;
+            this.contenedorAltimetria = null;
+        }
+    }
+    
+    /**
+     * Carga un archivo XML seleccionado por el usuario
+     * @param {Event} event - Evento de cambio del input file
+     */
+    cargarArchivoXML(event) {
+        // Resetear estado
+        this.rutas = [];
+        this.rutaActual = null;
+        this.listadoRutas.html('<li><p>Cargando archivo...</p></li>');
+        
+        // Eliminar secciones dinámicas previas
+        this.eliminarSeccionesDinamicas();
+        
+        // Obtener el archivo seleccionado
+        const archivo = event.target.files[0];
+        if (!archivo) {
+            this.listadoRutas.html('<li><p>No se ha seleccionado ningún archivo.</p></li>');
+            return;
+        }
+        
+        // Verificar que es un archivo XML
+        if (archivo.type !== 'text/xml' && !archivo.name.endsWith('.xml')) {
+            this.listadoRutas.html('<li><p>Error: El archivo debe ser de tipo XML.</p></li>');
+            return;
+        }
+        
+        // Crear un lector de archivos
+        const lector = new FileReader();
+        
+        // Configurar el evento de carga
+        lector.onload = (e) => {
+            try {
+                // Parsear el contenido XML
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(e.target.result, 'text/xml');
+                
+                // Procesar el XML
+                this.procesarXML(xmlDoc);
+                
+            } catch (error) {
+                console.error('Error al procesar el archivo XML:', error);
+                this.listadoRutas.html('<li><p>Error al procesar el archivo XML. Verifica que tiene el formato correcto.</p></li>');
             }
-        });
+        };
+        
+        // Configurar el evento de error
+        lector.onerror = () => {
+            this.listadoRutas.html('<li><p>Error al leer el archivo.</p></li>');
+        };
+        
+        // Leer el archivo como texto
+        lector.readAsText(archivo);
     }
     
     /**
@@ -154,11 +262,19 @@ class GestorRutas {
             this.rutas.push(nuevaRuta);
         });
         
+        // Verificar si se encontraron rutas
+        if (this.rutas.length === 0) {
+            this.listadoRutas.html('<li><p>No se encontraron rutas en el archivo XML.</p></li>');
+            return;
+        }
+        
         // Crear botones para las rutas
         this.crearBotonesRutas();
         
         // Si hay rutas, mostrar la primera por defecto
         if (this.rutas.length > 0) {
+            // Crear las secciones dinámicas antes de seleccionar la ruta
+            this.crearEstructuraContenido();
             this.seleccionarRuta(this.rutas[0].id);
         }
     }
@@ -476,7 +592,9 @@ class GestorRutas {
             },
             error: (error) => {
                 console.error('Error al cargar la altimetría:', error);
-                this.contenedorAltimetria.html('<p>No se ha podido cargar el perfil de altimetría</p>');
+                const mensajeError = document.createElement('p');
+                mensajeError.textContent = 'No se ha podido cargar el perfil de altimetría';
+                this.contenedorAltimetria.append(mensajeError);
             }
         });
     }
@@ -515,7 +633,11 @@ class GestorRutas {
      * @param {string} mensaje - Mensaje de error a mostrar
      */
     mostrarError(mensaje) {
-        this.contenidoRuta.html(`<p>Error: ${mensaje}</p>`);
+        if (this.contenidoRuta) {
+            const mensajeError = document.createElement('p');
+            mensajeError.textContent = `Error: ${mensaje}`;
+            this.contenidoRuta.empty().append(mensajeError);
+        }
     }
 }
 
