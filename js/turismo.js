@@ -274,14 +274,14 @@ class SeccionNoticias {
         this.config = {
             seccion: 'section:nth-of-type(4)', // Cuarta sección = noticias
             numeroNoticias: 4, // Número de noticias a mostrar
-            apiUrl: 'https://newsapi.org/v2/everything',
-            apiKey: 'afcd9e8511854f7f9f249ee2f2577d18', // Reemplazar con una clave de API válida
+            apiUrl: 'https://newsdata.io/api/1/news',
+            apiKey: 'pub_711ec5a2790d412e8d14d6fd87384c6d', // Tu API key de newsdata.io
             // Parámetros de la API
             parametros: {
-                q: 'Turismo en concejos Asturias',
+                q: 'Turismo Asturias',
                 language: 'es',
-                sortBy: 'publishedAt',
-                pageSize: 10
+                country: 'es',
+                size: 10
             }
         };
     }
@@ -305,34 +305,34 @@ class SeccionNoticias {
             {
                 title: 'Nueva ruta turística en San Martín del Rey Aurelio destaca el patrimonio minero',
                 description: 'El ayuntamiento inaugura una nueva ruta turística que recorre los puntos más emblemáticos del patrimonio industrial del concejo.',
-                url: '#',
-                urlToImage: 'multimedia/noticia1.jpg',
-                publishedAt: '2025-06-01T14:30:00Z',
-                source: { name: 'Turismo Asturias' }
+                link: '#',
+                image_url: 'multimedia/noticia1.jpg',
+                pubDate: '2025-06-01T14:30:00Z',
+                source_id: 'Turismo Asturias'
             },
             {
                 title: 'Festival gastronómico reunirá lo mejor de la cocina asturiana en San Martín',
                 description: 'Más de 20 restaurantes presentarán sus mejores platos en el festival gastronómico que se celebrará este fin de semana.',
-                url: '#',
-                urlToImage: 'multimedia/noticia2.jpg',
-                publishedAt: '2025-05-29T10:15:00Z',
-                source: { name: 'Gastronomía Astur' }
+                link: '#',
+                image_url: 'multimedia/noticia2.jpg',
+                pubDate: '2025-05-29T10:15:00Z',
+                source_id: 'Gastronomía Astur'
             },
             {
                 title: 'Éxito de participación en la jornada de puertas abiertas del Museo de la Minería',
                 description: 'Más de 500 personas visitaron el Museo de la Minería durante la jornada de puertas abiertas organizada este domingo.',
-                url: '#',
-                urlToImage: 'multimedia/noticia3.jpg',
-                publishedAt: '2025-05-27T18:45:00Z',
-                source: { name: 'Cultura Minera' }
+                link: '#',
+                image_url: 'multimedia/noticia3.jpg',
+                pubDate: '2025-05-27T18:45:00Z',
+                source_id: 'Cultura Minera'
             },
             {
                 title: 'Asturias promueve el turismo sostenible en áreas mineras',
                 description: 'El gobierno autonómico impulsa iniciativas para fomentar el turismo sostenible en antiguas zonas mineras como San Martín del Rey Aurelio.',
-                url: '#',
-                urlToImage: 'multimedia/noticia4.jpg',
-                publishedAt: '2025-05-25T09:20:00Z',
-                source: { name: 'Eco Turismo' }
+                link: '#',
+                image_url: 'multimedia/noticia4.jpg',
+                pubDate: '2025-05-25T09:20:00Z',
+                source_id: 'Eco Turismo'
             }
         ];
         
@@ -342,16 +342,16 @@ class SeccionNoticias {
             method: 'GET',
             data: {
                 ...this.config.parametros,
-                apiKey: this.config.apiKey
+                apikey: this.config.apiKey
             },
             success: (respuesta) => {
-                if (respuesta.status === 'ok' && respuesta.articles && respuesta.articles.length > 0) {
+                if (respuesta.status === 'success' && respuesta.results && respuesta.results.length > 0) {
                     // Filtrar y procesar artículos
-                    let articulos = respuesta.articles;
+                    let articulos = respuesta.results;
                     
                     // Filtrar artículos sin imagen o con descripciones vacías
                     articulos = articulos.filter(articulo => 
-                        articulo.urlToImage && 
+                        articulo.image_url && 
                         articulo.description && 
                         articulo.description.length > 50
                     );
@@ -411,7 +411,7 @@ class SeccionNoticias {
     // Crear tarjeta para una noticia
     crearTarjetaNoticia(noticia) {
         // Formatear fecha
-        const fecha = new Date(noticia.publishedAt);
+        const fecha = new Date(noticia.pubDate);
         const fechaFormateada = fecha.toLocaleDateString('es-ES', {
             day: 'numeric',
             month: 'long',
@@ -432,9 +432,9 @@ class SeccionNoticias {
         // Figura para la imagen
         const figure = document.createElement('figure');
         
-        if (noticia.urlToImage) {
+        if (noticia.image_url) {
             const img = document.createElement('img');
-            img.src = noticia.urlToImage;
+            img.src = noticia.image_url;
             img.alt = noticia.title;
             figure.appendChild(img);
         } else {
@@ -454,11 +454,11 @@ class SeccionNoticias {
         const header = document.createElement('header');
         
         const spanFuente = document.createElement('span');
-        spanFuente.textContent = noticia.source.name;
+        spanFuente.textContent = noticia.source_id;
         
         const time = document.createElement('time');
         time.textContent = fechaFormateada;
-        time.setAttribute('datetime', noticia.publishedAt);
+        time.setAttribute('datetime', noticia.pubDate);
         
         header.appendChild(spanFuente);
         header.appendChild(time);
@@ -466,7 +466,7 @@ class SeccionNoticias {
         // Título con enlace
         const h3 = document.createElement('h3');
         const a = document.createElement('a');
-        a.href = noticia.url;
+        a.href = noticia.link;
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
         a.textContent = noticia.title;
@@ -478,7 +478,7 @@ class SeccionNoticias {
         
         // Enlace para leer más
         const boton = document.createElement('a');
-        boton.href = noticia.url;
+        boton.href = noticia.link;
         boton.target = '_blank';
         boton.rel = 'noopener noreferrer';
         boton.textContent = 'Leer más';
