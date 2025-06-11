@@ -318,6 +318,7 @@ if (isset($_GET['accion'])) {
         
         <?php if ($usuarioLogueado): ?>
         <section>
+            <h3>Panel de usuario</h3>
             <nav>
                 <ul>
                     <li><a href="reservas.php?accion=recursos">Ver recursos turísticos</a></li>
@@ -382,7 +383,7 @@ if (isset($_GET['accion'])) {
                     <p>
                         <label for="telefono">Teléfono:</label>
                         <input type="tel" id="telefono" name="telefono" pattern="[0-9]{9}" required />
-                        <small>Formato: 9 dígitos numéricos</small>
+                        <p>Formato: 9 dígitos numéricos</p>
                     </p>
                     
                     <p>
@@ -482,7 +483,7 @@ if (isset($_GET['accion'])) {
             </form>
             
             <p>
-                <small>El navegador descargará automáticamente el archivo CSV.</small>
+                <p>El navegador descargará automáticamente el archivo CSV.</p>
             </p>
         </section>
         </section>
