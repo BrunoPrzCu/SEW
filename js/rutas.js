@@ -1,7 +1,7 @@
 /**
  * Módulo para la visualización de rutas de San Martín del Rey Aurelio
  * Autor: UO295445
- * Fecha: 2025-06-11 10:35:18
+ * Fecha: 2025-06-11 16:44:02
  */
 
 /**
@@ -82,6 +82,10 @@ class GestorRutas {
         
         // Sección 4: Información de la ruta seleccionada
         const seccionInfo = document.createElement('section');
+        // Añadir un encabezado temporal que se reemplazará en mostrarInformacionRuta
+        const h3Temp = document.createElement('h3');
+        h3Temp.textContent = 'Información de la ruta';
+        seccionInfo.appendChild(h3Temp);
         this.main.append(seccionInfo);
         this.contenidoRuta = $(seccionInfo);
         
@@ -92,8 +96,12 @@ class GestorRutas {
         seccionMapa.appendChild(tituloMapa);
         
         const contenedorMapa = document.createElement('section');
+        // Añadir encabezado para la subsección
+        const h4ContMapa = document.createElement('h4');
+        h4ContMapa.textContent = 'Visualización del mapa';
+        contenedorMapa.appendChild(h4ContMapa);
         seccionMapa.appendChild(contenedorMapa);
-        
+
         this.main.append(seccionMapa);
         this.contenedorMapa = $(contenedorMapa);
         
@@ -104,6 +112,10 @@ class GestorRutas {
         seccionAltimetria.appendChild(tituloAltimetria);
         
         const contenedorAltimetria = document.createElement('section');
+        // Añadir encabezado para la subsección
+        const h4ContAlt = document.createElement('h4');
+        h4ContAlt.textContent = 'Perfil de elevación';
+        contenedorAltimetria.appendChild(h4ContAlt);
         seccionAltimetria.appendChild(contenedorAltimetria);
         
         this.main.append(seccionAltimetria);
@@ -291,7 +303,6 @@ class GestorRutas {
             const elementoLista = document.createElement('li');
             const botonRuta = document.createElement('button');
             botonRuta.textContent = ruta.nombre;
-            botonRuta.setAttribute('type', 'button');
             
             // Usar jQuery para manejar el evento
             $(botonRuta).on('click', () => {
@@ -344,6 +355,10 @@ class GestorRutas {
         
         // Crear sección de información básica
         const seccionInfo = document.createElement('section');
+        // Añadir encabezado para la sección de información básica
+        const h4Info = document.createElement('h4');
+        h4Info.textContent = 'Información general';
+        seccionInfo.appendChild(h4Info);
         
         // Descripción
         const descripcion = document.createElement('p');
@@ -356,9 +371,9 @@ class GestorRutas {
         // Función auxiliar para crear elementos de lista con datos
         const crearElementoLista = (etiqueta, valor) => {
             const elemento = document.createElement('li');
-            const strong = document.createElement('strong');
-            strong.textContent = etiqueta + ': ';
-            elemento.appendChild(strong);
+            const p = document.createElement('p');
+            p.textContent = etiqueta + ': ';
+            elemento.appendChild(p);
             elemento.appendChild(document.createTextNode(valor));
             return elemento;
         };
@@ -376,7 +391,7 @@ class GestorRutas {
         
         // Añadir coordenadas
         const coordenadas = document.createElement('li');
-        const etiquetaCoordenadas = document.createElement('strong');
+        const etiquetaCoordenadas = document.createElement('p');
         etiquetaCoordenadas.textContent = 'Coordenadas de inicio: ';
         coordenadas.appendChild(etiquetaCoordenadas);
         coordenadas.appendChild(document.createTextNode(
@@ -443,7 +458,7 @@ class GestorRutas {
             
             // Distancia
             const distanciaItem = document.createElement('li');
-            const distanciaLabel = document.createElement('strong');
+            const distanciaLabel = document.createElement('p');
             distanciaLabel.textContent = 'Distancia: ';
             distanciaItem.appendChild(distanciaLabel);
             distanciaItem.appendChild(document.createTextNode(`${hito.distancia.valor} ${hito.distancia.unidades}`));
@@ -451,7 +466,7 @@ class GestorRutas {
             
             // Coordenadas
             const coordenadasItem = document.createElement('li');
-            const coordenadasLabel = document.createElement('strong');
+            const coordenadasLabel = document.createElement('p');
             coordenadasLabel.textContent = 'Coordenadas: ';
             coordenadasItem.appendChild(coordenadasLabel);
             coordenadasItem.appendChild(document.createTextNode(
@@ -463,14 +478,17 @@ class GestorRutas {
             
             // Contenedor para multimedia
             const contenedorMultimedia = document.createElement('section');
+            // Añadir encabezado para la sección multimedia
+            const hMultimedia = document.createElement('h6');
+            hMultimedia.textContent = 'Contenido multimedia';
+            contenedorMultimedia.appendChild(hMultimedia);
             
             // Añadir galería de fotos si existen
             if (hito.fotografias.length > 0) {
+                const seccionFotos = document.createElement('section');
                 const tituloFotos = document.createElement('h6');
-                contenedorMultimedia.appendChild(tituloFotos);
-                
-                const galeriaFotos = document.createElement('section');
-
+                tituloFotos.textContent = 'Galería de fotos';
+                seccionFotos.appendChild(tituloFotos);
                 
                 // Agregar todas las fotos
                 hito.fotografias.forEach(urlFoto => {
@@ -482,19 +500,18 @@ class GestorRutas {
                     imagen.title = `Imagen de ${hito.nombre}`;
                     
                     figura.appendChild(imagen);
-                    galeriaFotos.appendChild(figura);
+                    seccionFotos.appendChild(figura);
                 });
                 
-                contenedorMultimedia.appendChild(galeriaFotos);
+                contenedorMultimedia.appendChild(seccionFotos);
             }
             
             // Añadir videos si existen
             if (hito.videos.length > 0) {
+                const seccionVideos = document.createElement('section');
                 const tituloVideos = document.createElement('h6');
                 tituloVideos.textContent = 'Videos';
-                contenedorMultimedia.appendChild(tituloVideos);
-                
-                const galeriaVideos = document.createElement('section');
+                seccionVideos.appendChild(tituloVideos);
                 
                 // Agregar todos los videos
                 hito.videos.forEach(urlVideo => {
@@ -502,10 +519,10 @@ class GestorRutas {
                     videoElemento.src = urlVideo;
                     videoElemento.controls = true;
                     
-                    galeriaVideos.appendChild(videoElemento);
+                    seccionVideos.appendChild(videoElemento);
                 });
                 
-                contenedorMultimedia.appendChild(galeriaVideos);
+                contenedorMultimedia.appendChild(seccionVideos);
             }
             
             contenedorHito.appendChild(contenedorMultimedia);
@@ -526,8 +543,17 @@ class GestorRutas {
         // Limpiar contenedor
         this.contenedorMapa.empty();
         
+        // Crear encabezado para la sección del mapa
+        const h4Mapa = document.createElement('h4');
+        h4Mapa.textContent = 'Visualización del mapa';
+        this.contenedorMapa.append(h4Mapa);
+        
         // Crear elemento para el mapa
         const elementoMapa = document.createElement('section');
+        // Añadir encabezado para el elemento del mapa
+        const h5Mapa = document.createElement('h5');
+        h5Mapa.textContent = 'Mapa interactivo';
+        elementoMapa.appendChild(h5Mapa);
         this.contenedorMapa.append(elementoMapa);
         
         // Crear mapa
@@ -577,6 +603,11 @@ class GestorRutas {
         // Limpiar contenedor
         this.contenedorAltimetria.empty();
         
+        // Crear encabezado para la sección de altimetría
+        const h4Alt = document.createElement('h4');
+        h4Alt.textContent = 'Perfil de elevación';
+        this.contenedorAltimetria.append(h4Alt);
+        
         // Cargar archivo SVG
         $.ajax({
             url: "xml/" + this.rutaActual.altimetria,
@@ -585,9 +616,13 @@ class GestorRutas {
             success: (svgData) => {
                 // Crear contenedor para el SVG
                 const contenedorSVG = document.createElement('section');
+                // Añadir encabezado para el SVG
+                const h5SVG = document.createElement('h5');
+                h5SVG.textContent = 'Gráfica de altimetría';
+                contenedorSVG.appendChild(h5SVG);
                 
                 // Añadir el SVG al contenedor
-                contenedorSVG.innerHTML = svgData;
+                contenedorSVG.innerHTML += svgData;
                 this.contenedorAltimetria.append(contenedorSVG);
             },
             error: (error) => {
@@ -634,9 +669,14 @@ class GestorRutas {
      */
     mostrarError(mensaje) {
         if (this.contenidoRuta) {
+            // Asegurarse de que hay un encabezado en la sección de error
+            const h3Error = document.createElement('h3');
+            h3Error.textContent = 'Error';
+            
             const mensajeError = document.createElement('p');
-            mensajeError.textContent = `Error: ${mensaje}`;
-            this.contenidoRuta.empty().append(mensajeError);
+            mensajeError.textContent = `${mensaje}`;
+            
+            this.contenidoRuta.empty().append(h3Error, mensajeError);
         }
     }
 }
