@@ -54,11 +54,23 @@ class Reserva {
                 return ['exito' => false, 'error' => 'Error al crear la reserva.'];
             }
             
-            // Si el número de personas es igual a las plazas totales, marcar el horario como no disponible
-            if ($numPersonas >= $datosRecurso['plazas_totales']) {
+            // Actualizar las plazas disponibles del recurso
+            $nuevasPlazas = $datosRecurso['plazas_totales'] - $numPersonas;
+            $queryActualizarPlazas = "UPDATE recursos_turisticos SET plazas_totales = :plazas WHERE id = :id";
+            $stmtPlazas = $this->conn->prepare($queryActualizarPlazas);
+            $stmtPlazas->bindParam(':plazas', $nuevasPlazas, PDO::PARAM_INT);
+            $stmtPlazas->bindParam(':id', $datosRecurso['id'], PDO::PARAM_INT);
+            
+            if (!$stmtPlazas->execute()) {
+                $this->conn->rollBack();
+                return ['exito' => false, 'error' => 'Error al actualizar las plazas disponibles.'];
+            }
+            
+            // Si no quedan plazas disponibles, marcar el horario como no disponible
+            if ($nuevasPlazas <= 0) {
                 if (!$horario->actualizarDisponibilidad($horarioId, 0)) {
                     $this->conn->rollBack();
-                    return ['exito' => false, 'error' => 'Error al actualizar la disponibilidad.'];
+                    return ['exito' => false, 'error' => 'Error al actualizar la disponibilidad del horario.'];
                 }
             }
             
@@ -69,7 +81,7 @@ class Reserva {
             if ($this->conn->inTransaction()) {
                 $this->conn->rollBack();
             }
-            return ['exito' => false, 'error' => 'Error en la base de datos al procesar la reserva.'];
+            return ['exito' => false, 'error' => 'Error en la base de datos al procesar la reserva: ' . $e->getMessage()];
         }
     }
     
@@ -78,7 +90,8 @@ class Reserva {
             $query = "SELECT r.*, 
                      rt.nombre as recurso_nombre,
                      h.fecha_inicio,
-                     h.fecha_fin
+                     h.fecha_fin,
+                     h.recurso_id
                      FROM reservas r
                      JOIN horarios h ON r.horario_id = h.id
                      JOIN recursos_turisticos rt ON h.recurso_id = rt.id
@@ -98,7 +111,10 @@ class Reserva {
     public function anular($reservaId, $usuarioId) {
         try {
             // Verificar que la reserva pertenezca al usuario
-            $query = "SELECT * FROM reservas WHERE id = :id AND usuario_id = :usuario_id AND estado = 'confirmada'";
+            $query = "SELECT r.*, h.recurso_id 
+                     FROM reservas r
+                     JOIN horarios h ON r.horario_id = h.id
+                     WHERE r.id = :id AND r.usuario_id = :usuario_id AND r.estado = 'confirmada'";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':id', $reservaId, PDO::PARAM_INT);
             $stmt->bindParam(':usuario_id', $usuarioId, PDO::PARAM_INT);
@@ -123,7 +139,28 @@ class Reserva {
                 return false;
             }
             
-            // Actualizar disponibilidad del horario
+            // Obtener datos del recurso para actualizar plazas
+            $recurso = new Recurso();
+            $datosRecurso = $recurso->obtenerPorId($reserva['recurso_id']);
+            
+            if (!$datosRecurso) {
+                $this->conn->rollBack();
+                return false;
+            }
+            
+            // Actualizar las plazas disponibles del recurso (devolver las plazas)
+            $nuevasPlazas = $datosRecurso['plazas_totales'] + $reserva['num_personas'];
+            $queryActualizarPlazas = "UPDATE recursos_turisticos SET plazas_totales = :plazas WHERE id = :id";
+            $stmtPlazas = $this->conn->prepare($queryActualizarPlazas);
+            $stmtPlazas->bindParam(':plazas', $nuevasPlazas, PDO::PARAM_INT);
+            $stmtPlazas->bindParam(':id', $reserva['recurso_id'], PDO::PARAM_INT);
+            
+            if (!$stmtPlazas->execute()) {
+                $this->conn->rollBack();
+                return false;
+            }
+            
+            // Actualizar disponibilidad del horario (si estaba completo, ahora hay plazas)
             $horario = new Horario();
             if (!$horario->actualizarDisponibilidad($reserva['horario_id'], 1)) {
                 $this->conn->rollBack();

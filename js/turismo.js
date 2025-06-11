@@ -149,6 +149,7 @@ class CarruselFotos {
         
         const btnSiguiente = document.createElement('button');
         btnSiguiente.innerHTML = '&rsaquo;';
+        btnSiguiente.setAttribute('aria-label', 'Imagen siguiente');
         
         // Agregar botones al contenedor del carrusel
         contenedorCarrusel.appendChild(btnAnterior);
@@ -160,6 +161,7 @@ class CarruselFotos {
         for (let i = 0; i < this.totalImagenes; i++) {
             const li = document.createElement('li');
             const btn = document.createElement('button');
+            btn.setAttribute('aria-label', `Ver imagen ${i + 1}`);
             
             // Almacenar el índice como propiedad personalizada
             btn._indice = i;

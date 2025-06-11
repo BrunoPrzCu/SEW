@@ -624,7 +624,7 @@ if (isset($_GET['accion'])) {
                         
                         <?php if ($reserva['estado'] == 'confirmada'): ?>
                         <p>
-                            <a href="reservas.php?accion=anular_reserva&id=<?php echo $reserva['id']; ?>" onclick="return confirm('¿Está seguro de que desea anular esta reserva?');">Anular reserva</a>
+                            <a href="reservas.php?accion=anular_reserva&id=<?php echo $reserva['id']; ?>">Anular reserva</a>
                         </p>
                         <?php endif; ?>
                     </article>
