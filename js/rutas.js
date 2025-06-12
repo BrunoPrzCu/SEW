@@ -408,9 +408,6 @@ class GestorRutas {
         
         // Sección de referencias
         if (this.rutaActual.referencias.length > 0) {
-            const tituloRefs = document.createElement('h4');
-            tituloRefs.textContent = 'Enlaces de interés';
-            seccionInfo.appendChild(tituloRefs);
             
             const listaRefs = document.createElement('ul');
             this.rutaActual.referencias.forEach(ref => {
