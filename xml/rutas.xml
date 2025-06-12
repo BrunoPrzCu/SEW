@@ -40,12 +40,7 @@
                 <distancia unidades="km">1.2</distancia>
                 <fotografias>
                     <fotografia>multimedia/pozo_san_vicente1.jpg</fotografia>
-                    <fotografia>multimedia/pozo_san_vicente2.jpg</fotografia>
-                    <fotografia>multimedia/pozo_san_vicente3.jpg</fotografia>
                 </fotografias>
-                <videos>
-                    <video>multimedia/recorrido_pozo.mp4</video>
-                </videos>
             </hito>
             
             <hito>
@@ -59,12 +54,7 @@
                 <distancia unidades="km">2.5</distancia>
                 <fotografias>
                     <fotografia>multimedia/mirador_valle1.jpg</fotografia>
-                    <fotografia>multimedia/mirador_valle2.jpg</fotografia>
                 </fotografias>
-                <videos>
-                    <video>multimedia/panoramica_valle.mp4</video>
-                    <video>multimedia/atardecer_valle.mp4</video>
-                </videos>
             </hito>
             
             <hito>
@@ -78,9 +68,6 @@
                 <distancia unidades="km">1.8</distancia>
                 <fotografias>
                     <fotografia>multimedia/lavadero1.jpg</fotografia>
-                    <fotografia>multimedia/lavadero2.jpg</fotografia>
-                    <fotografia>multimedia/lavadero3.jpg</fotografia>
-                    <fotografia>multimedia/lavadero4.jpg</fotografia>
                 </fotografias>
             </hito>
             
@@ -95,11 +82,7 @@
                 <distancia unidades="km">1.3</distancia>
                 <fotografias>
                     <fotografia>multimedia/bocamina1.jpg</fotografia>
-                    <fotografia>multimedia/bocamina2.jpg</fotografia>
                 </fotografias>
-                <videos>
-                    <video>multimedia/interior_mina.mp4</video>
-                </videos>
             </hito>
             
             <hito>
