@@ -1,275 +1,420 @@
 <?php
-// Iniciar sesión para manejar la autenticación del usuario
-session_start();
-
-// Incluir archivos necesarios
-require_once 'php/config.php';
-require_once 'php/db.php';
-require_once 'php/usuario.php';
-require_once 'php/categoria.php';
-require_once 'php/recurso.php';
-require_once 'php/horario.php';
-require_once 'php/reserva.php';
-
-// Solo cargar csv_manager.php si es necesario
-if (isset($_GET['accion']) && ($_GET['accion'] == 'imp_exp' || $_GET['accion'] == 'importar')) {
-    require_once 'php/csv_manager.php';
-}
-
-// Variables para controlar la visualización
-$mostrarLogin = true;
-$mostrarRegistro = false;
-$mostrarRecursos = false;
-$mostrarDetalle = false;
-$mostrarReservas = false;
-$mostrarImpExp = false;
-$mensajeExito = '';
-$mensajeError = '';
-$mostrarResultados = false;
-$resultadoOperacion = [];
-
-// Verificar si hay un usuario logueado
-$usuarioLogueado = isset($_SESSION['usuario_id']);
-
-// Procesar acciones según el parámetro 'accion'
-if (isset($_GET['accion'])) {
-    switch ($_GET['accion']) {
-        case 'login':
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // Validación del lado del servidor
-                if (empty($_POST['email']) || empty($_POST['password'])) {
-                    $mensajeError = 'Debe completar todos los campos.';
-                } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                    $mensajeError = 'El formato del email no es válido.';
-                } else {
-                    // Autenticar usuario
-                    $usuario = new Usuario();
-                    if ($usuario->login($_POST['email'], $_POST['password'])) {
-                        $usuarioLogueado = true;
-                        $mostrarLogin = false;
-                        $mostrarRecursos = true;
-                        $mensajeExito = 'Inicio de sesión exitoso.';
-                    } else {
-                        $mensajeError = 'Credenciales incorrectas.';
-                    }
-                }
-            }
-            break;
+class SistemaReservas {
+    // Propiedades para controlar la visualización
+    public $mostrarLogin = true;
+    public $mostrarRegistro = false;
+    public $mostrarRecursos = false;
+    public $mostrarDetalle = false;
+    public $mostrarReservas = false;
+    public $mostrarImpExp = false;
+    public $mensajeExito = '';
+    public $mensajeError = '';
+    public $mostrarResultados = false;
+    public $resultadoOperacion = [];
+    
+    // Propiedades para datos del sistema
+    public $usuarioLogueado = false;
+    public $recursos = [];
+    public $categorias = [];
+    public $detalleRecurso = null;
+    public $horarios = [];
+    public $reservas = [];
+    public $presupuestoTotal = 0;
+    
+    /**
+     * Constructor que inicializa el sistema
+     */
+    public function __construct() {
+        // Iniciar sesión
+        session_start();
+        
+        // Cargar archivos necesarios
+        require_once 'php/config.php';
+        require_once 'php/db.php';
+        require_once 'php/usuario.php';
+        require_once 'php/categoria.php';
+        require_once 'php/recurso.php';
+        require_once 'php/horario.php';
+        require_once 'php/reserva.php';
+        
+        // Verificar si hay un usuario logueado
+        $this->usuarioLogueado = isset($_SESSION['usuario_id']);
+        
+        // Cargar csv_manager si es necesario
+        if (isset($_GET['accion']) && ($_GET['accion'] == 'imp_exp' || $_GET['accion'] == 'importar')) {
+            require_once 'php/csv_manager.php';
+        }
+    }
+    
+    /**
+     * Procesa las acciones según el parámetro accion
+     */
+    public function procesarAcciones() {
+        if (isset($_GET['accion'])) {
+            $accion = $_GET['accion'];
             
-        case 'registro':
-            $mostrarLogin = false;
-            $mostrarRegistro = true;
-            
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // Validación del lado del servidor
-                $errores = array();
-                
-                if (empty($_POST['nombre']) || strlen($_POST['nombre']) < 3) {
-                    $errores[] = 'El nombre debe tener al menos 3 caracteres.';
-                }
-                
-                if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                    $errores[] = 'El formato del email no es válido.';
-                }
-                
-                if (empty($_POST['password']) || strlen($_POST['password']) < 6) {
-                    $errores[] = 'La contraseña debe tener al menos 6 caracteres.';
-                }
-                
-                if (empty($_POST['telefono']) || !preg_match('/^[0-9]{9}$/', $_POST['telefono'])) {
-                    $errores[] = 'El teléfono debe tener 9 dígitos numéricos.';
-                }
-                
-                if (empty($errores)) {
-                    $usuario = new Usuario();
+            switch ($accion) {
+                case 'login':
+                    $this->procesarLogin();
+                    break;
                     
-                    // Verificar si el email ya existe
-                    if ($usuario->existeEmail($_POST['email'])) {
-                        $mensajeError = 'Este email ya está registrado.';
-                    } else {
-                        if ($usuario->registrar($_POST['nombre'], $_POST['email'], $_POST['password'], $_POST['telefono'])) {
-                            $mensajeExito = 'Usuario registrado correctamente. Ahora puede iniciar sesión.';
-                            $mostrarRegistro = false;
-                            $mostrarLogin = true;
-                        } else {
-                            $mensajeError = 'Error al registrar el usuario.';
-                        }
-                    }
-                } else {
-                    $mensajeError = implode('<p>', $errores);
-                }
+                case 'registro':
+                    $this->procesarRegistro();
+                    break;
+                    
+                case 'cerrar_sesion':
+                    $this->procesarCerrarSesion();
+                    break;
+                    
+                case 'recursos':
+                    $this->procesarRecursos();
+                    break;
+                    
+                case 'detalle_recurso':
+                    $this->procesarDetalleRecurso();
+                    break;
+                    
+                case 'reservar':
+                    $this->procesarReservar();
+                    break;
+                    
+                case 'mis_reservas':
+                    $this->procesarMisReservas();
+                    break;
+                    
+                case 'anular_reserva':
+                    $this->procesarAnularReserva();
+                    break;
+                    
+                case 'imp_exp':
+                    $this->procesarImportExport();
+                    break;
+                    
+                case 'importar':
+                    $this->procesarImportar();
+                    break;
             }
-            break;
-            
-        case 'cerrar_sesion':
-            session_unset();
-            session_destroy();
-            $usuarioLogueado = false;
-            $mostrarLogin = true;
-            $mensajeExito = 'Sesión cerrada correctamente.';
-            break;
-            
-        case 'recursos':
-            if ($usuarioLogueado) {
-                $mostrarLogin = false;
-                $mostrarRecursos = true;
-                // Obtener todos los recursos o filtrar por categoría
-                $categoriaId = isset($_GET['categoria']) ? (int)$_GET['categoria'] : 0;
-                
-                $recurso = new Recurso();
-                if ($categoriaId > 0) {
-                    $recursos = $recurso->obtenerPorCategoria($categoriaId);
-                } else {
-                    $recursos = $recurso->obtenerTodos();
-                }
-                
-                $categoria = new Categoria();
-                $categorias = $categoria->obtenerTodas();
-            } else {
-                $mensajeError = 'Debe iniciar sesión para ver los recursos.';
-            }
-            break;
-            
-        case 'detalle_recurso':
-            if ($usuarioLogueado) {
-                $mostrarLogin = false;
-                $mostrarDetalle = true;
-                $recursoId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-                
-                $recurso = new Recurso();
-                $detalleRecurso = $recurso->obtenerPorId($recursoId);
-                
-                $horario = new Horario();
-                $horarios = $horario->obtenerPorRecurso($recursoId);
-            } else {
-                $mensajeError = 'Debe iniciar sesión para ver los detalles del recurso.';
-            }
-            break;
-            
-        case 'reservar':
-            if ($usuarioLogueado) {
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    // Validación del lado del servidor
-                    if (empty($_POST['horario_id']) || !is_numeric($_POST['horario_id'])) {
-                        $mensajeError = 'Debe seleccionar un horario válido.';
-                    } else if (empty($_POST['num_personas']) || !is_numeric($_POST['num_personas']) || $_POST['num_personas'] < 1) {
-                        $mensajeError = 'El número de personas debe ser al menos 1.';
-                    } else {
-                        $reserva = new Reserva();
-                        $resultado = $reserva->crear(
-                            $_SESSION['usuario_id'],
-                            $_POST['horario_id'],
-                            (int)$_POST['num_personas'],
-                            isset($_POST['recurso_id']) ? (int)$_POST['recurso_id'] : 0
-                        );
-                        
-                        if ($resultado['exito']) {
-                            $mensajeExito = 'Reserva realizada correctamente.';
-                            $mostrarRecursos = false;
-                            $mostrarReservas = true;
-                        } else {
-                            $mensajeError = $resultado['error'];
-                            $mostrarDetalle = true;
-                            // Volver a cargar los datos del recurso y horarios
-                            $recursoId = isset($_POST['recurso_id']) ? (int)$_POST['recurso_id'] : 0;
-                            
-                            $recurso = new Recurso();
-                            $detalleRecurso = $recurso->obtenerPorId($recursoId);
-                            
-                            $horario = new Horario();
-                            $horarios = $horario->obtenerPorRecurso($recursoId);
-                        }
-                    }
-                }
-            } else {
-                $mensajeError = 'Debe iniciar sesión para realizar una reserva.';
-            }
-            break;
-            
-        case 'mis_reservas':
-            if ($usuarioLogueado) {
-                $mostrarLogin = false;
-                $mostrarReservas = true;
-                
-                $reserva = new Reserva();
-                $reservas = $reserva->obtenerPorUsuario($_SESSION['usuario_id']);
-            } else {
-                $mensajeError = 'Debe iniciar sesión para ver sus reservas.';
-            }
-            break;
-            
-        case 'anular_reserva':
-            if ($usuarioLogueado) {
-                $reservaId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-                
-                $reserva = new Reserva();
-                if ($reserva->anular($reservaId, $_SESSION['usuario_id'])) {
-                    $mensajeExito = 'Reserva anulada correctamente.';
-                } else {
-                    $mensajeError = 'No se pudo anular la reserva.';
-                }
-                $mostrarLogin = false;
-                $mostrarReservas = true;
-                $reservas = $reserva->obtenerPorUsuario($_SESSION['usuario_id']);
-            } else {
-                $mensajeError = 'Debe iniciar sesión para anular una reserva.';
-            }
-            break;
-            
-        // Nueva acción para importar/exportar
-        case 'imp_exp':
-            if ($usuarioLogueado) {
-                $mostrarLogin = false;
-                $mostrarImpExp = true;
-            } else {
-                $mensajeError = 'Debe iniciar sesión para acceder a esta funcionalidad.';
-            }
-            break;
-            
-        // Nueva acción para manejar la importación
-        case 'importar':
-            if ($usuarioLogueado) {
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    // Verificar si se ha subido un archivo
-                    if (isset($_FILES['archivo_csv']) && $_FILES['archivo_csv']['error'] === UPLOAD_ERR_OK) {
-                        $archivoTemporal = $_FILES['archivo_csv']['tmp_name'];
-                        $tabla = $_POST['tabla'];
-                        
-                        // Importar datos directamente desde el archivo temporal
-                        $csvManager = new CSVManager();
-                        $resultadoOperacion = $csvManager->importarDesdeCSV($tabla, $archivoTemporal);
-                        
-                        if ($resultadoOperacion['exito']) {
-                            $mensajeExito = "Importación exitosa: " . $resultadoOperacion['registrosImportados'] . " registros importados.";
-                        } else {
-                            $mensajeError = "Error en la importación.";
-                        }
-                        
-                        $mostrarResultados = true;
-                        $mostrarImpExp = true;
-                    } else {
-                        $mensajeError = "Debe seleccionar un archivo CSV para importar.";
-                        $mostrarImpExp = true;
-                    }
-                }
-            } else {
-                $mensajeError = 'Debe iniciar sesión para realizar esta acción.';
-            }
-            break;
+        } else {
+            // Si no hay acción especificada y el usuario está logueado, mostrar recursos
+            $this->procesarVistaDefault();
+        }
     }
-} else {
-    // Si no hay acción especificada y el usuario está logueado, mostrar recursos
-    if ($usuarioLogueado) {
-        $mostrarLogin = false;
-        $mostrarRecursos = true;
+    
+    /**
+     * Procesa la acción de login
+     */
+    private function procesarLogin() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Validación del lado del servidor
+            if (empty($_POST['email']) || empty($_POST['password'])) {
+                $this->mensajeError = 'Debe completar todos los campos.';
+            } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                $this->mensajeError = 'El formato del email no es válido.';
+            } else {
+                // Autenticar usuario
+                $usuario = new Usuario();
+                if ($usuario->login($_POST['email'], $_POST['password'])) {
+                    $this->usuarioLogueado = true;
+                    $this->mostrarLogin = false;
+                    $this->mostrarRecursos = true;
+                    
+                    $recurso = new Recurso();
+                    $this->recursos = $recurso->obtenerTodos();
+                    
+                    $categoria = new Categoria();
+                    $this->categorias = $categoria->obtenerTodas();
+                    $this->mensajeExito = 'Inicio de sesión exitoso.';
+                } else {
+                    $this->mensajeError = 'Credenciales incorrectas.';
+                }
+            }
+        }
+    }
+    
+    /**
+     * Procesa la acción de registro
+     */
+    private function procesarRegistro() {
+        $this->mostrarLogin = false;
+        $this->mostrarRegistro = true;
         
-        $recurso = new Recurso();
-        $recursos = $recurso->obtenerTodos();
-        
-        $categoria = new Categoria();
-        $categorias = $categoria->obtenerTodas();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Validación del lado del servidor
+            $errores = array();
+            
+            if (empty($_POST['nombre']) || strlen($_POST['nombre']) < 3) {
+                $errores[] = 'El nombre debe tener al menos 3 caracteres.';
+            }
+            
+            if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                $errores[] = 'El formato del email no es válido.';
+            }
+            
+            if (empty($_POST['password']) || strlen($_POST['password']) < 6) {
+                $errores[] = 'La contraseña debe tener al menos 6 caracteres.';
+            }
+            
+            if (empty($_POST['telefono']) || !preg_match('/^[0-9]{9}$/', $_POST['telefono'])) {
+                $errores[] = 'El teléfono debe tener 9 dígitos numéricos.';
+            }
+            
+            if (empty($errores)) {
+                $usuario = new Usuario();
+                
+                // Verificar si el email ya existe
+                if ($usuario->existeEmail($_POST['email'])) {
+                    $this->mensajeError = 'Este email ya está registrado.';
+                } else {
+                    if ($usuario->registrar($_POST['nombre'], $_POST['email'], $_POST['password'], $_POST['telefono'])) {
+                        $this->mensajeExito = 'Usuario registrado correctamente. Ahora puede iniciar sesión.';
+                        $this->mostrarRegistro = false;
+                        $this->mostrarLogin = true;
+                    } else {
+                        $this->mensajeError = 'Error al registrar el usuario.';
+                    }
+                }
+            } else {
+                $this->mensajeError = implode('<p>', $errores);
+            }
+        }
+    }
+    
+    /**
+     * Procesa la acción de cerrar sesión
+     */
+    private function procesarCerrarSesion() {
+        session_unset();
+        session_destroy();
+        $this->usuarioLogueado = false;
+        $this->mostrarLogin = true;
+        $this->mensajeExito = 'Sesión cerrada correctamente.';
+    }
+    
+    /**
+     * Procesa la acción de ver recursos
+     */
+    private function procesarRecursos() {
+        if ($this->usuarioLogueado) {
+            $this->mostrarLogin = false;
+            $this->mostrarRecursos = true;
+            // Obtener todos los recursos o filtrar por categoría
+            $categoriaId = isset($_GET['categoria']) ? (int)$_GET['categoria'] : 0;
+            
+            $recurso = new Recurso();
+            if ($categoriaId > 0) {
+                $this->recursos = $recurso->obtenerPorCategoria($categoriaId);
+            } else {
+                $this->recursos = $recurso->obtenerTodos();
+            }
+            
+            $categoria = new Categoria();
+            $this->categorias = $categoria->obtenerTodas();
+        } else {
+            $this->mensajeError = 'Debe iniciar sesión para ver los recursos.';
+        }
+    }
+    
+    /**
+     * Procesa la acción de ver detalle de un recurso
+     */
+    private function procesarDetalleRecurso() {
+        if ($this->usuarioLogueado) {
+            $this->mostrarLogin = false;
+            $this->mostrarDetalle = true;
+            $recursoId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+            
+            $recurso = new Recurso();
+            $this->detalleRecurso = $recurso->obtenerPorId($recursoId);
+            
+            $horario = new Horario();
+            $this->horarios = $horario->obtenerPorRecurso($recursoId);
+        } else {
+            $this->mensajeError = 'Debe iniciar sesión para ver los detalles del recurso.';
+        }
+    }
+    
+    /**
+     * Procesa la acción de reservar
+     */
+    private function procesarReservar() {
+        if ($this->usuarioLogueado) {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Validación del lado del servidor
+                if (empty($_POST['horario_id']) || !is_numeric($_POST['horario_id'])) {
+                    $this->mensajeError = 'Debe seleccionar un horario válido.';
+                } else if (empty($_POST['num_personas']) || !is_numeric($_POST['num_personas']) || $_POST['num_personas'] < 1) {
+                    $this->mensajeError = 'El número de personas debe ser al menos 1.';
+                } else {
+                    $reserva = new Reserva();
+                    $resultado = $reserva->crear(
+                        $_SESSION['usuario_id'],
+                        $_POST['horario_id'],
+                        (int)$_POST['num_personas'],
+                        isset($_POST['recurso_id']) ? (int)$_POST['recurso_id'] : 0
+                    );
+                    
+                    if ($resultado['exito']) {
+                        $this->mensajeExito = 'Reserva realizada correctamente.';
+                        $this->mostrarRecursos = false;
+                        $this->mostrarReservas = true;
+                        $this->mostrarLogin = false;
+                        
+                        // Cargar las reservas actualizadas
+                        $this->reservas = $reserva->obtenerPorUsuario($_SESSION['usuario_id']);
+                        $this->calcularPresupuestoTotal();
+                    } else {
+                        $this->mensajeError = $resultado['error'];
+                        $this->mostrarDetalle = true;
+                        // Volver a cargar los datos del recurso y horarios
+                        $recursoId = isset($_POST['recurso_id']) ? (int)$_POST['recurso_id'] : 0;
+                        
+                        $recurso = new Recurso();
+                        $this->detalleRecurso = $recurso->obtenerPorId($recursoId);
+                        
+                        $horario = new Horario();
+                        $this->horarios = $horario->obtenerPorRecurso($recursoId);
+                    }
+                }
+            }
+        } else {
+            $this->mensajeError = 'Debe iniciar sesión para realizar una reserva.';
+        }
+    }
+    
+    /**
+     * Procesa la acción de ver mis reservas
+     */
+    private function procesarMisReservas() {
+        if ($this->usuarioLogueado) {
+            $this->mostrarLogin = false;
+            $this->mostrarReservas = true;
+            
+            $reserva = new Reserva();
+            $this->reservas = $reserva->obtenerPorUsuario($_SESSION['usuario_id']);
+            $this->calcularPresupuestoTotal();
+        } else {
+            $this->mensajeError = 'Debe iniciar sesión para ver sus reservas.';
+        }
+    }
+    
+    /**
+     * Calcula el presupuesto total de las reservas confirmadas
+     */
+    private function calcularPresupuestoTotal() {
+        $this->presupuestoTotal = 0;
+        foreach ($this->reservas as $reserva) {
+            if ($reserva['estado'] == 'confirmada') {
+                $this->presupuestoTotal += $reserva['precio_total'];
+            }
+        }
+    }
+    
+    /**
+     * Procesa la acción de anular una reserva
+     */
+    private function procesarAnularReserva() {
+        if ($this->usuarioLogueado) {
+            $reservaId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+            
+            $reserva = new Reserva();
+            if ($reserva->anular($reservaId, $_SESSION['usuario_id'])) {
+                $this->mensajeExito = 'Reserva anulada correctamente.';
+            } else {
+                $this->mensajeError = 'No se pudo anular la reserva.';
+            }
+            $this->mostrarLogin = false;
+            $this->mostrarReservas = true;
+            $this->reservas = $reserva->obtenerPorUsuario($_SESSION['usuario_id']);
+            $this->calcularPresupuestoTotal();
+        } else {
+            $this->mensajeError = 'Debe iniciar sesión para anular una reserva.';
+        }
+    }
+    
+    /**
+     * Procesa la acción de importar/exportar
+     */
+    private function procesarImportExport() {
+        if ($this->usuarioLogueado) {
+            $this->mostrarLogin = false;
+            $this->mostrarImpExp = true;
+        } else {
+            $this->mensajeError = 'Debe iniciar sesión para acceder a esta funcionalidad.';
+        }
+    }
+    
+    /**
+     * Procesa la acción de importar
+     */
+    private function procesarImportar() {
+        if ($this->usuarioLogueado) {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Verificar si se ha subido un archivo
+                if (isset($_FILES['archivo_csv']) && $_FILES['archivo_csv']['error'] === UPLOAD_ERR_OK) {
+                    $archivoTemporal = $_FILES['archivo_csv']['tmp_name'];
+                    $tabla = $_POST['tabla'];
+                    
+                    // Importar datos directamente desde el archivo temporal
+                    $csvManager = new CSVManager();
+                    $this->resultadoOperacion = $csvManager->importarDesdeCSV($tabla, $archivoTemporal);
+                    
+                    if ($this->resultadoOperacion['exito']) {
+                        $this->mensajeExito = "Importación exitosa: " . $this->resultadoOperacion['registrosImportados'] . " registros importados.";
+                    } else {
+                        $this->mensajeError = "Error en la importación.";
+                    }
+                    
+                    $this->mostrarResultados = true;
+                    $this->mostrarImpExp = true;
+                } else {
+                    $this->mensajeError = "Debe seleccionar un archivo CSV para importar.";
+                    $this->mostrarImpExp = true;
+                }
+            }
+        } else {
+            $this->mensajeError = 'Debe iniciar sesión para realizar esta acción.';
+        }
+    }
+    
+    /**
+     * Procesa la vista por defecto cuando no hay acción especificada
+     */
+    private function procesarVistaDefault() {
+        if ($this->usuarioLogueado) {
+            $this->mostrarLogin = false;
+            $this->mostrarRecursos = true;
+            
+            $recurso = new Recurso();
+            $this->recursos = $recurso->obtenerTodos();
+            
+            $categoria = new Categoria();
+            $this->categorias = $categoria->obtenerTodas();
+        }
     }
 }
+
+// Instanciar y procesar
+$sistema = new SistemaReservas();
+$sistema->procesarAcciones();
+
+// Extraer variables para usar en la vista
+$mostrarLogin = $sistema->mostrarLogin;
+$mostrarRegistro = $sistema->mostrarRegistro;
+$mostrarRecursos = $sistema->mostrarRecursos;
+$mostrarDetalle = $sistema->mostrarDetalle;
+$mostrarReservas = $sistema->mostrarReservas;
+$mostrarImpExp = $sistema->mostrarImpExp;
+$mensajeExito = $sistema->mensajeExito;
+$mensajeError = $sistema->mensajeError;
+$mostrarResultados = $sistema->mostrarResultados;
+$resultadoOperacion = $sistema->resultadoOperacion;
+$usuarioLogueado = $sistema->usuarioLogueado;
+$recursos = $sistema->recursos;
+$categorias = $sistema->categorias;
+$detalleRecurso = $sistema->detalleRecurso;
+$horarios = $sistema->horarios;
+$reservas = $sistema->reservas;
+$presupuestoTotal = $sistema->presupuestoTotal;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -426,7 +571,7 @@ if (isset($_GET['accion'])) {
                                 <option value="recursos_turisticos">Recursos Turísticos</option>
                                 <option value="horarios">Horarios</option>
                                 <option value="reservas">Reservas</option>
-                                <option value="">Múltiples tablas (desde datos_iniciales.csv)</option>
+                                <option value="">Múltiples tablas</option>
                             </select>
                         </p>
                         
@@ -589,17 +734,6 @@ if (isset($_GET['accion'])) {
             <h2>Mis reservas</h2>
             
             <?php if (count($reservas) > 0): ?>
-
-            <?php 
-            // Calcular el presupuesto total (suma de todas las reservas confirmadas)
-            $presupuestoTotal = 0;
-            foreach ($reservas as $reserva) {
-                if ($reserva['estado'] == 'confirmada') {
-                    $presupuestoTotal += $reserva['precio_total'];
-                }
-            }
-            ?>
-            
             <section>
                 <h3>Resumen del presupuesto</h3>
                 <p>Presupuesto total de actividades reservadas: <strong><?php echo number_format($presupuestoTotal, 2); ?>€</strong></p>
