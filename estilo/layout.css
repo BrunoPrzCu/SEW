@@ -55,24 +55,6 @@ table {
     display: block;
 }
 
-/* Estilos responsivos para la sección de meteorología */
-/* ==========================================================================
-   Media Queries - Agrupadas por tamaño de pantalla
-   ========================================================================== */
-
-/* Tablets y pantallas medianas (hasta 1024px) */
-@media screen and (max-width: 64em) { /* 1024px / 16px = 64em */
-    /* Tiempo actual en pantallas medianas */
-    section:nth-of-type(1) > section > section > section {
-        grid-template-columns: 1fr 1fr;
-        gap: 1em;
-    }
-    
-    section:nth-of-type(1) > section > section > section > section:first-child {
-        grid-column: 1 / -1;
-        justify-self: center;
-    }
-}
 
 /* Tablets pequeñas (hasta 768px) */
 @media screen and (max-width: 48em) { /* 768px / 16px = 48em */
@@ -223,11 +205,7 @@ table {
     main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(2) {
         grid-template-columns: 1fr;
     }
-}
 
-/* Móviles pequeños y medianos (hasta 480px) */
-@media screen and (max-width: 30em) { /* 480px / 16px = 30em */
-    /* Ajustes generales para móviles */
     body {
         font-size: 0.9rem; 
     }
@@ -297,8 +275,8 @@ table {
     section:nth-of-type(4) > section > article > figure {
         height: 11.25em; /* 180px */
     }
-
 }
+
 
 /* Tablets y pantallas medianas (769px - 1024px) */
 @media screen and (min-width: 48.0625em) and (max-width: 64em) { /* 769px-1024px / 16px */
@@ -390,66 +368,5 @@ table {
     
     header, footer {
         padding: 1.5em 1em;
-    }
-}
-
-/* Estilos para impresión */
-@media print {
-    body {
-        font-size: 12pt;
-        line-height: 1.3;
-        background: white;
-        color: black;
-    }
-    
-    nav {
-        display: none;
-    }
-    
-    header, footer {
-        background: white;
-        color: black;
-        text-align: center;
-    }
-    
-    main {
-        display: block;
-        width: 100%;
-    }
-    
-    a {
-        color: black;
-        text-decoration: underline;
-    }
-    
-    video, audio {
-        display: none;
-    }
-    
-    /* Se añade la URL junto al texto del enlace */
-    a::after {
-        content: " (" attr(href) ")";
-        font-size: 0.9em;
-    }
-    
-    /* Evitar que los enlaces a imágenes muestren la URL */
-    a[href^="multimedia"]::after {
-        content: "";
-    }
-
-    section {
-        background: white;
-        border: 1px solid #ddd;
-        margin-bottom: 1em;
-        page-break-inside: avoid;
-    }
-
-    th, td {
-        border-color: black;
-    }
-
-    th {
-        background: #eee;
-        color: black;
     }
 }
