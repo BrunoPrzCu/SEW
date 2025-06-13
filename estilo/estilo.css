@@ -1,8 +1,15 @@
+/* 
+* Hoja de estilo para San Martín del Rey Aurelio - Sitio web de turismo
+* Autor: UO295445
+* Fecha: 2025-06-13 15:27:02
+* Optimizado para accesibilidad AAA con formatos hexadecimales
+*/
+
 /* 0,0,0,1 */
 body {
     font-family: Arial, sans-serif;
-    /* Se establece un color de texto claro para garantizar contraste con el fondo oscuro */
-    color: #ffffff;
+    /* Color de texto oscuro sobre fondo claro para máximo contraste */
+    color: #121212;
     background-color: #ffffff;
     margin: 0;
     padding: 0;
@@ -11,12 +18,12 @@ body {
 }
 
 body > p:first-of-type {
-    color: #000000;
+    color: #121212;
     margin: 1em;
 }
 
 body > p:first-of-type > a:first-of-type {
-    color: #000000;
+    color: #0056b3;
 }
 
 body header > h1:first-of-type > a:first-of-type {
@@ -27,8 +34,8 @@ body header > h1:first-of-type > a:first-of-type {
 
 /* 0,0,0,1 */
 header {
-    /* El color blanco del texto hereda a los h1 y h2 dentro del header */
-    background-color: #1a3b4b;
+    /* Fondo oscuro con alto contraste respecto al texto blanco */
+    background-color: #0a304d;
     color: #ffffff;
     padding: 1em;
     text-align: center;
@@ -45,22 +52,19 @@ h1 {
 h2 {
     font-size: 1.5em;
     margin: 0.5em 0;
-    /* El h2 dentro de header hereda color:white, fuera de header hereda color:#f0f0f0 del body */
 }
 
 /* 0,0,0,1 */
 h3 {
     font-size: 1.3em;
     margin: 0.7em 0;
-    /* Hereda color:#f0f0f0 del body */
 }
 
 /* Estilos del menú de navegación */
 
 /* 0,0,0,1 */
 nav {
-    background-color: #0f2027;
-    /*Hereda color de primer plano de body*/
+    background-color: #031a2a;
 }
 
 /* 0,0,0,2 */
@@ -82,8 +86,7 @@ nav li {
 /* 0,0,0,2 */
 nav a {
     display: block;
-    /* Hereda color de fondo de nav */
-    color: white;
+    color: #ffffff;
     text-align: center;
     padding: 1em;
     text-decoration: none;
@@ -92,12 +95,12 @@ nav a {
 
 /* 0,0,1,1 */
 nav a:hover {
-    background-color: #2c5364; /*Hereda color de primer plano de nav*/
+    background-color: #1a5483;
 }
 
 /* 0,1,2 - Se permite el uso de class para el enlace activo */
 nav a.activo {
-    background-color: #2c5364; /*Hereda color de primer plano de nav*/
+    background-color: #1a5483;
     font-weight: bold;
 }
 
@@ -115,14 +118,15 @@ main {
 section {
     margin-bottom: 2em;
     padding: 1em; 
-    background-color: #1e1e1e; /*hereda color de fondo de body*/
+    background-color: #0d1d2a;
     border-radius: 4px;
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    color: #ffffff;
 }
 
 section:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 15px #00000033;
 }
 
 /* Secciones que ocupan todo el ancho */
@@ -141,7 +145,7 @@ main > section:nth-of-type(5) {
 /* 0,0,0,1 */
 p {
     margin: 0.8em 0;
-    /* Hereda color:#f0f0f0 del body */
+    /* Hereda color blanco de section */
 }
 
 /* Estilos para listas */
@@ -172,7 +176,7 @@ dl {
 dt {
     font-weight: bold;
     margin-top: 1em;
-    color: #4db6e5; /* Hereda color de fondo de body */
+    color: #56ccf2; /* Azul más claro para alto contraste */
 }
 
 /* 0,0,0,1 */
@@ -194,12 +198,12 @@ caption {
     padding: 0.5em;
     font-weight: bold;
     margin-bottom: 0.5em;
-    color: #4db6e5; /* Hereda color de fondo de body */
+    color: #56ccf2;
 }
 
 /* 0,0,0,1 */
 th {
-    background-color: #115879;
+    background-color: #0a4875;
     color: #ffffff;
     padding: 0.7em;
     text-align: left;
@@ -210,20 +214,18 @@ th {
 td {
     padding: 0.7em;
     border: 1px solid #444;
-    /* Hereda color:#f0f0f0 del body */
 }
 
 /* 0,0,0,2 */
 tbody tr:nth-child(even) {
-    background-color: #2a2a2a;
-    /* Hereda color:#f0f0f0 del body */
+    background-color: #1a2c3a;
 }
 
 /* Estilos para enlaces */
 
 /* 0,0,0,1 */
 a {
-    color: #4db6e5; /* Hereda color de fondo de body */
+    color: #56ccf2; /* Azul más claro para contraste */
     text-decoration: none;
 }
 
@@ -245,7 +247,7 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
-    border: 1px solid #444; /* Borde sutil para imágenes */
+    border: 1px solid #444;
 }
 
 /* 0,0,0,1 */
@@ -253,14 +255,14 @@ video {
     width: 100%;
     display: block;
     margin: 1em 0;
-    border: 1px solid #444; /* Borde sutil para videos */
+    border: 1px solid #444;
 }
 
 /* 0,0,0,1 */
 audio {
     width: 100%;
     margin: 1em 0;
-    background-color: #2a2a2a; /* Hereda color de primer plano de body */
+    background-color: #1a2c3a;
 }
 
 /* Estilos para elementos details y summary */
@@ -271,7 +273,7 @@ details {
     padding: 0.5em;
     border: 1px solid #444;
     border-radius: 4px;
-    background-color: #2a2a2a; /* Hereda color de primer plano de body */
+    background-color: #1a2c3a;
 }
 
 /* 0,0,0,1 */
@@ -279,7 +281,7 @@ summary {
     font-weight: bold;
     cursor: pointer;
     padding: 0.5em 0;
-    color: #4db6e5; /* Hereda color de fondo de body */
+    color: #56ccf2;
 }
 
 /* 0,0,1,1 */
@@ -297,9 +299,8 @@ details[open] summary {
 
 /* 0,0,0,1 */
 footer {
-    background-color: #1a3b4b;
-    /* Color blanco para asegurar contraste con fondo oscuro */
-    color: white;
+    background-color: #0a304d;
+    color: #ffffff;
     text-align: center;
     padding: 1em;
     margin-top: 2em;
@@ -309,12 +310,11 @@ footer {
 /* 0,0,0,2 */
 footer p {
     margin: 0.5em 0;
-    /* Hereda color:white del footer, no del body */
 }
 
 /* Estilos para la sección de meteorología */
 section:nth-of-type(1) > section > section {
-    background-color: #22303c;
+    background-color: #0e3047;
     border-radius: 8px;
     padding: 1.5em;
     margin-top: 1em;
@@ -351,8 +351,6 @@ section:nth-of-type(1) > section > section > section > section:nth-child(2) p:fi
     margin: 0;
 }
 
-
-
 /* Estilos para la previsión de 7 días */
 section:nth-of-type(3) > section > ul {
     display: grid;
@@ -364,7 +362,7 @@ section:nth-of-type(3) > section > ul {
 }
 
 section:nth-of-type(3) > section > ul > li {
-    background-color: #22303c;
+    background-color: #0e3047;
     border-radius: 8px;
     padding: 1em;
     text-align: center;
@@ -373,13 +371,13 @@ section:nth-of-type(3) > section > ul > li {
 
 section:nth-of-type(3) > section > ul > li:hover {
     transform: translateY(-0.3125em);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px #00000033;
 }
 
 section:nth-of-type(3) > section > ul > li > p:first-of-type {
     font-weight: bold;
     margin-bottom: 0.5em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid #ffffff4D;
     padding-bottom: 0.5em;
 }
 
@@ -398,7 +396,6 @@ section:nth-of-type(3) > section > ul > li figure figcaption {
     font-size: 0.9em;
     margin-top: 0.3em;
 }
-
 
 /* Estilos para el carrusel */
 section:nth-of-type(2) > section {
@@ -447,8 +444,8 @@ section:nth-of-type(2) > section > section > figure > figcaption {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
+    background: #000000D9; /* Fondo más oscuro para mayor contraste */
+    color: #ffffff;
     padding: 1em;
     margin: 0;
 }
@@ -457,8 +454,8 @@ section:nth-of-type(2) > section > button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
+    background: #000000B3; /* Más oscuro para mayor contraste */
+    color: #ffffff;
     border: none;
     width: 2.5em;
     height: 2.5em;
@@ -481,7 +478,7 @@ section:nth-of-type(2) > section > button:nth-of-type(2) {
 }
 
 section:nth-of-type(2) > section > button:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: #000000E6;
 }
 
 section:nth-of-type(2) > section > menu {
@@ -502,7 +499,7 @@ section:nth-of-type(2) > section > menu > li > button {
     width: 0.75em;
     height: 0.75em;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
+    background: #ffffffB3; /* Más opaco para contraste */
     border: none;
     cursor: pointer;
     padding: 0;
@@ -510,13 +507,12 @@ section:nth-of-type(2) > section > menu > li > button {
 
 section:nth-of-type(2) > section > menu > li > button:hover,
 section:nth-of-type(2) > section > menu > li > button.activo {
-    background: white;
+    background: #ffffff;
 }
 
 section:nth-of-type(2) > section > section > h4 {
     font-size: 0%;
 }
-
 
 /* Estilos para la sección de destacados */
 section:nth-of-type(3) > ul {
@@ -529,9 +525,9 @@ section:nth-of-type(3) > ul {
 
 section:nth-of-type(3) > ul > li {
     padding: 1.5em;
-    background-color: #1e1e1e;
+    background-color: #0d1d2a;
     border-radius: 0.5em;
-    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25em 0.5em #0000001A;
     transition: transform 0.3s;
 }
 
@@ -542,7 +538,7 @@ section:nth-of-type(3) > ul > li:hover {
 section:nth-of-type(3) > ul > li > h3 {
     margin-top: 0;
     margin-bottom: 0.8em;
-    color: #4db6e5;
+    color: #56ccf2;
 }
 
 /* Sección de noticias */
@@ -555,7 +551,7 @@ section:nth-of-type(4) > h2::after {
     display: block;
     width: 5em;
     height: 0.1875em;
-    background-color: #2c5364;
+    background-color: #1a5483;
     margin: 0.625em auto 1.25em;
 }
 
@@ -582,14 +578,14 @@ section:nth-of-type(4) > section > article {
     height: 100%;
     border-radius: 0.5em;
     overflow: hidden;
-    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25em 0.5em #0000001A;
     transition: transform 0.3s, box-shadow 0.3s;
-    background-color: #1e1e1e;
+    background-color: #0d1d2a;
 }
 
 section:nth-of-type(4) > section > article:hover {
     transform: translateY(-0.3125em);
-    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.5em 1em #00000033;
 }
 
 section:nth-of-type(4) > section > article > figure {
@@ -606,7 +602,6 @@ section:nth-of-type(4) > section > article > figure > img {
     margin: 0;
     border: none;
 }
-
 
 section:nth-of-type(4) > section > article > figure > span {
     font-style: italic;
@@ -627,7 +622,7 @@ section:nth-of-type(4) > section > article > section > header {
     justify-content: space-between;
     margin-bottom: 0.8em;
     font-size: 0.9em;
-    color: #cccccc;
+    color: #e0e0e0; /* Más claro para contraste */
     background: none;
     padding: 0;
 }
@@ -639,13 +634,13 @@ section:nth-of-type(4) > section > article > section > h3 {
 }
 
 section:nth-of-type(4) > section > article > section > h3 > a {
-    color: #4db6e5;
+    color: #56ccf2;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 section:nth-of-type(4) > section > article > section > h3 > a:hover {
-    color: #7ecef5;
+    color: #89daff;
 }
 
 section:nth-of-type(4) > section > article > section > p {
@@ -658,8 +653,8 @@ section:nth-of-type(4) > section > article > section > p {
 section:nth-of-type(4) > section > article > section > a {
     align-self: flex-start;
     padding: 0.5em 1em;
-    background-color: #2c5364;
-    color: white;
+    background-color: #1a5483;
+    color: #ffffff;
     text-decoration: none;
     border-radius: 0.25em;
     transition: background-color 0.3s;
@@ -667,7 +662,7 @@ section:nth-of-type(4) > section > article > section > a {
 }
 
 section:nth-of-type(4) > section > article > section > a:hover {
-    background-color: #203a43;
+    background-color: #2673b4;
     text-decoration: none;
 }
 
@@ -682,15 +677,15 @@ section:nth-of-type(5) > ul {
 
 section:nth-of-type(5) > ul > li {
     padding: 1.5em;
-    background-color: #1e1e1e;
+    background-color: #0d1d2a;
     border-radius: 0.5em;
-    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25em 0.5em #0000001A;
 }
 
 section:nth-of-type(5) > ul > li > h3 {
     margin-top: 0;
     margin-bottom: 1em;
-    color: #4db6e5;
+    color: #56ccf2;
 }
 
 section:nth-of-type(5) > ul > li > p {
@@ -702,7 +697,7 @@ section:nth-of-type(5) > ul > li:nth-child(3) {
     grid-column: 1 / -1;
     border-radius: 0.5em;
     overflow: hidden;
-    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25em 0.5em #0000001A;
     padding: 0;
 }
 
@@ -739,8 +734,8 @@ section:nth-of-type(5) > ul > li:nth-child(3) > figure > figcaption {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
+    background: #000000D9; /* Más oscuro para contraste */
+    color: #ffffff;
     padding: 0.5em;
     font-size: 0.9em;
     text-align: center;
@@ -752,7 +747,6 @@ section:nth-of-type(5) > ul > li:nth-child(3) > figure:hover > figcaption {
     transform: translateY(0);
 }
 
-
 /* Estilos específicos para el juego */
 main > section:first-child > section:nth-of-type(2) {
     background: none;
@@ -761,7 +755,7 @@ main > section:first-child > section:nth-of-type(2) {
 }
 
 main > section:first-child > section:nth-of-type(2) > section {
-    background-color: #22303c;
+    background-color: #0e3047;
     border-radius: 8px;
     padding: 2em;
     margin: 0;
@@ -776,8 +770,8 @@ main > section:first-child > section:nth-of-type(2) > section > img {
 }
 
 main > section:first-child > section:nth-of-type(2) > section > button {
-    background-color: #2c5364;
-    color: white;
+    background-color: #1a5483;
+    color: #ffffff;
     border: none;
     border-radius: 4px;
     padding: 0.8em 1.5em;
@@ -788,13 +782,13 @@ main > section:first-child > section:nth-of-type(2) > section > button {
 }
 
 main > section:first-child > section:nth-of-type(2) > section > button:hover {
-    background-color: #3a7896;
+    background-color: #2673b4;
 }
 
 main > section:first-child > section:nth-of-type(2) > section > h3 {
     font-size: 1.4em;
     margin-bottom: 1em;
-    color: #4db6e5;
+    color: #56ccf2;
 }
 
 main > section:first-child > section:nth-of-type(2) > section > ol {
@@ -816,7 +810,7 @@ main > section:first-child > section:nth-of-type(2) > section > ol > li > label 
 }
 
 main > section:first-child > section:nth-of-type(2) > section > ol > li > label:hover {
-    background-color: #2a3c4d;
+    background-color: #144260;
 }
 
 main > section:first-child > section:nth-of-type(2) > section > ol > li > label > input {
@@ -854,8 +848,8 @@ main > section:nth-of-type(3) > ul > li {
 }
 
 main > section:nth-of-type(3) > ul > li > button {
-    background-color: #22303c;
-    color: white;
+    background-color: #0e3047;
+    color: #ffffff;
     border: none;
     border-radius: 4px;
     padding: 0.8em 1.5em;
@@ -865,13 +859,13 @@ main > section:nth-of-type(3) > ul > li > button {
 }
 
 main > section:nth-of-type(3) > ul > li > button:hover {
-    background-color: #2c5364;
+    background-color: #1a5483;
     transform: translateY(-0.2em);
 }
 
 /* Sección de información de ruta */
 main > section:nth-of-type(4) > section {
-    background-color: #22303c;
+    background-color: #0e3047;
     border-radius: 8px;
     padding: 1.5em;
     margin: 1em 0;
@@ -887,7 +881,7 @@ main > section:nth-of-type(4) > section > ul {
 
 main > section:nth-of-type(4) > section > ul > li {
     padding: 0.5em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid #ffffff4D; /* Más visible para contraste */
 }
 
 main > section:nth-of-type(4) > section:nth-of-type(2) {
@@ -897,7 +891,7 @@ main > section:nth-of-type(4) > section:nth-of-type(2) {
 /* Enlaces en la sección de referencias */
 main > section:nth-of-type(4) > section > h4 {
     margin-top: 1.5em;
-    color: #4db6e5;
+    color: #56ccf2;
 }
 
 /* Tabla de hitos */
@@ -908,8 +902,8 @@ main > section:nth-of-type(4) > section:nth-of-type(2) table {
 }
 
 main > section:nth-of-type(4) > section:nth-of-type(2) table th {
-    background-color: #2c5364;
-    color: white;
+    background-color: #1a5483;
+    color: #ffffff;
     padding: 0.8em;
     text-align: left;
     border: 1px solid #444;
@@ -922,7 +916,7 @@ main > section:nth-of-type(4) > section:nth-of-type(2) table td {
 }
 
 main > section:nth-of-type(4) > section:nth-of-type(2) table tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: #ffffff1A; /* Más visible para contraste */
 }
 
 /* Imágenes en tabla */
@@ -946,9 +940,8 @@ main > section:nth-of-type(4) > section:nth-of-type(2) table img:hover {
 main > section:nth-of-type(4) > section:nth-of-type(2) table figcaption {
     font-size: 0.8em;
     margin-top: 0.3em;
-    color: #4db6e5;
+    color: #56ccf2;
 }
-
 
 /* Contenedor del mapa */
 main > section:nth-of-type(5) > section > section {
@@ -967,7 +960,7 @@ main > section:nth-of-type(6) > section > section {
     border: 1px solid #444;
     border-radius: 4px;
     padding: 1em;
-    background-color: #22303c;
+    background-color: #0e3047;
 }
 
 /* Estilos para SVG en altimetría */
