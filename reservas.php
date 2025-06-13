@@ -431,7 +431,7 @@ $presupuestoTotal = $sistema->presupuestoTotal;
 </head>
 <body>
     <header>
-        <h1>San Martín del Rey Aurelio</h1>
+        <h1> <a href="index.html"> San Martín del Rey Aurelio</a></h1>
         <h2>Reservas</h2>
     </header>
 
@@ -446,6 +446,8 @@ $presupuestoTotal = $sistema->presupuestoTotal;
             <li><a href="ayuda.html">Ayuda</a></li>
         </ul>
     </nav>
+
+    <p>Estás en: <a href="index.html"> Inicio</a> >> Reservas</p>
 
     <main>
         <section>

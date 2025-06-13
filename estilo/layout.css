@@ -1,8 +1,8 @@
 /* 
 * Hoja de estilo de layout para San Martín del Rey Aurelio - Sitio web de turismo
 * Autor: UO295445
-* Fecha: 2025-06-13 08:50:52
-* Actualizado para eliminar advertencias de redefinición
+* Fecha: 2025-06-13 13:45:23
+* Actualizado para indicar redefiniciones en media queries
 */
 
 /* Diseño base - Aplicable a todos los tamaños */
@@ -66,7 +66,7 @@ table {
 @media screen and (max-width: 48em) { /* 768px / 16px = 48em */
     /* Estructura general */
     main {
-        grid-template-columns: 1fr; /* Una sola columna para tablets pequeñas */
+        grid-template-columns: 1fr; /* Redefinición intencionada por media query - Una sola columna para tablets pequeñas */
     }
     
     /* Navegación */
@@ -80,19 +80,19 @@ table {
     
     /* Tiempo actual en tablets pequeñas */
     section:nth-of-type(1) > section > section > section {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Redefinición intencionada por media query */
     }
     
     /* Previsión en formato vertical para tablets y móviles */
     section:nth-of-type(2) > section > ul {
         display: grid;
-        grid-template-columns: 1fr; /* Una columna para formato vertical */
+        grid-template-columns: 1fr; /* Redefinición intencionada por media query - Una columna para formato vertical */
         column-gap: 0.8em;
         row-gap: 0.8em;
     }
     
     section:nth-of-type(2) > section {
-        height: 18.75em; /* 300px */
+        height: 18.75em; /* Redefinición intencionada por media query - 300px */
     }
     
     /* Tarjetas de previsión en formato horizontal compacto */
@@ -128,12 +128,12 @@ table {
     }
     
     section:nth-of-type(2) > section > ul > li figure img {
-        width: 3.5em;
-        height: 3.5em;
+        width: 3.5em; /* Redefinición intencionada por media query */
+        height: 3.5em; /* Redefinición intencionada por media query */
     }
     
     section:nth-of-type(2) > section > ul > li figure figcaption {
-        font-size: 0.8em;
+        font-size: 0.8em; /* Redefinición intencionada por media query */
         text-align: center;
         margin-top: 0.3em;
     }
@@ -144,7 +144,7 @@ table {
     }
     
     main > section:first-child > section:nth-of-type(2) > section > img {
-        max-width: 100%;
+        max-width: 100%; /* Redefinición intencionada por media query */
     }
     
     main > section:first-child > section:nth-of-type(2) > section > section {
@@ -162,7 +162,7 @@ table {
     section:nth-of-type(3) > section > ul,
     section:nth-of-type(5) > ul,
     main > section:nth-of-type(4) > section > ul {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Redefinición intencionada por media query */
     }
     
     section:nth-of-type(3) > section > ul > li {
@@ -199,83 +199,83 @@ table {
     }
     
     main > section:nth-of-type(4) > section:nth-of-type(2) table {
-        display: block;
+        display: block; /* Redefinición intencionada por media query */
         overflow-x: auto;
     }
     
     /* Altura del mapa en móviles */
     main > section:nth-of-type(5) > section > section {
-        height: 18.75em;
+        height: 18.75em; /* Redefinición intencionada por media query */
     }
 
     main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(1) {
-        grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(8em, 1fr)); /* Redefinición intencionada por media query */
     }
     
     main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(2) {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Redefinición intencionada por media query */
     }
 
     body {
-        font-size: 0.9rem; 
+        font-size: 0.9rem; /* Redefinición intencionada por media query */
     }
     
     main {
         padding: 0.5em;
         max-width: 95%; 
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr; /* Redefinición intencionada por media query */
     }
     
     section {
-        padding: 0.5em; 
+        padding: 0.5em; /* Redefinición intencionada por media query */
     }
     
     h1 {
-        font-size: 1.8em;
+        font-size: 1.8em; /* Redefinición intencionada por media query */
     }
     
     h2 {
-        font-size: 1.3em;
+        font-size: 1.3em; /* Redefinición intencionada por media query */
     }
     
     /* Navegación en móviles */
     nav ul {
-        flex-direction: column;
+        flex-direction: column; /* Redefinición intencionada por media query */
     }
     
     nav li {
-        width: 100%;
+        width: 100%; /* Redefinición intencionada por media query */
     }
     
     /* Tiempo actual en móviles */
     section:nth-of-type(1) > section > section > section {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Redefinición intencionada por media query */
     }
     
     /* Ajustes adicionales para previsión en móviles pequeños */
     section:nth-of-type(2) > section > ul > li > p:first-of-type {
-        font-size: 1.1em;
+        font-size: 1.1em; /* Redefinición intencionada por media query */
     }
     
     section:nth-of-type(2) > section > ul > li figure img {
-        width: 3em;
-        height: 3em;
+        width: 3em; /* Redefinición intencionada por media query */
+        height: 3em; /* Redefinición intencionada por media query */
     }
 
     section:nth-of-type(2) > section {
-        height: 15.625em; /* 250px */
+        height: 15.625em; /* Redefinición intencionada por media query - 250px */
     }
     
     section:nth-of-type(2) > section > section > figure > figcaption {
         padding: 0.5em;
-        font-size: 0.9em;
+        font-size: 0.9em; /* Redefinición intencionada por media query */
     }
 
     section:nth-of-type(2) > section > button:nth-of-type(1),
     section:nth-of-type(2) > section > button:nth-of-type(2) {
         width: 1.875em; /* 30px */
         height: 1.875em; /* 30px */
-        font-size: 1.2em;
+        font-size: 1.2em; /* Redefinición intencionada por media query */
     }
 
     section:nth-of-type(2) > section > menu {
@@ -283,7 +283,7 @@ table {
     }
     
     section:nth-of-type(4) > section > article > figure {
-        height: 11.25em; /* 180px */
+        height: 11.25em; /* Redefinición intencionada por media query - 180px */
     }
 }
 
@@ -291,45 +291,45 @@ table {
 /* Tablets y pantallas medianas (769px - 1024px) */
 @media screen and (min-width: 48.0625em) and (max-width: 64em) { /* 769px-1024px / 16px */
     body {
-        font-size: 1rem;
+        font-size: 1rem; /* Redefinición intencionada por media query */
     }
     
     nav li {
-        flex-grow: 1;
-        flex-shrink: 1;
-        flex-basis: auto;
+        flex-grow: 1; /* Redefinición intencionada por media query */
+        flex-shrink: 1; /* Redefinición intencionada por media query */
+        flex-basis: auto; /* Redefinición intencionada por media query */
     }
     
     main {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Diseño de dos columnas para tablets */
-        column-gap: 2em;
-        row-gap: 2em;
+        display: grid; /* Redefinición intencionada por media query */
+        grid-template-columns: repeat(2, 1fr); /* Redefinición intencionada por media query - Diseño de dos columnas para tablets */
+        column-gap: 2em; /* Redefinición intencionada por media query */
+        row-gap: 2em; /* Redefinición intencionada por media query */
     }
     
     /* Selector para hacer que algunas secciones ocupen todo el ancho */
     section:nth-child(1), 
     section:nth-child(4), 
     section:nth-child(7) {
-        grid-column-start: 1;
-        grid-column-end: -1;
+        grid-column-start: 1; /* Redefinición intencionada por media query */
+        grid-column-end: -1; /* Redefinición intencionada por media query */
     }
 }
 
 /* Pantallas grandes (1025px - 1200px) */
 @media screen and (min-width: 64.0625em) and (max-width: 75em) { /* 1025px-1200px / 16px */
     body {
-        font-size: 1.05rem;
+        font-size: 1.05rem; /* Redefinición intencionada por media query */
     }
     
     nav li {
-        flex-grow: 1;
-        flex-shrink: 1;
-        flex-basis: auto;
+        flex-grow: 1; /* Redefinición intencionada por media query */
+        flex-shrink: 1; /* Redefinición intencionada por media query */
+        flex-basis: auto; /* Redefinición intencionada por media query */
     }
     
     main {
-        grid-template-columns: repeat(2, 1fr); /* Mantenemos dos columnas para pantallas grandes */
+        grid-template-columns: repeat(2, 1fr); /* Redefinición intencionada por media query - Mantenemos dos columnas para pantallas grandes */
         /* Reemplazado grid-auto-flow: dense; con posicionamiento explícito */
         grid-auto-rows: min-content; /* Importante: cada fila solo tiene la altura necesaria */
     }
@@ -337,60 +337,60 @@ table {
     /* Secciones destacadas que ocupen todo el ancho */
     section:nth-child(1),
     section:nth-child(7) {
-        grid-column-start: 1;
-        grid-column-end: -1;
+        grid-column-start: 1; /* Redefinición intencionada por media query */
+        grid-column-end: -1; /* Redefinición intencionada por media query */
     }
     
     /* Secciones con tablas ocupan todo el ancho */
     section:has(table) {
-        grid-column-start: 1;
-        grid-column-end: -1;
+        grid-column-start: 1; /* Redefinición intencionada por media query */
+        grid-column-end: -1; /* Redefinición intencionada por media query */
     }
 }
 
 /* Pantallas muy grandes (más de 1200px) */
 @media screen and (min-width: 75.0625em) { /* >1200px / 16px */
     body {
-        font-size: 1.1rem;
+        font-size: 1.1rem; /* Redefinición intencionada por media query */
     }
     
     nav li {
-        flex-grow: 1;
-        flex-shrink: 1;
-        flex-basis: auto;
+        flex-grow: 1; /* Redefinición intencionada por media query */
+        flex-shrink: 1; /* Redefinición intencionada por media query */
+        flex-basis: auto; /* Redefinición intencionada por media query */
     }
     
     /* Para pantallas muy anchas, utilizamos un layout mixto */
     main {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Tres columnas para pantallas grandes */
+        display: grid; /* Redefinición intencionada por media query */
+        grid-template-columns: repeat(3, 1fr); /* Redefinición intencionada por media query - Tres columnas para pantallas grandes */
         /* Eliminado grid-auto-flow: dense; para evitar redefiniciones */
         grid-auto-rows: min-content; /* Cada fila solo tiene la altura necesaria */
-        column-gap: 2em;
-        row-gap: 2em;
+        column-gap: 2em; /* Redefinición intencionada por media query */
+        row-gap: 2em; /* Redefinición intencionada por media query */
     }
     
     /* Secciones principales ocupan más espacio */
     section:nth-child(1) {
-        grid-column-start: 1;
-        grid-column-end: -1;
+        grid-column-start: 1; /* Redefinición intencionada por media query */
+        grid-column-end: -1; /* Redefinición intencionada por media query */
     }
     
     /* Secciones con tablas o contenido más extenso */
     section:has(table),
     section:has(dl) {
-        grid-column-start: auto;
-        grid-column-end: span 2;
+        grid-column-start: auto; /* Redefinición intencionada por media query */
+        grid-column-end: span 2; /* Redefinición intencionada por media query */
     }
     
     /* Secciones con multimedia */
     section:has(video),
     section:has(audio) {
-        grid-column-start: 1;
-        grid-column-end: -1;
+        grid-column-start: 1; /* Redefinición intencionada por media query */
+        grid-column-end: -1; /* Redefinición intencionada por media query */
     }
     
     header, footer {
-        padding: 1.5em 1em;
+        padding: 1.5em 1em; /* Redefinición intencionada por media query */
     }
 }
