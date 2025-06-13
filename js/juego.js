@@ -241,21 +241,27 @@ class JuegoPreguntas {
         pregunta.opciones.forEach((opcion, idx) => {
             const elementoLista = document.createElement('li');
             
-            const labelOpcion = document.createElement('label');
+            // Crear un ID único para cada input
+            const inputId = `pregunta${indice}_opcion${idx}`;
             
+            // Crear el input primero
             const inputOpcion = document.createElement('input');
             inputOpcion.type = 'radio';
             inputOpcion.name = `pregunta${indice}`;
             inputOpcion.value = idx;
+            inputOpcion.id = inputId; // Asignar el ID único
             
-            // Si el usuario ya ha respondido esta pregunta, marcar la opción seleccionada
             if (this.respuestasUsuario[indice] === idx) {
                 inputOpcion.checked = true;
             }
             
-            labelOpcion.appendChild(inputOpcion);
-            labelOpcion.appendChild(document.createTextNode(` ${opcion}`));
+            // Crear la etiqueta con la referencia al input
+            const labelOpcion = document.createElement('label');
+            labelOpcion.htmlFor = inputId; // Conectar la etiqueta con el input mediante for
+            labelOpcion.textContent = opcion; // Usar textContent en lugar de appendChild
             
+            // Añadir los elementos a la lista
+            elementoLista.appendChild(inputOpcion);
             elementoLista.appendChild(labelOpcion);
             listaOpciones.appendChild(elementoLista);
         });
