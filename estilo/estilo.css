@@ -10,7 +10,7 @@ body {
     font-family: Arial, sans-serif;
     /* Color de texto oscuro sobre fondo claro para máximo contraste */
     color: #121212;
-    background-color: #ffffff;
+    background-color: #A8A8A8;
     margin: 0;
     padding: 0;
     font-size: 1rem;
@@ -18,12 +18,12 @@ body {
 }
 
 body > p:first-of-type {
-    color: #121212;
+    color: #1C1C1C;
     margin: 1em;
 }
 
 body > p:first-of-type > a:first-of-type {
-    color: #0056b3;
+    color: #121212;
 }
 
 body header > h1:first-of-type > a:first-of-type {
@@ -93,10 +93,6 @@ nav a {
     transition: background-color 0.3s;
 }
 
-/* 0,0,1,1 */
-nav a:hover {
-    background-color: #1a5483;
-}
 
 /* 0,1,2 - Se permite el uso de class para el enlace activo */
 nav a.activo {
@@ -203,8 +199,8 @@ caption {
 
 /* 0,0,0,1 */
 th {
-    background-color: #0a4875;
-    color: #ffffff;
+    background-color: #D1D1D1;
+    color: #3D3D3D;
     padding: 0.7em;
     text-align: left;
     border: 1px solid #444;
@@ -314,7 +310,6 @@ footer p {
 
 /* Estilos para la sección de meteorología */
 section:nth-of-type(1) > section > section {
-    background-color: #0e3047;
     border-radius: 8px;
     padding: 1.5em;
     margin-top: 1em;
@@ -351,6 +346,14 @@ section:nth-of-type(1) > section > section > section > section:nth-child(2) p:fi
     margin: 0;
 }
 
+main > section:nth-of-type(2) > nav > ul {
+    background-color: #D1D1D1;
+}
+
+main > section:nth-of-type(2) > nav > ul > li > a {
+    color: #3D3D3D;
+}
+
 /* Estilos para la previsión de 7 días */
 section:nth-of-type(3) > section > ul {
     display: grid;
@@ -362,11 +365,16 @@ section:nth-of-type(3) > section > ul {
 }
 
 section:nth-of-type(3) > section > ul > li {
-    background-color: #0e3047;
+    background-color: #D1D1D1;
+    color: #3D3D3D;
     border-radius: 8px;
     padding: 1em;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
+}
+
+section:nth-of-type(3) > section > ul > li > a {
+    color: #3D3D3D;
 }
 
 section:nth-of-type(3) > section > ul > li:hover {
@@ -662,7 +670,6 @@ section:nth-of-type(4) > section > article > section > a {
 }
 
 section:nth-of-type(4) > section > article > section > a:hover {
-    background-color: #2673b4;
     text-decoration: none;
 }
 
@@ -848,8 +855,8 @@ main > section:nth-of-type(3) > ul > li {
 }
 
 main > section:nth-of-type(3) > ul > li > button {
-    background-color: #0e3047;
-    color: #ffffff;
+    background-color: #D1D1D1;
+    color: #3D3D3D;
     border: none;
     border-radius: 4px;
     padding: 0.8em 1.5em;
@@ -865,7 +872,6 @@ main > section:nth-of-type(3) > ul > li > button:hover {
 
 /* Sección de información de ruta */
 main > section:nth-of-type(4) > section {
-    background-color: #0e3047;
     border-radius: 8px;
     padding: 1.5em;
     margin: 1em 0;
@@ -902,8 +908,8 @@ main > section:nth-of-type(4) > section:nth-of-type(2) table {
 }
 
 main > section:nth-of-type(4) > section:nth-of-type(2) table th {
-    background-color: #1a5483;
-    color: #ffffff;
+    background-color: #D1D1D1;
+    color: #3D3D3D;
     padding: 0.8em;
     text-align: left;
     border: 1px solid #444;
@@ -960,7 +966,6 @@ main > section:nth-of-type(6) > section > section {
     border: 1px solid #444;
     border-radius: 4px;
     padding: 1em;
-    background-color: #0e3047;
 }
 
 /* Estilos para SVG en altimetría */
