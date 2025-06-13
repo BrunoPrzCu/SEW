@@ -1,7 +1,8 @@
 /* 
 * Hoja de estilo de layout para San Martín del Rey Aurelio - Sitio web de turismo
 * Autor: UO295445
-* Fecha: 2025-06-03 12:34:43
+* Fecha: 2025-06-13 08:50:52
+* Actualizado para eliminar advertencias de redefinición
 */
 
 /* Diseño base - Aplicable a todos los tamaños */
@@ -15,10 +16,13 @@ body {
 
 /* 0,0,0,1 */
 main {
-    flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
     /* Se utiliza CSS Grid para la disposición principal de contenidos */
     grid-template-columns: 1fr;
-    gap: 1em;
+    column-gap: 1em;
+    row-gap: 1em;
     margin: 0 auto;
 }
 
@@ -56,6 +60,8 @@ table {
 }
 
 
+
+
 /* Tablets pequeñas (hasta 768px) */
 @media screen and (max-width: 48em) { /* 768px / 16px = 48em */
     /* Estructura general */
@@ -81,7 +87,8 @@ table {
     section:nth-of-type(2) > section > ul {
         display: grid;
         grid-template-columns: 1fr; /* Una columna para formato vertical */
-        gap: 0.8em;
+        column-gap: 0.8em;
+        row-gap: 0.8em;
     }
     
     section:nth-of-type(2) > section {
@@ -93,14 +100,16 @@ table {
         display: grid;
         grid-template-columns: auto 1fr;
         grid-template-rows: auto auto auto;
-        gap: 0.5em;
+        column-gap: 0.5em;
+        row-gap: 0.5em;
         align-items: center;
         text-align: left;
         padding: 1em;
     }
     
     section:nth-of-type(2) > section > ul > li > p:first-of-type {
-        grid-column: 1 / -1;
+        grid-column-start: 1;
+        grid-column-end: -1;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         padding-bottom: 0.5em;
         margin-bottom: 0.5em;
@@ -109,7 +118,8 @@ table {
     }
     
     section:nth-of-type(2) > section > ul > li figure {
-        grid-row: 2 / 5;
+        grid-row-start: 2;
+        grid-row-end: 5;
         margin: 0;
         padding-right: 1em;
         display: flex;
@@ -160,24 +170,24 @@ table {
         grid-template-columns: auto 1fr;
         grid-template-rows: auto auto auto;
         text-align: left;
-        gap: 0.5em;
+        column-gap: 0.5em;
+        row-gap: 0.5em;
         align-items: center;
     }
     
     section:nth-of-type(3) > section > ul > li > p:first-of-type {
-        grid-column: 1 / -1;
+        grid-column-start: 1;
+        grid-column-end: -1;
         text-align: center;
     }
     
     section:nth-of-type(3) > section > ul > li figure {
-        grid-row: 2 / 5;
+        grid-row-start: 2;
+        grid-row-end: 5;
         margin: 0;
         padding-right: 0.8em;
     }
     
-    section:nth-of-type(4) > section {
-        grid-template-columns: 1fr;
-    }
     
     /* Sección de rutas y contenido relacionado */
     main > section:nth-of-type(3) > ul {
@@ -285,20 +295,24 @@ table {
     }
     
     nav li {
-        flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
     }
     
     main {
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* Diseño de dos columnas para tablets */
-        gap: 2em;
+        column-gap: 2em;
+        row-gap: 2em;
     }
     
     /* Selector para hacer que algunas secciones ocupen todo el ancho */
     section:nth-child(1), 
     section:nth-child(4), 
     section:nth-child(7) {
-        grid-column: 1 / -1;
+        grid-column-start: 1;
+        grid-column-end: -1;
     }
 }
 
@@ -309,24 +323,28 @@ table {
     }
     
     nav li {
-        flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
     }
     
     main {
         grid-template-columns: repeat(2, 1fr); /* Mantenemos dos columnas para pantallas grandes */
-        grid-auto-flow: dense; /* Permite que los elementos se distribuyan de forma óptima */
+        /* Reemplazado grid-auto-flow: dense; con posicionamiento explícito */
         grid-auto-rows: min-content; /* Importante: cada fila solo tiene la altura necesaria */
     }
     
     /* Secciones destacadas que ocupen todo el ancho */
     section:nth-child(1),
     section:nth-child(7) {
-        grid-column: 1 / -1;
+        grid-column-start: 1;
+        grid-column-end: -1;
     }
     
     /* Secciones con tablas ocupan todo el ancho */
     section:has(table) {
-        grid-column: 1 / -1;
+        grid-column-start: 1;
+        grid-column-end: -1;
     }
 }
 
@@ -337,33 +355,39 @@ table {
     }
     
     nav li {
-        flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
     }
     
     /* Para pantallas muy anchas, utilizamos un layout mixto */
     main {
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* Tres columnas para pantallas grandes */
-        grid-auto-flow: dense; /* Mejor distribución de elementos */
+        /* Eliminado grid-auto-flow: dense; para evitar redefiniciones */
         grid-auto-rows: min-content; /* Cada fila solo tiene la altura necesaria */
-        gap: 2em;
+        column-gap: 2em;
+        row-gap: 2em;
     }
     
     /* Secciones principales ocupan más espacio */
     section:nth-child(1) {
-        grid-column: 1 / -1;
+        grid-column-start: 1;
+        grid-column-end: -1;
     }
     
     /* Secciones con tablas o contenido más extenso */
     section:has(table),
     section:has(dl) {
-        grid-column: span 2;
+        grid-column-start: auto;
+        grid-column-end: span 2;
     }
     
     /* Secciones con multimedia */
     section:has(video),
     section:has(audio) {
-        grid-column: 1 / -1;
+        grid-column-start: 1;
+        grid-column-end: -1;
     }
     
     header, footer {
