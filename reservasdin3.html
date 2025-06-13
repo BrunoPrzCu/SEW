@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de reservas turísticas en San Martín del Rey Aurelio, Asturias">
+    <meta name="keywords" content="reservas, alojamiento, hoteles, turismo rural, San Martín del Rey Aurelio, vacaciones, escapada, Asturias">
+    <meta name="author" content="Bruno Pérez Cuervo">
+    <title>Reservas - San Martín del Rey Aurelio</title>
+    <link rel="icon" href="multimedia/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
+    <link rel="stylesheet" type="text/css" href="estilo/layout.css">
+</head>
+<body>
+    <header>
+        <h1>San Martín del Rey Aurelio</h1>
+        <h2>Reservas</h2>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Página principal</a></li>
+            <li><a href="gastronomia.html">Gastronomía</a></li>
+            <li><a href="rutas.html">Rutas</a></li>
+            <li><a href="meteorologia.html">Meteorología</a></li>
+            <li><a href="juego.html">Juego</a></li>
+            <li><a href="reservas.php" class="activo">Reservas</a></li>
+            <li><a href="ayuda.html">Ayuda</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Sistema de reservas</h2>
+            <p>Utiliza nuestro sistema para realizar reservas en alojamientos, restaurantes y experiencias turísticas de San Martín del Rey Aurelio.</p>
+            <p>Garantiza tu plaza en los mejores establecimientos y actividades del concejo.</p>
+            
+                        
+                    </section>
+        
+                
+                
+                <section>
+            <h2>Registro de usuario</h2>
+            <form action="reservas.php?accion=registro" method="post">
+                <fieldset>
+                    <legend>Datos de registro</legend>
+                    
+                    <p>
+                        <label for="nombre">Nombre completo:</label>
+                        <input type="text" id="nombre" name="nombre" minlength="3" required="">
+                    </p>
+                    
+                    <p>
+                        <label for="registro_email">Correo electrónico:</label>
+                        <input type="email" id="registro_email" name="email" required="">
+                    </p>
+                    
+                    <p>
+                        <label for="registro_password">Contraseña:</label>
+                        <input type="password" id="registro_password" name="password" minlength="6" required="">
+                    </p>
+                    
+                    <p>
+                        <label for="telefono">Teléfono:</label>
+                        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{9}" required="">
+                        </p><p>Formato: 9 dígitos numéricos</p>
+                    <p></p>
+                    
+                    <p>
+                        <button type="submit">Registrarse</button>
+                    </p>
+                </fieldset>
+            </form>
+            
+            <p>¿Ya tienes una cuenta? <a href="reservas.php">Iniciar sesión</a></p>
+        </section>
+                
+                
+                
+                
+            </main>
+
+    <footer>
+        <p>San Martín del Rey Aurelio - Turismo</p>
+        <p>Universidad de Oviedo - Software y Estándares para la Web</p>
+        <p>Bruno Pérez Cuervo</p>
+    </footer>
+
+</body></html>
