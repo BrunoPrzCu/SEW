@@ -500,7 +500,7 @@ section:nth-of-type(2) > section > menu > li > button.activo {
     background: white;
 }
 
-section:nth-of-type(2) > section > section > h6 {
+section:nth-of-type(2) > section > section > h4 {
     font-size: 0%;
 }
 

@@ -120,9 +120,9 @@ class CarruselFotos {
         
         // Crear contenedor de imágenes (section interior)
         const contenedorImagenes = document.createElement('section');
-        const h6 = document.createElement('h6');
-        h6.textContent = 'Imágenes destacadas';
-        contenedorImagenes.appendChild(h6);
+        const h4 = document.createElement('h4');
+        h4.textContent = 'Imágenes destacadas';
+        contenedorImagenes.appendChild(h4);
 
         // Añadir imágenes al contenedor
         this.imagenes.forEach((imagen) => {
