@@ -254,7 +254,7 @@ class TiempoActual {
         const esDia = hora >= 7 && hora < 21; // Simplificación para día/noche
         
         // Mapeo de códigos WMO a iconos
-        const iconoBase = 'https://www.weatherbit.io/static/img/icons/';
+        const iconoBase = 'multimedia/';
         
         let iconoCodigo;
         
@@ -479,7 +479,7 @@ class PrevisionSemanal {
     // Obtener URL de icono según el código de clima
     obtenerIconoClima(codigo) {
         // Mapeo de códigos WMO a iconos
-        const iconoBase = 'https://www.weatherbit.io/static/img/icons/';
+        const iconoBase = 'multimedia/';
         
         let iconoCodigo;
         
