@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de reservas turísticas en San Martín del Rey Aurelio, Asturias">
+    <meta name="keywords" content="reservas, alojamiento, hoteles, turismo rural, San Martín del Rey Aurelio, vacaciones, escapada, Asturias">
+    <meta name="author" content="Bruno Pérez Cuervo">
+    <title>Reservas - San Martín del Rey Aurelio</title>
+    <link rel="icon" href="multimedia/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
+    <link rel="stylesheet" type="text/css" href="estilo/layout.css">
+</head>
+<body>
+    <header>
+        <h1>San Martín del Rey Aurelio</h1>
+        <h2>Reservas</h2>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Página principal</a></li>
+            <li><a href="gastronomia.html">Gastronomía</a></li>
+            <li><a href="rutas.html">Rutas</a></li>
+            <li><a href="meteorologia.html">Meteorología</a></li>
+            <li><a href="juego.html">Juego</a></li>
+            <li><a href="reservas.php" class="activo">Reservas</a></li>
+            <li><a href="ayuda.html">Ayuda</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Sistema de reservas</h2>
+            <p>Utiliza nuestro sistema para realizar reservas en alojamientos, restaurantes y experiencias turísticas de San Martín del Rey Aurelio.</p>
+            <p>Garantiza tu plaza en los mejores establecimientos y actividades del concejo.</p>
+            
+                        
+                    </section>
+        
+                <section>
+            <h3>Panel de usuario</h3>
+            <nav>
+                <ul>
+                    <li><a href="reservas.php?accion=recursos">Ver recursos turísticos</a></li>
+                    <li><a href="reservas.php?accion=mis_reservas">Mis reservas</a></li>
+                    <li><a href="reservas.php?accion=imp_exp">Importar/Exportar datos</a></li>
+                    <li><a href="reservas.php?accion=cerrar_sesion">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+            <p>Bienvenido/a, miau</p>
+        </section>
+                
+                
+                
+                <section>
+            <h2>Importar y Exportar Datos</h2>
+            
+                        
+            <section>
+                <h3>Importar datos CSV</h3>
+                <form action="reservas.php?accion=importar" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <legend>Importación de datos</legend>
+                        
+                        <p>
+                            <label for="tabla">Tabla destino:</label>
+                            <select id="tabla" name="tabla" required="">
+                                <option value="">-- Seleccione una tabla --</option>
+                                <option value="usuarios">Usuarios</option>
+                                <option value="categorias">Categorías</option>
+                                <option value="recursos_turisticos">Recursos Turísticos</option>
+                                <option value="horarios">Horarios</option>
+                                <option value="reservas">Reservas</option>
+                                <option value="">Múltiples tablas</option>
+                            </select>
+                        </p>
+                        
+                        <p>
+                            <label for="archivo_csv">Archivo CSV:</label>
+                            <input type="file" id="archivo_csv" name="archivo_csv" accept=".csv" required="">
+                        </p>
+                        
+                        <p>
+                            <button type="submit">Importar datos</button>
+                        </p>
+                    </fieldset>
+                </form>
+            </section>
+
+            <section>
+            <h3>Exportar datos a CSV</h3>
+            <form action="php/exportar.php" method="get">
+                <fieldset>
+                    <legend>Exportación de datos</legend>
+                    
+                    <p>
+                        <label for="tabla_export">Tabla a exportar:</label>
+                        <select id="tabla_export" name="tabla" required="">
+                            <option value="">-- Seleccione una tabla --</option>
+                            <option value="usuarios">Usuarios</option>
+                            <option value="categorias">Categorías</option>
+                            <option value="recursos_turisticos">Recursos Turísticos</option>
+                            <option value="horarios">Horarios</option>
+                            <option value="reservas">Reservas</option>
+                        </select>
+                    </p>
+                    
+                    <p>
+                        <label for="filtro">Filtro (opcional):</label>
+                        <input type="text" id="filtro" name="filtro" placeholder="Ejemplo: id &gt; 5 AND categoria_id = 2">
+                    </p>
+                    
+                    <p>
+                        <button type="submit">Exportar datos</button>
+                    </p>
+                </fieldset>
+            </form>
+            
+            <form action="php/exportar.php" method="get">
+                <fieldset>
+                    <legend>Exportación completa</legend>
+                    <p>Exporta todos los datos de la base de datos en un único archivo CSV.</p>
+                    <input type="hidden" name="completa" value="1">
+                    <p>
+                        <button type="submit">Exportar toda la información</button>
+                    </p>
+                </fieldset>
+            </form>
+            
+            <p>
+                </p><p>El navegador descargará automáticamente el archivo CSV.</p>
+            <p></p>
+        </section>
+        </section>
+                
+                
+                
+            </main>
+
+    <footer>
+        <p>San Martín del Rey Aurelio - Turismo</p>
+        <p>Universidad de Oviedo - Software y Estándares para la Web</p>
+        <p>Bruno Pérez Cuervo</p>
+    </footer>
+
+</body></html>
