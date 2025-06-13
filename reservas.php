@@ -425,6 +425,7 @@ $presupuestoTotal = $sistema->presupuestoTotal;
     <meta name="keywords" content="reservas, alojamiento, hoteles, turismo rural, San Martín del Rey Aurelio, vacaciones, escapada, Asturias"/>
     <meta name="author" content="Bruno Pérez Cuervo"/>
     <title>Reservas - San Martín del Rey Aurelio</title>
+    <link rel="icon" href="multimedia/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css"/>
     <link rel="stylesheet" type="text/css" href="estilo/layout.css"/>
 </head>
