@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de reservas turísticas en San Martín del Rey Aurelio, Asturias">
+    <meta name="keywords" content="reservas, alojamiento, hoteles, turismo rural, San Martín del Rey Aurelio, vacaciones, escapada, Asturias">
+    <meta name="author" content="Bruno Pérez Cuervo">
+    <title>Reservas - San Martín del Rey Aurelio</title>
+    <link rel="icon" href="multimedia/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
+    <link rel="stylesheet" type="text/css" href="estilo/layout.css">
+</head>
+<body>
+    <header>
+        <h1>San Martín del Rey Aurelio</h1>
+        <h2>Reservas</h2>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Página principal</a></li>
+            <li><a href="gastronomia.html">Gastronomía</a></li>
+            <li><a href="rutas.html">Rutas</a></li>
+            <li><a href="meteorologia.html">Meteorología</a></li>
+            <li><a href="juego.html">Juego</a></li>
+            <li><a href="reservas.php" class="activo">Reservas</a></li>
+            <li><a href="ayuda.html">Ayuda</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Sistema de reservas</h2>
+            <p>Utiliza nuestro sistema para realizar reservas en alojamientos, restaurantes y experiencias turísticas de San Martín del Rey Aurelio.</p>
+            <p>Garantiza tu plaza en los mejores establecimientos y actividades del concejo.</p>
+            
+                        
+                    </section>
+        
+                <section>
+            <h3>Panel de usuario</h3>
+            <nav>
+                <ul>
+                    <li><a href="reservas.php?accion=recursos">Ver recursos turísticos</a></li>
+                    <li><a href="reservas.php?accion=mis_reservas">Mis reservas</a></li>
+                    <li><a href="reservas.php?accion=imp_exp">Importar/Exportar datos</a></li>
+                    <li><a href="reservas.php?accion=cerrar_sesion">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+            <p>Bienvenido/a, miau</p>
+        </section>
+                
+                
+                
+                
+                <section>
+            <h2>Recursos turísticos disponibles</h2>
+            
+            <section>
+                <h3>Filtrar por categoría</h3>
+                <ul>
+                    <li><a href="reservas.php?accion=recursos">Todas las categorías</a></li>
+                                        <li><a href="reservas.php?accion=recursos&amp;categoria=5">Actividad</a></li>
+                                        <li><a href="reservas.php?accion=recursos&amp;categoria=4">Hotel</a></li>
+                                        <li><a href="reservas.php?accion=recursos&amp;categoria=1">Museo</a></li>
+                                        <li><a href="reservas.php?accion=recursos&amp;categoria=3">Restaurante</a></li>
+                                        <li><a href="reservas.php?accion=recursos&amp;categoria=2">Ruta</a></li>
+                                    </ul>
+            </section>
+            
+                            <ul>
+                                    <li>
+                        <article>
+                            <h3>Hotel La Casona</h3>
+                            <p>Hotel rural tradicional asturiano</p>
+                            <p>Categoría: Hotel</p>
+                            <p>Precio: 65.00€</p>
+                            <p>Plazas disponibles: 20</p>
+                            <p><a href="reservas.php?accion=detalle_recurso&amp;id=4">Ver detalles y reservar</a></p>
+                        </article>
+                    </li>
+                                    <li>
+                        <article>
+                            <h3>Museo de la Minería</h3>
+                            <p>Museo etnográfico sobre la historia minera de la región</p>
+                            <p>Categoría: Museo</p>
+                            <p>Precio: 8.50€</p>
+                            <p>Plazas disponibles: 25</p>
+                            <p><a href="reservas.php?accion=detalle_recurso&amp;id=1">Ver detalles y reservar</a></p>
+                        </article>
+                    </li>
+                                    <li>
+                        <article>
+                            <h3>Ruta del Nalón</h3>
+                            <p>Ruta guiada por el valle del río Nalón</p>
+                            <p>Categoría: Ruta</p>
+                            <p>Precio: 12.00€</p>
+                            <p>Plazas disponibles: 15</p>
+                            <p><a href="reservas.php?accion=detalle_recurso&amp;id=2">Ver detalles y reservar</a></p>
+                        </article>
+                    </li>
+                                    <li>
+                        <article>
+                            <h3>Sidrería El Minero</h3>
+                            <p>Degustación de sidra y platos tradicionales asturianos</p>
+                            <p>Categoría: Restaurante</p>
+                            <p>Precio: 25.00€</p>
+                            <p>Plazas disponibles: 30</p>
+                            <p><a href="reservas.php?accion=detalle_recurso&amp;id=3">Ver detalles y reservar</a></p>
+                        </article>
+                    </li>
+                                    <li>
+                        <article>
+                            <h3>Visita al Pozo Sotón</h3>
+                            <p>Visita guiada a una auténtica mina de carbón</p>
+                            <p>Categoría: Actividad</p>
+                            <p>Precio: 15.00€</p>
+                            <p>Plazas disponibles: 10</p>
+                            <p><a href="reservas.php?accion=detalle_recurso&amp;id=5">Ver detalles y reservar</a></p>
+                        </article>
+                    </li>
+                                </ul>
+                    </section>
+                
+                
+            </main>
+
+    <footer>
+        <p>San Martín del Rey Aurelio - Turismo</p>
+        <p>Universidad de Oviedo - Software y Estándares para la Web</p>
+        <p>Bruno Pérez Cuervo</p>
+    </footer>
+
+</body></html>
