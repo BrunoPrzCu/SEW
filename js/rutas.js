@@ -1,8 +1,3 @@
-/**
- * Módulo para la visualización de rutas de San Martín del Rey Aurelio
- * Autor: UO295445
- * Fecha: 2025-06-11 16:44:02
- */
 
 /**
  * Clase principal para gestionar las rutas

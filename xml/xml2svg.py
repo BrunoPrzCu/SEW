@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import xml.etree.ElementTree as ET
-import os
 
 def generar_altimetria_ruta(ruta, ns, ruta_id, nombre_ruta, svg_file):
     """

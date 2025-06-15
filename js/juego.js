@@ -1,8 +1,3 @@
-/**
- * Módulo para el juego de preguntas sobre San Martín del Rey Aurelio
- * Autor: UO295445
- * Fecha: 2025-06-11 18:02:10
- */
 
 /**
  * Clase principal que gestiona el juego de preguntas
@@ -144,10 +139,10 @@ class JuegoPreguntas {
             const $seccionPrincipal = $('main > section:first-child');
             
             if ($seccionPrincipal.length > 0) {
-                // Crear la sección del juego
+
                 const seccionJuego = document.createElement('section');
                 
-                // Añadir un encabezado al contenedor principal del juego
+
                 const tituloJuego = document.createElement('h3');
                 tituloJuego.textContent = 'Juego de preguntas sobre San Martín del Rey Aurelio';
                 seccionJuego.appendChild(tituloJuego);
@@ -169,33 +164,33 @@ class JuegoPreguntas {
     mostrarPantallaBienvenida() {
         this.contenedorJuego.empty();
         
-        // Mantener siempre el encabezado principal
+
         const tituloJuego = document.createElement('h3');
         tituloJuego.textContent = 'Juego de preguntas sobre San Martín del Rey Aurelio';
         this.contenedorJuego.append(tituloJuego);
         
-        // Crear sección para la bienvenida
+ 
         const seccionBienvenida = document.createElement('section');
         
-        // Añadir un encabezado a la sección de bienvenida
+
         const tituloBienvenida = document.createElement('h4');
         tituloBienvenida.textContent = '¡Bienvenido al juego de preguntas!';
         seccionBienvenida.appendChild(tituloBienvenida);
         
-        // Información del juego
+
         const infoBienvenida = document.createElement('p');
         infoBienvenida.textContent = 'Este juego consiste en 10 preguntas sobre San Martín del Rey Aurelio y nuestro sitio web. ¡Demuestra cuánto conoces sobre nuestro municipio!';
         seccionBienvenida.appendChild(infoBienvenida);
         
-        // Botón para comenzar
+
         const botonComenzar = document.createElement('button');
         botonComenzar.textContent = 'Comenzar el juego';
         seccionBienvenida.appendChild(botonComenzar);
         
-        // Agregar al contenedor
+
         this.contenedorJuego.append(seccionBienvenida);
         
-        // Configurar evento
+
         $(botonComenzar).on('click', () => {
             this.mostrarPregunta(0);
         });
@@ -214,28 +209,28 @@ class JuegoPreguntas {
         this.preguntaActual = indice;
         const pregunta = this.preguntas[indice];
         
-        // Limpiar contenedor
+
         this.contenedorJuego.empty();
         
-        // Mantener siempre el encabezado principal
+
         const tituloJuego = document.createElement('h3');
         tituloJuego.textContent = 'Juego de preguntas sobre San Martín del Rey Aurelio';
         this.contenedorJuego.append(tituloJuego);
         
-        // Crear sección para la pregunta
+
         const seccionPregunta = document.createElement('section');
         
-        // Encabezado de pregunta
+
         const tituloPregunta = document.createElement('h4');
         tituloPregunta.textContent = `Pregunta ${indice + 1} de ${this.preguntas.length}`;
         seccionPregunta.appendChild(tituloPregunta);
         
-        // Información de progreso
+
         const infoPregunta = document.createElement('p');
         infoPregunta.textContent = pregunta.enunciado;
         seccionPregunta.appendChild(infoPregunta);
         
-        // Opciones de respuesta
+
         const listaOpciones = document.createElement('ol');
         
         pregunta.opciones.forEach((opcion, idx) => {
@@ -257,8 +252,8 @@ class JuegoPreguntas {
             
             // Crear la etiqueta con la referencia al input
             const labelOpcion = document.createElement('label');
-            labelOpcion.htmlFor = inputId; // Conectar la etiqueta con el input mediante for
-            labelOpcion.textContent = opcion; // Usar textContent en lugar de appendChild
+            labelOpcion.htmlFor = inputId; 
+            labelOpcion.textContent = opcion; 
             
             // Añadir los elementos a la lista
             elementoLista.appendChild(inputOpcion);
@@ -328,17 +323,17 @@ class JuegoPreguntas {
      * Verifica que todas las preguntas hayan sido respondidas
      */
     verificarRespuestasCompletas() {
-        // Guardar la última respuesta antes de verificar
+
         this.guardarRespuestaActual();
         
-        // Comprobar si hay preguntas sin responder
+
         const preguntasSinResponder = this.respuestasUsuario.findIndex(respuesta => respuesta === -1);
         
         if (preguntasSinResponder !== -1) {
-            // Hay preguntas sin responder
+
             this.mostrarAdvertencia(preguntasSinResponder);
         } else {
-            // Todas las preguntas están respondidas
+
             this.calcularResultado();
         }
     }
@@ -351,12 +346,12 @@ class JuegoPreguntas {
         // Limpiar contenedor
         this.contenedorJuego.empty();
         
-        // Mantener siempre el encabezado principal
+
         const tituloJuego = document.createElement('h3');
         tituloJuego.textContent = 'Juego de preguntas sobre San Martín del Rey Aurelio';
         this.contenedorJuego.append(tituloJuego);
         
-        // Crear sección para la advertencia
+ 
         const seccionAdvertencia = document.createElement('section');
         
         const titulo = document.createElement('h4');
@@ -367,12 +362,12 @@ class JuegoPreguntas {
         mensaje.textContent = 'Debes responder todas las preguntas antes de finalizar el juego.';
         seccionAdvertencia.appendChild(mensaje);
         
-        // Botón para ir a la pregunta sin responder
+
         const botonContinuar = document.createElement('button');
         botonContinuar.textContent = 'Ir a la pregunta sin responder';
         seccionAdvertencia.appendChild(botonContinuar);
         
-        // Agregar al contenedor
+ 
         this.contenedorJuego.append(seccionAdvertencia);
         
         // Configurar evento
@@ -388,7 +383,7 @@ class JuegoPreguntas {
         // Marcar el juego como terminado
         this.juegoTerminado = true;
         
-        // Calcular puntuación
+
         let respuestasCorrectas = 0;
         
         this.respuestasUsuario.forEach((respuesta, indice) => {
@@ -402,24 +397,24 @@ class JuegoPreguntas {
         // Limpiar contenedor
         this.contenedorJuego.empty();
         
-        // Mantener siempre el encabezado principal
+
         const tituloJuego = document.createElement('h3');
         tituloJuego.textContent = 'Juego de preguntas sobre San Martín del Rey Aurelio';
         this.contenedorJuego.append(tituloJuego);
         
-        // Crear sección para el resultado
+
         const seccionResultado = document.createElement('section');
         
         const titulo = document.createElement('h4');
         titulo.textContent = '¡Juego completado!';
         seccionResultado.appendChild(titulo);
         
-        // Puntuación
+
         const puntuacionElement = document.createElement('p');
         puntuacionElement.textContent = `Tu puntuación es: ${puntuacion} de 10 puntos`;
         seccionResultado.appendChild(puntuacionElement);
         
-        // Mensaje según puntuación
+
         const mensajeResultado = document.createElement('p');
         if (puntuacion >= 9) {
             mensajeResultado.textContent = '¡Excelente! Eres un experto en San Martín del Rey Aurelio.';
@@ -435,24 +430,24 @@ class JuegoPreguntas {
         // Botones de acción
         const seccionBotones = document.createElement('section');
         
-        // Añadir un encabezado a la sección de botones
+
         const tituloBotones = document.createElement('h5');
         tituloBotones.textContent = 'Opciones';
         seccionBotones.appendChild(tituloBotones);
         
-        // Botón para ver respuestas
+
         const botonVerRespuestas = document.createElement('button');
         botonVerRespuestas.textContent = 'Ver respuestas';
         seccionBotones.appendChild(botonVerRespuestas);
         
-        // Botón para volver a jugar
+
         const botonReiniciar = document.createElement('button');
         botonReiniciar.textContent = 'Volver a jugar';
         seccionBotones.appendChild(botonReiniciar);
         
         seccionResultado.appendChild(seccionBotones);
         
-        // Agregar al contenedor
+
         this.contenedorJuego.append(seccionResultado);
         
         // Configurar eventos
@@ -499,10 +494,6 @@ class JuegoPreguntas {
             const respuestaCorrecta = document.createElement('p');
             respuestaCorrecta.textContent = `Respuesta correcta: ${pregunta.opciones[pregunta.respuestaCorrecta]}`;
             
-            // Añadir clase si es correcta o incorrecta (usamos atributo role en lugar de class)
-            if (this.respuestasUsuario[indice] === pregunta.respuestaCorrecta) {
-                respuestaCorrecta.setAttribute('role', 'status');
-            }
             
             elementoLista.appendChild(respuestaCorrecta);
             
@@ -510,10 +501,6 @@ class JuegoPreguntas {
             const tuRespuesta = document.createElement('p');
             tuRespuesta.textContent = `Tu respuesta: ${pregunta.opciones[this.respuestasUsuario[indice]]}`;
             
-            // Añadir clase si es correcta o incorrecta (usamos atributo role en lugar de class)
-            if (this.respuestasUsuario[indice] === pregunta.respuestaCorrecta) {
-                tuRespuesta.setAttribute('role', 'status');
-            }
             
             elementoLista.appendChild(tuRespuesta);
             

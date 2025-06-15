@@ -1,8 +1,3 @@
-/**
- * Módulo principal para la página de turismo de San Martín del Rey Aurelio
- * Autor: UO295445
- * Fecha: 2025-06-03 10:03:46
- */
 
 // Clase principal para gestionar la aplicación
 class AplicacionTurismo {
@@ -12,11 +7,11 @@ class AplicacionTurismo {
         this.noticias = new SeccionNoticias();
     }
 
-    // Inicializar la aplicación
+
     iniciar() {
         // Iniciar componentes cuando el DOM esté listo
         $(document).ready(() => {
-            // Detectar si estamos en la página principal
+
             if (this.esPaginaPrincipal()) {
                 this.carrusel.inicializar();
                 this.noticias.cargarNoticias();
@@ -24,9 +19,9 @@ class AplicacionTurismo {
         });
     }
     
-    // Detectar si estamos en la página principal
+
     esPaginaPrincipal() {
-        // Verificar si existe la estructura de la página principal
+
         return $('section:nth-of-type(2)').length > 0 && 
                $('main > section:nth-of-type(4)').length > 0;
     }
@@ -88,7 +83,7 @@ class CarruselFotos {
     inicializar() {
         const $seccion = $(this.config.seccion);
         
-        // Solo inicializar si la sección del carrusel existe
+
         if ($seccion.length > 0) {
             // Crear estructura del carrusel
             this.crearEstructuraHTML();
@@ -151,11 +146,11 @@ class CarruselFotos {
         btnSiguiente.innerHTML = '&rsaquo;';
         btnSiguiente.setAttribute('aria-label', 'Imagen siguiente');
         
-        // Agregar botones al contenedor del carrusel
+
         contenedorCarrusel.appendChild(btnAnterior);
         contenedorCarrusel.appendChild(btnSiguiente);
         
-        // Crear indicadores (menu)
+
         const menu = document.createElement('menu');
         
         for (let i = 0; i < this.totalImagenes; i++) {
@@ -163,7 +158,6 @@ class CarruselFotos {
             const btn = document.createElement('button');
             btn.setAttribute('aria-label', `Ver imagen ${i + 1}`);
             
-            // Almacenar el índice como propiedad personalizada
             btn._indice = i;
             
             li.appendChild(btn);
@@ -224,12 +218,12 @@ class CarruselFotos {
         // Calcular desplazamiento
         const desplazamiento = -indice * 100;
         
-        // Obtener elementos del DOM
+
         const $seccion = $(this.config.seccion);
         const $carrusel = $seccion.find('section');
         const $contenedor = $carrusel.find('section');
         
-        // Aplicar desplazamiento directamente como estilo en línea
+
         if ($contenedor.length > 0) {
             $contenedor[0].style.transform = `translateX(${desplazamiento}%)`;
         }
@@ -271,7 +265,7 @@ class SeccionNoticias {
             seccion: 'section:nth-of-type(4)', // Cuarta sección = noticias
             numeroNoticias: 4, // Número de noticias a mostrar
             apiUrl: 'https://newsdata.io/api/1/news',
-            apiKey: 'pub_711ec5a2790d412e8d14d6fd87384c6d', // Tu API key de newsdata.io
+            apiKey: 'pub_711ec5a2790d412e8d14d6fd87384c6d', 
             // Parámetros de la API
             parametros: {
                 q: 'Turismo Asturias',

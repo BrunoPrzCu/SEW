@@ -1,8 +1,4 @@
-/**
- * Módulo para la gestión de información meteorológica de San Martín del Rey Aurelio
- * Autor: UO295445
- * Fecha: 2025-06-03 11:30:22
- */
+
 
 // Clase principal para gestionar la aplicación meteorológica
 class AplicacionMeteo {
@@ -40,7 +36,7 @@ class TiempoActual {
     constructor(coordenadas, config) {
         this.coordenadas = coordenadas;
         this.config = config;
-        this.contenedor = 'section:nth-of-type(1) > section'; // Selector del contenedor para el tiempo actual
+        this.contenedor = 'section:nth-of-type(1) > section'; 
         
         // Open-Meteo API URL para tiempo actual
         this.urlAPI = 'https://api.open-meteo.com/v1/forecast';
@@ -534,7 +530,7 @@ class PrevisionSemanal {
     }
 }
 
-// Crear instancia de la aplicación y arrancarla cuando el DOM esté listo
+
 $(document).ready(() => {
     const app = new AplicacionMeteo();
     app.iniciar();
