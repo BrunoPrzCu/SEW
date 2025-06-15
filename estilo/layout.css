@@ -340,11 +340,6 @@ table {
         grid-column-end: -1; /* Redefinición intencionada por media query */
     }
     
-    /* Secciones con tablas ocupan todo el ancho */
-    section:has(table) {
-        grid-column-start: 1; /* Redefinición intencionada por media query */
-        grid-column-end: -1; /* Redefinición intencionada por media query */
-    }
 }
 
 /* Pantallas muy grandes (más de 1200px) */
@@ -375,19 +370,6 @@ table {
         grid-column-end: -1; /* Redefinición intencionada por media query */
     }
     
-    /* Secciones con tablas o contenido más extenso */
-    section:has(table),
-    section:has(dl) {
-        grid-column-start: auto; /* Redefinición intencionada por media query */
-        grid-column-end: span 2; /* Redefinición intencionada por media query */
-    }
-    
-    /* Secciones con multimedia */
-    section:has(video),
-    section:has(audio) {
-        grid-column-start: 1; /* Redefinición intencionada por media query */
-        grid-column-end: -1; /* Redefinición intencionada por media query */
-    }
     
     header, footer {
         padding: 1.5em 1em; /* Redefinición intencionada por media query */
