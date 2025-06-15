@@ -56,7 +56,6 @@ audio {
 table {
     width: 100%;
     overflow-x: auto;
-    display: block;
 }
 
 
@@ -198,7 +197,7 @@ table {
     }
     
     main > section:nth-of-type(4) > section:nth-of-type(2) table {
-        display: block; /* Redefinición intencionada por media query */
+        display: flex; /* Redefinición intencionada por media query */
         overflow-x: auto;
     }
     
