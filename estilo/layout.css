@@ -1,58 +1,46 @@
-/* 
-* Hoja de estilo de layout para San Martín del Rey Aurelio - Sitio web de turismo
-* Autor: UO295445
-* Fecha: 2025-06-13 13:45:23
-* Actualizado para indicar redefiniciones en media queries
-*/
 
-/* Diseño base - Aplicable a todos los tamaños */
-
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 main {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: auto;
-    /* Se utiliza CSS Grid para la disposición principal de contenidos */
     grid-template-columns: 1fr;
     column-gap: 1em;
     row-gap: 1em;
     margin: 0 auto;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 section {
-    /* Quitamos el align-self: stretch que sería el comportamiento predeterminado */
     align-self: start;
-    /* Esto hace que cada sección tenga solo la altura que necesita */
 }
 
-/* Proporciones flexibles para imágenes y elementos multimedia */
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 img {
     max-width: 100%;
     height: auto;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 video {
     width: 100%;
     height: auto;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 audio {
     width: 100%;
 }
 
 /* Estilos para tablas responsivas */
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 table {
     width: 100%;
     overflow-x: auto;
@@ -63,38 +51,41 @@ table {
 
 /* Tablets pequeñas (hasta 768px) */
 @media screen and (max-width: 48em) { /* 768px / 16px = 48em */
-    /* Estructura general */
+    /* Especificidad 0,0,1 */
     main {
-        grid-template-columns: 1fr; /* Redefinición intencionada por media query - Una sola columna para tablets pequeñas */
+        grid-template-columns: 1fr; /* Redefinición intencionada por media query  */
     }
     
-    /* Navegación */
+    /* Especificidad 0,0,2 */
     nav ul {
         flex-wrap: wrap;
     }
     
+    /* Especificidad 0,0,2 */
     nav li {
-        width: 50%; /* En tablets pequeñas, 2 elementos por fila */
+        width: 50%;
     }
     
-    /* Tiempo actual en tablets pequeñas */
+    /* Especificidad 0,1,4 */
     section:nth-of-type(1) > section > section > section {
-        grid-template-columns: 1fr; /* Redefinición intencionada por media query */
+        grid-template-columns: 1fr; 
     }
     
     /* Previsión en formato vertical para tablets y móviles */
+    /* Especificidad 0,1,3 */
     section:nth-of-type(2) > section > ul {
         display: grid;
-        grid-template-columns: 1fr; /* Redefinición intencionada por media query - Una columna para formato vertical */
+        grid-template-columns: 1fr; 
         column-gap: 0.8em;
         row-gap: 0.8em;
     }
     
+    /* Especificidad 0,1,2 */
     section:nth-of-type(2) > section {
-        height: 18.75em; /* Redefinición intencionada por media query - 300px */
+        height: 18.75em; 
     }
     
-    /* Tarjetas de previsión en formato horizontal compacto */
+    /* Especificidad 0,1,4 */
     section:nth-of-type(2) > section > ul > li {
         display: grid;
         grid-template-columns: auto 1fr;
@@ -106,6 +97,7 @@ table {
         padding: 1em;
     }
     
+    /* Especificidad 0,2,5 */
     section:nth-of-type(2) > section > ul > li > p:first-of-type {
         grid-column-start: 1;
         grid-column-end: -1;
@@ -115,6 +107,7 @@ table {
         text-align: center;
     }
     
+    /* Especificidad 0,1,5 */
     section:nth-of-type(2) > section > ul > li figure {
         grid-row-start: 2;
         grid-row-end: 5;
@@ -125,44 +118,52 @@ table {
         align-items: center;
     }
     
+    /* Especificidad 0,1,6 */
     section:nth-of-type(2) > section > ul > li figure img {
-        width: 3.5em; /* Redefinición intencionada por media query */
-        height: 3.5em; /* Redefinición intencionada por media query */
+        width: 3.5em; 
+        height: 3.5em; 
     }
     
+    /* Especificidad 0,1,6 */
     section:nth-of-type(2) > section > ul > li figure figcaption {
-        font-size: 0.8em; /* Redefinición intencionada por media query */
+        font-size: 0.8em; 
         text-align: center;
         margin-top: 0.3em;
     }
 
     /* Media query para dispositivos móviles para la sección del juego */
+    /* Especificidad 0,2,4 */
     main > section:first-child > section:nth-of-type(2) > section {
         padding: 1.5em;
     }
     
+    /* Especificidad 0,2,5 */
     main > section:first-child > section:nth-of-type(2) > section > img {
-        max-width: 100%; /* Redefinición intencionada por media query */
+        max-width: 100%; 
     }
     
+    /* Especificidad 0,2,5 */
     main > section:first-child > section:nth-of-type(2) > section > section {
         flex-direction: column;
         align-items: center;
     }
     
+    /* Especificidad 0,2,6 */
     main > section:first-child > section:nth-of-type(2) > section > section > button {
         min-width: 8em;
         max-width: 12em;
         width: auto;
     }
     
-    /* Secciones varias */
-    section:nth-of-type(3) > section > ul,
-    section:nth-of-type(5) > ul,
-    main > section:nth-of-type(4) > section > ul {
-        grid-template-columns: 1fr; /* Redefinición intencionada por media query */
+    
+    
+    section:nth-of-type(3) > section > ul, /* Especificidad 0,1,3*/
+    section:nth-of-type(5) > ul, /* Especificidad 0,1,2*/
+    main > section:nth-of-type(4) > section > ul { /* Especificidad 0,1,4 */
+        grid-template-columns: 1fr; 
     }
     
+    /* Especificidad 0,1,4 */
     section:nth-of-type(3) > section > ul > li {
         display: grid;
         grid-template-columns: auto 1fr;
@@ -173,12 +174,14 @@ table {
         align-items: center;
     }
     
+    /* Especificidad 0,2,5 */
     section:nth-of-type(3) > section > ul > li > p:first-of-type {
         grid-column-start: 1;
         grid-column-end: -1;
         text-align: center;
     }
     
+    /* Especificidad 0,1,5 */
     section:nth-of-type(3) > section > ul > li figure {
         grid-row-start: 2;
         grid-row-end: 5;
@@ -188,151 +191,174 @@ table {
     
     
     /* Sección de rutas y contenido relacionado */
+    /* Especificidad 0,1,3 */
     main > section:nth-of-type(3) > ul {
         flex-direction: column;
     }
     
+    /* Especificidad 0,1,5 */
     main > section:nth-of-type(3) > ul > li > button {
         width: 100%;
     }
     
+    /* Especificidad 0,2,4 */
     main > section:nth-of-type(4) > section:nth-of-type(2) table {
-        display: flex; /* Redefinición intencionada por media query */
+        display: flex; 
         overflow-x: auto;
     }
     
-    /* Altura del mapa en móviles */
+    /* Especificidad 0,1,4 */
     main > section:nth-of-type(5) > section > section {
-        height: 18.75em; /* Redefinición intencionada por media query */
+        height: 18.75em; 
     }
 
+    /* Especificidad 0,3,8 */
     main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(1) {
-        grid-template-columns: repeat(auto-fill, minmax(8em, 1fr)); /* Redefinición intencionada por media query */
+        grid-template-columns: repeat(auto-fill, minmax(8em, 1fr)); 
     }
     
+    /* Especificidad 0,3,8 */
     main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(2) {
-        grid-template-columns: 1fr; /* Redefinición intencionada por media query */
+        grid-template-columns: 1fr; 
     }
 
+    /* Especificidad 0,0,1 */
     body {
-        font-size: 0.9rem; /* Redefinición intencionada por media query */
+        font-size: 0.9rem; 
     }
     
+    /* Especificidad 0,0,1 */
     main {
         padding: 0.5em;
         max-width: 95%; 
         grid-template-columns: 1fr; /* Redefinición intencionada por media query */
     }
     
+    /* Especificidad 0,0,1 */
     section {
-        padding: 0.5em; /* Redefinición intencionada por media query */
+        padding: 0.5em; 
     }
     
+    /* Especificidad 0,0,1 */
     h1 {
-        font-size: 1.8em; /* Redefinición intencionada por media query */
+        font-size: 1.8em; 
     }
     
+    /* Especificidad 0,0,1 */
     h2 {
-        font-size: 1.3em; /* Redefinición intencionada por media query */
+        font-size: 1.3em; 
     }
     
-    /* Navegación en móviles */
+    /* Especificidad 0,0,2 */
     nav ul {
-        flex-direction: column; /* Redefinición intencionada por media query */
+        flex-direction: column; 
     }
     
+    /* Especificidad 0,0,2 */
     nav li {
         width: 100%; /* Redefinición intencionada por media query */
     }
     
-    /* Tiempo actual en móviles */
+    /* Especificidad 0,1,4 */
     section:nth-of-type(1) > section > section > section {
         grid-template-columns: 1fr; /* Redefinición intencionada por media query */
     }
     
-    /* Ajustes adicionales para previsión en móviles pequeños */
+    /* Especificidad 0,2,5 */
     section:nth-of-type(2) > section > ul > li > p:first-of-type {
-        font-size: 1.1em; /* Redefinición intencionada por media query */
+        font-size: 1.1em; 
     }
     
+    /* Especificidad 0,1,6 */
     section:nth-of-type(2) > section > ul > li figure img {
         width: 3em; /* Redefinición intencionada por media query */
         height: 3em; /* Redefinición intencionada por media query */
     }
 
+    /* Especificidad 0,1,2 */
     section:nth-of-type(2) > section {
-        height: 15.625em; /* Redefinición intencionada por media query - 250px */
+        height: 15.625em; /* Redefinición intencionada por media query */
     }
     
+    /* Especificidad 0,1,5 */
     section:nth-of-type(2) > section > section > figure > figcaption {
         padding: 0.5em;
-        font-size: 0.9em; /* Redefinición intencionada por media query */
+        font-size: 0.9em; 
     }
 
+    /* Especificidad 0,2,3 de ambas */
     section:nth-of-type(2) > section > button:nth-of-type(1),
     section:nth-of-type(2) > section > button:nth-of-type(2) {
-        width: 1.875em; /* 30px */
-        height: 1.875em; /* 30px */
-        font-size: 1.2em; /* Redefinición intencionada por media query */
+        width: 1.875em; 
+        height: 1.875em; 
+        font-size: 1.2em; 
     }
 
+    /* Especificidad 0,1,3 */
     section:nth-of-type(2) > section > menu {
-        bottom: 3.75em; /* 60px */
+        bottom: 3.75em; 
     }
     
+    /* Especificidad 0,1,4 */
     section:nth-of-type(4) > section > article > figure {
-        height: 11.25em; /* Redefinición intencionada por media query - 180px */
+        height: 11.25em; 
     }
 }
 
 
 /* Tablets y pantallas medianas (769px - 1024px) */
 @media screen and (min-width: 48.0625em) and (max-width: 64em) { /* 769px-1024px / 16px */
+    /* Especificidad 0,0,1 */
     body {
         font-size: 1rem; /* Redefinición intencionada por media query */
     }
     
+    /* Especificidad 0,0,2 */
     nav li {
-        flex-grow: 1; /* Redefinición intencionada por media query */
-        flex-shrink: 1; /* Redefinición intencionada por media query */
-        flex-basis: auto; /* Redefinición intencionada por media query */
+        flex-grow: 1; 
+        flex-shrink: 1; 
+        flex-basis: auto; 
     }
     
+    /* Especificidad 0,0,1 */
     main {
-        display: grid; /* Redefinición intencionada por media query */
-        grid-template-columns: repeat(2, 1fr); /* Redefinición intencionada por media query - Diseño de dos columnas para tablets */
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); /* Redefinición intencionada por media query  */
         column-gap: 2em; /* Redefinición intencionada por media query */
         row-gap: 2em; /* Redefinición intencionada por media query */
     }
     
-    /* Selector para hacer que algunas secciones ocupen todo el ancho */
+    /* Especificidad 0,1,1 en las tres*/
     section:nth-child(1), 
     section:nth-child(4), 
     section:nth-child(7) {
-        grid-column-start: 1; /* Redefinición intencionada por media query */
-        grid-column-end: -1; /* Redefinición intencionada por media query */
+        grid-column-start: 1; 
+        grid-column-end: -1; 
     }
 }
 
 /* Pantallas grandes (1025px - 1200px) */
 @media screen and (min-width: 64.0625em) and (max-width: 75em) { /* 1025px-1200px / 16px */
+    /* Especificidad 0,0,1 */
     body {
         font-size: 1.05rem; /* Redefinición intencionada por media query */
     }
     
+    /* Especificidad 0,0,2 */
     nav li {
         flex-grow: 1; /* Redefinición intencionada por media query */
         flex-shrink: 1; /* Redefinición intencionada por media query */
         flex-basis: auto; /* Redefinición intencionada por media query */
     }
     
+    /* Especificidad 0,0,1 */
     main {
-        grid-template-columns: repeat(2, 1fr); /* Redefinición intencionada por media query - Mantenemos dos columnas para pantallas grandes */
-        /* Reemplazado grid-auto-flow: dense; con posicionamiento explícito */
-        grid-auto-rows: min-content; /* Importante: cada fila solo tiene la altura necesaria */
+        grid-template-columns: repeat(2, 1fr); /* Redefinición intencionada por media query */
+        grid-auto-rows: min-content; 
     }
     
     /* Secciones destacadas que ocupen todo el ancho */
+    /* Especificidad 0,1,1 en ambas */
     section:nth-child(1),
     section:nth-child(7) {
         grid-column-start: 1; /* Redefinición intencionada por media query */
@@ -343,34 +369,36 @@ table {
 
 /* Pantallas muy grandes (más de 1200px) */
 @media screen and (min-width: 75.0625em) { /* >1200px / 16px */
+    /* Especificidad 0,0,1 */
     body {
         font-size: 1.1rem; /* Redefinición intencionada por media query */
     }
     
+    /* Especificidad 0,0,2 */
     nav li {
         flex-grow: 1; /* Redefinición intencionada por media query */
         flex-shrink: 1; /* Redefinición intencionada por media query */
         flex-basis: auto; /* Redefinición intencionada por media query */
     }
     
-    /* Para pantallas muy anchas, utilizamos un layout mixto */
+    /* Especificidad 0,0,1 */
     main {
         display: grid; /* Redefinición intencionada por media query */
-        grid-template-columns: repeat(3, 1fr); /* Redefinición intencionada por media query - Tres columnas para pantallas grandes */
-        /* Eliminado grid-auto-flow: dense; para evitar redefiniciones */
-        grid-auto-rows: min-content; /* Cada fila solo tiene la altura necesaria */
+        grid-template-columns: repeat(3, 1fr); /* Redefinición intencionada por media query  */
+        grid-auto-rows: min-content; /* Redefinición intencionada por media query */
         column-gap: 2em; /* Redefinición intencionada por media query */
         row-gap: 2em; /* Redefinición intencionada por media query */
     }
     
-    /* Secciones principales ocupan más espacio */
+    /* Especificidad 0,1,1 */
     section:nth-child(1) {
         grid-column-start: 1; /* Redefinición intencionada por media query */
         grid-column-end: -1; /* Redefinición intencionada por media query */
     }
     
     
+    /* Especificidad 0,0,1 */
     header, footer {
-        padding: 1.5em 1em; /* Redefinición intencionada por media query */
+        padding: 1.5em 1em;
     }
 }

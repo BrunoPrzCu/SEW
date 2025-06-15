@@ -1,5 +1,4 @@
 
-
 /* Especificidad 0,0,1 */
 body {
     font-family: Arial, sans-serif;
@@ -60,7 +59,7 @@ h3 {
 
 /* Estilos del menú de navegación */
 
-/* Especificidad 0,0,0,1 */
+/* Especificidad 0,0,1 */
 nav {
     background-color: #031a2a;
 }
@@ -124,14 +123,14 @@ section:hover {
     box-shadow: 0 0.5rem 0.9375rem #00000033;
 }
 
-/* Especificidad de las 3: 0,0,1 */
+/* Especificidad 0,1,2 */
 main > section:nth-of-type(1),
 main > section:nth-of-type(2),
 main > section:nth-of-type(4) {
     grid-column: 1 / -1;
 }
 
-/* Especificidad de las dos 0,1,2 */
+/* Especificidad 0,1,2 */
 main > section:nth-of-type(3),
 main > section:nth-of-type(5) {
     grid-column: span 2;
@@ -234,7 +233,7 @@ picture {
     margin: 1em 0;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 img {
     max-width: 100%;
     height: auto;
@@ -242,7 +241,7 @@ img {
     border: 0.0625rem solid #444;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 video {
     width: 100%;
     display: flex;
@@ -250,7 +249,7 @@ video {
     border: 0.0625rem solid #444;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 audio {
     width: 100%;
     margin: 1em 0;
@@ -259,7 +258,7 @@ audio {
 
 /* Estilos para elementos details y summary */
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 details {
     margin: 1em 0;
     padding: 0.5em;
@@ -268,7 +267,7 @@ details {
     background-color: #1a2c3a;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 summary {
     font-weight: bold;
     cursor: pointer;
@@ -276,12 +275,12 @@ summary {
     color: #56ccf2;
 }
 
-/* 0,0,1,1 */
+/* Especificidad 0,1,1 */
 details[open] {
     padding-bottom: 1em;
 }
 
-/* 0,0,0,2 */
+/* Especificidad 0,1,2 */
 details[open] summary {
     margin-bottom: 0.5em;
     border-bottom: 0.0625rem solid #444;
@@ -289,7 +288,7 @@ details[open] summary {
 
 /* Estilos para el pie de página */
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 footer {
     background-color: #0a304d;
     color: #ffffff;
@@ -299,18 +298,20 @@ footer {
     font-size: 0.9em;
 }
 
-/* 0,0,0,2 */
+/* Especificidad 0,0,2 */
 footer p {
     margin: 0.5em 0;
 }
 
 /* Estilos para la sección de meteorología */
+/* Especificidad 0,1,3 */
 section:nth-of-type(1) > section > section {
     border-radius: 0.5rem;
     padding: 1.5em;
     margin-top: 1em;
 }
 
+/* Especificidad 0,1,4 */
 section:nth-of-type(1) > section > section > section {
     background: none;
     padding: 0;
@@ -320,11 +321,13 @@ section:nth-of-type(1) > section > section > section {
     align-items: center;
 }
 
+/* Especificidad 0,1,3 */
 section:nth-of-type(1) > section figure {
     margin: 0;
     text-align: center;
 }
 
+/* Especificidad 0,1,4 */
 section:nth-of-type(1) > section figure img {
     width: 5em;
     height: 5em;
@@ -333,24 +336,29 @@ section:nth-of-type(1) > section figure img {
     border: none;
 }
 
+/* Especificidad 0,2,5 */
 section:nth-of-type(1) > section > section > section > section:first-child {
     justify-self: center;
 }
 
+/* Especificidad 0,3,6 */
 section:nth-of-type(1) > section > section > section > section:nth-child(2) p:first-of-type {
     font-size: 2em;
     margin: 0;
 }
 
+/* Especificidad 0,1,4 */
 main > section:nth-of-type(2) > nav > ul {
     background-color: #D1D1D1;
 }
 
+/* Especificidad 0,1,6 */
 main > section:nth-of-type(2) > nav > ul > li > a {
     color: #3D3D3D;
 }
 
 /* Estilos para la previsión de 7 días */
+/* Especificidad 0,1,3 */
 section:nth-of-type(3) > section > ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
@@ -360,6 +368,7 @@ section:nth-of-type(3) > section > ul {
     margin-top: 1em;
 }
 
+/* Especificidad 0,1,4 */
 section:nth-of-type(3) > section > ul > li {
     background-color: #D1D1D1;
     color: #3D3D3D;
@@ -369,15 +378,18 @@ section:nth-of-type(3) > section > ul > li {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+/* Especificidad 0,1,5 */
 section:nth-of-type(3) > section > ul > li > a {
     color: #3D3D3D;
 }
 
+/* Especificidad 0,2,4 */
 section:nth-of-type(3) > section > ul > li:hover {
     transform: translateY(-0.3125em);
     box-shadow: 0 0.3125rem 0.9375rem #00000033;
 }
 
+/* Especificidad 0,2,5 */
 section:nth-of-type(3) > section > ul > li > p:first-of-type {
     font-weight: bold;
     margin-bottom: 0.5em;
@@ -385,10 +397,12 @@ section:nth-of-type(3) > section > ul > li > p:first-of-type {
     padding-bottom: 0.5em;
 }
 
+/* Especificidad 0,1,5 */
 section:nth-of-type(3) > section > ul > li figure {
     margin: 0.5em 0;
 }
 
+/* Especificidad 0,1,6 */
 section:nth-of-type(3) > section > ul > li figure img {
     width: 3.5em;
     height: 3.5em;
@@ -396,12 +410,14 @@ section:nth-of-type(3) > section > ul > li figure img {
     border: none;
 }
 
+/* Especificidad 0,1,6 */
 section:nth-of-type(3) > section > ul > li figure figcaption {
     font-size: 0.9em;
     margin-top: 0.3em;
 }
 
 /* Estilos para el carrusel */
+/* Especificidad 0,1,2 */
 section:nth-of-type(2) > section {
     position: relative;
     overflow: hidden;
@@ -411,11 +427,13 @@ section:nth-of-type(2) > section {
 }
 
 /* Deshabilitar el hover en el carrusel */
+/* Especificidad 0,2,2 */
 section:nth-of-type(2) > section:hover {
     transform: none;
     box-shadow: none;
 }
 
+/* Especificidad 0,1,3 */
 section:nth-of-type(2) > section > section {
     display: flex;
     height: 100%;
@@ -427,6 +445,7 @@ section:nth-of-type(2) > section > section {
     border-radius: 0;
 }
 
+/* Especificidad 0,1,4 */
 section:nth-of-type(2) > section > section > figure {
     min-width: 100%;
     height: 100%;
@@ -435,6 +454,7 @@ section:nth-of-type(2) > section > section > figure {
     padding: 0;
 }
 
+/* Especificidad 0,1,5 */
 section:nth-of-type(2) > section > section > figure > img {
     width: 100%;
     height: 100%;
@@ -443,6 +463,7 @@ section:nth-of-type(2) > section > section > figure > img {
     margin: 0;
 }
 
+/* Especificidad 0,1,5 */
 section:nth-of-type(2) > section > section > figure > figcaption {
     position: absolute;
     bottom: 0;
@@ -454,6 +475,7 @@ section:nth-of-type(2) > section > section > figure > figcaption {
     margin: 0;
 }
 
+/* Especificidad 0,1,3 */
 section:nth-of-type(2) > section > button {
     position: absolute;
     top: 50%;
@@ -473,18 +495,22 @@ section:nth-of-type(2) > section > button {
     transition: background-color 0.3s;
 }
 
+/* Especificidad 0,2,3 */
 section:nth-of-type(2) > section > button:nth-of-type(1) {
     left: 0.625em;
 }
 
+/* Especificidad 0,2,3 */
 section:nth-of-type(2) > section > button:nth-of-type(2) {
     right: 0.625em;
 }
 
+/* Especificidad 0,2,3 */
 section:nth-of-type(2) > section > button:hover {
     background: #000000E6;
 }
 
+/* Especificidad 0,1,3 */
 section:nth-of-type(2) > section > menu {
     position: absolute;
     bottom: 4.375em;
@@ -499,6 +525,7 @@ section:nth-of-type(2) > section > menu {
     list-style: none;
 }
 
+/* Especificidad 0,1,5 */
 section:nth-of-type(2) > section > menu > li > button {
     width: 0.75em;
     height: 0.75em;
@@ -509,16 +536,18 @@ section:nth-of-type(2) > section > menu > li > button {
     padding: 0;
 }
 
-section:nth-of-type(2) > section > menu > li > button:hover,
-section:nth-of-type(2) > section > menu > li > button.activo {
+/* Especificidad 0,2,5 */
+section:nth-of-type(2) > section > menu > li > button:hover {
     background: #ffffff;
 }
 
+/* Especificidad 0,1,4 */
 section:nth-of-type(2) > section > section > h4 {
     font-size: 0%;
 }
 
 /* Estilos para la sección de destacados */
+/* Especificidad 0,1,2 */
 section:nth-of-type(3) > ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(15.625em, 1fr));
@@ -527,6 +556,7 @@ section:nth-of-type(3) > ul {
     padding: 0;
 }
 
+/* Especificidad 0,1,3 */
 section:nth-of-type(3) > ul > li {
     padding: 1.5em;
     background-color: #0d1d2a;
@@ -535,10 +565,12 @@ section:nth-of-type(3) > ul > li {
     transition: transform 0.3s;
 }
 
+/* Especificidad 0,2,3 */
 section:nth-of-type(3) > ul > li:hover {
     transform: translateY(-0.3125em);
 }
 
+/* Especificidad 0,1,4 */
 section:nth-of-type(3) > ul > li > h3 {
     margin-top: 0;
     margin-bottom: 0.8em;
@@ -546,20 +578,14 @@ section:nth-of-type(3) > ul > li > h3 {
 }
 
 /* Sección de noticias */
+/* Especificidad 0,1,1 */
 section:nth-of-type(4) {
     margin: 3em 0;
 }
 
-section:nth-of-type(4) > h2::after {
-    content: '';
-    display: flex;
-    width: 5em;
-    height: 0.1875em;
-    background-color: #1a5483;
-    margin: 0.625em auto 1.25em;
-}
 
 
+/* Especificidad 0,1,2 */
 section:nth-of-type(4) > section {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(18.75em, 1fr));
@@ -569,6 +595,7 @@ section:nth-of-type(4) > section {
     margin: 0;
 }
 
+/* Especificidad 0,1,3 */
 section:nth-of-type(4) > section > article {
     display: flex;
     flex-direction: column;
@@ -580,11 +607,13 @@ section:nth-of-type(4) > section > article {
     background-color: #0d1d2a;
 }
 
+/* Especificidad 0,2,3 */
 section:nth-of-type(4) > section > article:hover {
     transform: translateY(-0.3125em);
     box-shadow: 0 0.5em 1em #00000033;
 }
 
+/* Especificidad 0,1,4 */
 section:nth-of-type(4) > section > article > figure {
     height: 12.5em;
     margin: 0;
@@ -592,6 +621,7 @@ section:nth-of-type(4) > section > article > figure {
     position: relative;
 }
 
+/* Especificidad 0,1,5 */
 section:nth-of-type(4) > section > article > figure > img {
     width: 100%;
     height: 100%;
@@ -600,10 +630,8 @@ section:nth-of-type(4) > section > article > figure > img {
     border: none;
 }
 
-section:nth-of-type(4) > section > article > figure > span {
-    font-style: italic;
-}
 
+/* Especificidad 0,1,4 */
 section:nth-of-type(4) > section > article > section {
     padding: 1.5em;
     flex: 1;
@@ -614,6 +642,7 @@ section:nth-of-type(4) > section > article > section {
     border-radius: 0;
 }
 
+/* Especificidad 0,1,5 */
 section:nth-of-type(4) > section > article > section > header {
     display: flex;
     justify-content: space-between;
@@ -624,22 +653,26 @@ section:nth-of-type(4) > section > article > section > header {
     padding: 0;
 }
 
+/* Especificidad 0,1,5 */
 section:nth-of-type(4) > section > article > section > h3 {
     margin: 0 0 0.8em 0;
     font-size: 1.3em;
     line-height: 1.3;
 }
 
+/* Especificidad 0,1,6 */
 section:nth-of-type(4) > section > article > section > h3 > a {
     color: #56ccf2;
     text-decoration: none;
     transition: color 0.3s;
 }
 
+/* Especificidad 0,2,6 */
 section:nth-of-type(4) > section > article > section > h3 > a:hover {
     color: #89daff;
 }
 
+/* Especificidad 0,1,5 */
 section:nth-of-type(4) > section > article > section > p {
     margin: 0 0 1.2em 0;
     font-size: 1em;
@@ -647,6 +680,7 @@ section:nth-of-type(4) > section > article > section > p {
     flex: 1;
 }
 
+/* Especificidad 0,1,5 */
 section:nth-of-type(4) > section > article > section > a {
     align-self: flex-start;
     padding: 0.5em 1em;
@@ -658,11 +692,13 @@ section:nth-of-type(4) > section > article > section > a {
     margin-top: auto;
 }
 
+/* Especificidad 0,2,5 */
 section:nth-of-type(4) > section > article > section > a:hover {
     text-decoration: none;
 }
 
 /* Sección de contacto */
+/* Especificidad 0,1,2 */
 section:nth-of-type(5) > ul {
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
@@ -671,6 +707,7 @@ section:nth-of-type(5) > ul {
     padding: 0;
 }
 
+/* Especificidad 0,1,3 */
 section:nth-of-type(5) > ul > li {
     padding: 1.5em;
     background-color: #0d1d2a;
@@ -678,17 +715,20 @@ section:nth-of-type(5) > ul > li {
     box-shadow: 0 0.25em 0.5em #0000001A;
 }
 
+/* Especificidad 0,1,4 */
 section:nth-of-type(5) > ul > li > h3 {
     margin-top: 0;
     margin-bottom: 1em;
     color: #56ccf2;
 }
 
+/* Especificidad 0,1,4 */
 section:nth-of-type(5) > ul > li > p {
     margin: 0.5em 0;
 }
 
 /* Estilos para el mapa (reemplazando el iframe) */
+/* Especificidad 0,2,3 */
 section:nth-of-type(5) > ul > li:nth-child(3) {
     grid-column: 1 / -1;
     border-radius: 0.5em;
@@ -697,6 +737,7 @@ section:nth-of-type(5) > ul > li:nth-child(3) {
     padding: 0;
 }
 
+/* Especificidad 0,2,4 */
 section:nth-of-type(5) > ul > li:nth-child(3) > figure {
     margin: 0;
     padding: 0;
@@ -706,6 +747,7 @@ section:nth-of-type(5) > ul > li:nth-child(3) > figure {
     overflow: hidden;
 }
 
+/* Especificidad 0,2,5 */
 section:nth-of-type(5) > ul > li:nth-child(3) > figure > a {
     display: flex;
     width: 100%;
@@ -713,10 +755,12 @@ section:nth-of-type(5) > ul > li:nth-child(3) > figure > a {
     transition: opacity 0.3s;
 }
 
+/* Especificidad 0,3,5 */
 section:nth-of-type(5) > ul > li:nth-child(3) > figure > a:hover {
     opacity: 0.9;
 }
 
+/* Especificidad 0,2,6 */
 section:nth-of-type(5) > ul > li:nth-child(3) > figure > a > img {
     width: 100%;
     height: 100%;
@@ -725,6 +769,7 @@ section:nth-of-type(5) > ul > li:nth-child(3) > figure > a > img {
     margin: 0;
 }
 
+/* Especificidad 0,2,5 */
 section:nth-of-type(5) > ul > li:nth-child(3) > figure > figcaption {
     position: absolute;
     bottom: 0;
@@ -739,17 +784,20 @@ section:nth-of-type(5) > ul > li:nth-child(3) > figure > figcaption {
     transition: transform 0.3s;
 }
 
+/* Especificidad 0,3,5 */
 section:nth-of-type(5) > ul > li:nth-child(3) > figure:hover > figcaption {
     transform: translateY(0);
 }
 
 /* Estilos específicos para el juego */
+/* Especificidad 0,2,3 */
 main > section:first-child > section:nth-of-type(2) {
     background: none;
     padding: 0;
     margin: 1em 0;
 }
 
+/* Especificidad 0,2,4 */
 main > section:first-child > section:nth-of-type(2) > section {
     background-color: #0e3047;
     border-radius: 0.5rem;
@@ -758,6 +806,7 @@ main > section:first-child > section:nth-of-type(2) > section {
     text-align: center;
 }
 
+/* Especificidad 0,2,5 */
 main > section:first-child > section:nth-of-type(2) > section > img {
     max-width: 80%;
     height: auto;
@@ -765,6 +814,7 @@ main > section:first-child > section:nth-of-type(2) > section > img {
     border-radius: 0.25rem;
 }
 
+/* Especificidad 0,2,5 */
 main > section:first-child > section:nth-of-type(2) > section > button {
     background-color: #1a5483;
     color: #ffffff;
@@ -777,26 +827,31 @@ main > section:first-child > section:nth-of-type(2) > section > button {
     margin: 0.5em 0.5em;
 }
 
+/* Especificidad 0,3,5 */
 main > section:first-child > section:nth-of-type(2) > section > button:hover {
     background-color: #2673b4;
 }
 
+/* Especificidad 0,2,5 */
 main > section:first-child > section:nth-of-type(2) > section > h3 {
     font-size: 1.4em;
     margin-bottom: 1em;
     color: #56ccf2;
 }
 
+/* Especificidad 0,2,5 */
 main > section:first-child > section:nth-of-type(2) > section > ol {
     text-align: left;
     margin: 1.5em 0;
     padding-left: 2em;
 }
 
+/* Especificidad 0,2,6 */
 main > section:first-child > section:nth-of-type(2) > section > ol > li {
     margin-bottom: 1em;
 }
 
+/* Especificidad 0,2,7 */
 main > section:first-child > section:nth-of-type(2) > section > ol > li > label {
     display: flex;
     padding: 0.5em;
@@ -805,14 +860,17 @@ main > section:first-child > section:nth-of-type(2) > section > ol > li > label 
     border-radius: 0.25rem;
 }
 
+/* Especificidad 0,3,7 */
 main > section:first-child > section:nth-of-type(2) > section > ol > li > label:hover {
     background-color: #144260;
 }
 
+/* Especificidad 0,2,8 */
 main > section:first-child > section:nth-of-type(2) > section > ol > li > label > input {
     margin-right: 0.5em;
 }
 
+/* Especificidad 0,2,5 */
 main > section:first-child > section:nth-of-type(2) > section > section {
     display: flex;
     justify-content: center;
@@ -823,6 +881,7 @@ main > section:first-child > section:nth-of-type(2) > section > section {
 }
 
 /* Estilos para la lista de respuestas en la pantalla final */
+/* Especificidad 0,2,7 */
 main > section:first-child > section:nth-of-type(2) > section > ol > li > p {
     margin: 0.5em 0;
 }
@@ -830,6 +889,7 @@ main > section:first-child > section:nth-of-type(2) > section > ol > li > p {
 /* Estilos para la página de rutas */
 
 /* Botones de selección de rutas */
+/* Especificidad 0,1,3 */
 main > section:nth-of-type(3) > ul {
     display: flex;
     flex-wrap: wrap;
@@ -839,10 +899,12 @@ main > section:nth-of-type(3) > ul {
     margin: 1em 0;
 }
 
+/* Especificidad 0,1,4 */
 main > section:nth-of-type(3) > ul > li {
     margin: 0;
 }
 
+/* Especificidad 0,1,5 */
 main > section:nth-of-type(3) > ul > li > button {
     background-color: #D1D1D1;
     color: #3D3D3D;
@@ -854,18 +916,21 @@ main > section:nth-of-type(3) > ul > li > button {
     transition: background-color 0.3s, transform 0.2s;
 }
 
+/* Especificidad 0,2,5 */
 main > section:nth-of-type(3) > ul > li > button:hover {
     background-color: #1a5483;
     transform: translateY(-0.2em);
 }
 
 /* Sección de información de ruta */
+/* Especificidad 0,1,3 */
 main > section:nth-of-type(4) > section {
     border-radius: 0.5rem;
     padding: 1.5em;
     margin: 1em 0;
 }
 
+/* Especificidad 0,1,4 */
 main > section:nth-of-type(4) > section > ul {
     list-style: none;
     padding: 0;
@@ -874,28 +939,33 @@ main > section:nth-of-type(4) > section > ul {
     gap: 0.8em;
 }
 
+/* Especificidad 0,1,5 */
 main > section:nth-of-type(4) > section > ul > li {
     padding: 0.5em;
     border-bottom: 0.0625rem solid #ffffff4D; /* Más visible para contraste */
 }
 
+/* Especificidad 0,2,3 */
 main > section:nth-of-type(4) > section:nth-of-type(2) {
     margin-top: 1.5em;
 }
 
 /* Enlaces en la sección de referencias */
+/* Especificidad 0,1,4 */
 main > section:nth-of-type(4) > section > h4 {
     margin-top: 1.5em;
     color: #56ccf2;
 }
 
 /* Tabla de hitos */
+/* Especificidad 0,2,4 */
 main > section:nth-of-type(4) > section:nth-of-type(2) table {
     width: 100%;
     border-collapse: collapse;
     margin: 1em 0;
 }
 
+/* Especificidad 0,2,5 */
 main > section:nth-of-type(4) > section:nth-of-type(2) table th {
     background-color: #D1D1D1;
     color: #3D3D3D;
@@ -904,22 +974,26 @@ main > section:nth-of-type(4) > section:nth-of-type(2) table th {
     border: 0.0625rem solid #444;
 }
 
+/* Especificidad 0,2,5 */
 main > section:nth-of-type(4) > section:nth-of-type(2) table td {
     padding: 0.8em;
     border: 0.0625rem solid #444;
     vertical-align: top;
 }
 
+/* Especificidad 0,3,5 */
 main > section:nth-of-type(4) > section:nth-of-type(2) table tr:nth-child(even) {
     background-color: #ffffff1A; /* Más visible para contraste */
 }
 
 /* Imágenes en tabla */
+/* Especificidad 0,2,5 */
 main > section:nth-of-type(4) > section:nth-of-type(2) table figure {
     margin: 0;
     text-align: center;
 }
 
+/* Especificidad 0,2,5 */
 main > section:nth-of-type(4) > section:nth-of-type(2) table img {
     max-width: 100%;
     height: 6.25em;
@@ -928,10 +1002,12 @@ main > section:nth-of-type(4) > section:nth-of-type(2) table img {
     transition: transform 0.3s;
 }
 
+/* Especificidad 0,3,5 */
 main > section:nth-of-type(4) > section:nth-of-type(2) table img:hover {
     transform: scale(1.05);
 }
 
+/* Especificidad 0,2,5 */
 main > section:nth-of-type(4) > section:nth-of-type(2) table figcaption {
     font-size: 0.8em;
     margin-top: 0.3em;
@@ -939,6 +1015,7 @@ main > section:nth-of-type(4) > section:nth-of-type(2) table figcaption {
 }
 
 /* Contenedor del mapa */
+/* Especificidad 0,1,4 */
 main > section:nth-of-type(5) > section > section {
     height: 25em;
     width: 100%;
@@ -948,6 +1025,7 @@ main > section:nth-of-type(5) > section > section {
 }
 
 /* Contenedor de la altimetría */
+/* Especificidad 0,1,4 */
 main > section:nth-of-type(6) > section > section {
     width: auto;
     height: auto;
@@ -958,15 +1036,18 @@ main > section:nth-of-type(6) > section > section {
 }
 
 /* Estilos para SVG en altimetría */
+/* Especificidad 0,1,5 */
 main > section:nth-of-type(6) > section > section svg {
     width: 100%;
     height: 100%;
 }
 
+/* Especificidad 0,2,7 */
 main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section {
     margin-top: 1.5em;
 }
 
+/* Especificidad 0,3,8 */
 main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(1) {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
@@ -974,16 +1055,19 @@ main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > sec
     margin-bottom: 1em;
 }
 
+/* Especificidad 0,3,9 */
 main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(1) > figure {
     margin: 0;
 }
 
+/* Especificidad 0,3,8 */
 main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(2) {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
     gap: 1em;
 }
 
+/* Especificidad 0,3,9 */
 main > section:nth-of-type(4) > section:nth-of-type(2) > ul > li > article > section > section:nth-of-type(2) > video {
     width: 80%;
     border-radius: 0.25rem;
