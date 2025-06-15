@@ -1,6 +1,6 @@
 
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 body {
     font-family: Arial, sans-serif;
     /* Color de texto oscuro sobre fondo claro para máximo contraste */
@@ -12,22 +12,25 @@ body {
     line-height: 1.5;
 }
 
+/* Especificidad 0,1,2 */
 body > p:first-of-type {
     color: #1C1C1C;
     margin: 1em;
 }
 
+/* Especificidad 0,2,3 */
 body > p:first-of-type > a:first-of-type {
     color: #121212;
 }
 
+/* Especificidad 0,2,4 */
 body header > h1:first-of-type > a:first-of-type {
     color: #ffffff;
     margin: 1em;
 }
 
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 header {
     /* Fondo oscuro con alto contraste respecto al texto blanco */
     background-color: #0a304d;
@@ -36,20 +39,20 @@ header {
     text-align: center;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 h1 {
     font-size: 2em;
     margin: 0.5em 0;
     /* Color heredado del header: color: white; */
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 h2 {
     font-size: 1.5em;
     margin: 0.5em 0;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 h3 {
     font-size: 1.3em;
     margin: 0.7em 0;
@@ -57,12 +60,12 @@ h3 {
 
 /* Estilos del menú de navegación */
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,0,1 */
 nav {
     background-color: #031a2a;
 }
 
-/* 0,0,0,2 */
+/* Especificidad 0,0,2 */
 nav ul {
     list-style-type: none;
     margin: 0;
@@ -72,13 +75,13 @@ nav ul {
     justify-content: center;
 }
 
-/* 0,0,0,2 */
+/* Especificidad 0,0,2 */
 nav li {
     margin: 0;
     padding: 0;
 }
 
-/* 0,0,0,2 */
+/* Especificidad 0,0,2 */
 nav a {
     display: flex;
     color: #ffffff;
@@ -89,7 +92,7 @@ nav a {
 }
 
 
-/* 0,1,2 - Se permite el uso de class para el enlace activo */
+/* Especificidad 0,1,2 */
 nav a.activo {
     background-color: #1a5483;
     font-weight: bold;
@@ -97,7 +100,7 @@ nav a.activo {
 
 /* Estilos para el contenido principal */
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 main {
     max-width: 90%;
     margin: 0 auto;
@@ -105,7 +108,7 @@ main {
     gap: 1em;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 section {
     margin-bottom: 2em;
     padding: 1em; 
@@ -115,76 +118,76 @@ section {
     color: #ffffff;
 }
 
+/* Especificidad 0,1,1 */
 section:hover {
     transform: translateY(-0.3125rem);
     box-shadow: 0 0.5rem 0.9375rem #00000033;
 }
 
-/* Secciones que ocupan todo el ancho */
+/* Especificidad de las 3: 0,0,1 */
 main > section:nth-of-type(1),
 main > section:nth-of-type(2),
 main > section:nth-of-type(4) {
     grid-column: 1 / -1;
 }
 
-/* Secciones que ocupan dos columnas si hay espacio */
+/* Especificidad de las dos 0,1,2 */
 main > section:nth-of-type(3),
 main > section:nth-of-type(5) {
     grid-column: span 2;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 p {
     margin: 0.8em 0;
-    /* Hereda color blanco de section */
 }
 
 /* Estilos para listas */
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 ul {
     padding-left: 2em;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 ol {
     padding-left: 2em;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 li {
     margin-bottom: 0.5em;
 }
 
 /* Estilo para listas de definición */
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 dl {
     margin: 1em 0;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 dt {
     font-weight: bold;
     margin-top: 1em;
     color: #56ccf2; /* Azul más claro para alto contraste */
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 dd {
     margin: 0.5em 0 0.5em 2em;
 }
 
 /* Estilos para tablas */
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 1em 0;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 caption {
     padding: 0.5em;
     font-weight: bold;
@@ -192,7 +195,7 @@ caption {
     color: #56ccf2;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 th {
     background-color: #D1D1D1;
     color: #3D3D3D;
@@ -201,33 +204,31 @@ th {
     border: 0.0625rem solid #444;
 }
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 td {
     padding: 0.7em;
     border: 0.0625rem solid #444;
 }
 
-/* 0,0,0,2 */
+/* Especificidad 0,1,2 */
 tbody tr:nth-child(even) {
     background-color: #1a2c3a;
 }
 
-/* Estilos para enlaces */
-
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 a {
     color: #56ccf2; /* Azul más claro para contraste */
     text-decoration: none;
 }
 
-/* 0,0,1,1 */
+/* Especificidad 0,1,1 */
 a:hover {
     text-decoration: underline;
 }
 
 /* Estilos para elementos multimedia */
 
-/* 0,0,0,1 */
+/* Especificidad 0,0,1 */
 picture {
     display: flex;
     margin: 1em 0;
@@ -558,13 +559,6 @@ section:nth-of-type(4) > h2::after {
     margin: 0.625em auto 1.25em;
 }
 
-section:nth-of-type(4) > section:empty::before {
-    content: 'Cargando noticias...';
-    display: flex;
-    text-align: center;
-    padding: 2em;
-    font-size: 1.2em;
-}
 
 section:nth-of-type(4) > section {
     display: grid;
